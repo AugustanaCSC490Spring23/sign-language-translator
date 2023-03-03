@@ -26,4 +26,3 @@
 3.  Run `npm start`.
 
 #### Client will run on port 8000.
-#### Client can then be accessed at [http://localhost:8000](http://localhost:8000/)
