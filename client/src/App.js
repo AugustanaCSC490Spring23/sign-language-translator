@@ -1,11 +1,13 @@
 import './App.css';
+import LoginPage from "./pages/Login Page/Login";
+
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        Hi team Anh Chinh
-      </header>
+  
+      <LoginPage/>
     </div>
   );
 }
