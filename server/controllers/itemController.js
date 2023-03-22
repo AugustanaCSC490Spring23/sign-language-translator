@@ -1,11 +1,11 @@
-const Item = require("../models/itemModel");
-const AppError = require("../utils/appError");
-const catchAsync = require("../utils/catchAsync");
+const Item = require("../models/item");
+const Err = require("../utils/customError");
+const asyncCatch = require("../utils/asyncCatch");
 
 // MIDDLEWARES
 
 //////////////
-exports.getAllItems = catchAsync(async (req, res, next) => {
+exports.getAllItems = asyncCatch(async (req, res, next) => {
   const items = await Item.find({});
   res.status(200).json({
     status: "success",
@@ -15,11 +15,11 @@ exports.getAllItems = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getItem = catchAsync(async (req, res, next) => {
+exports.getItem = asyncCatch(async (req, res, next) => {
   const item = await Item.findOne({ text: req.params.text });
 
   if (!item) {
-    return next(new AppError('No item found with given ID', 404));
+    return next(new Err('No item found with given ID', 404));
   }
 
   res.status(200).json({
@@ -28,7 +28,7 @@ exports.getItem = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.createItem = catchAsync(async (req, res, next) => {
+exports.createItem = asyncCatch(async (req, res, next) => {
   const item = new Item(req.body);
   await item.save();
   res.status(200).json({
