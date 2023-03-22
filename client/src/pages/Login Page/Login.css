@@ -49,76 +49,10 @@ table {
 
 @font-face {
     font-family: "Nunito";
-    src: url("../../fonts/Nunito/static/Nunito-Black.ttf");
-    font-weight: black;
+    src: url("../../fonts/Nunito/Nunito-VariableFont_wght.ttf");
+    font-weight: 100 900;
+    
 }
-
-@font-face {
-    font-family: "Nunito";
-    src: url("../../fonts/Nunito/static/Nunito-BlackItalic.ttf");
-    font-weight: black;
-    font-style: italic
-}
-
-
-@font-face {
-    font-family: "Nunito";
-    src: url("../../fonts/Nunito/static/Nunito-Bold.ttf");
-    font-weight: bold;
-}
-
-@font-face {
-    font-family: "Nunito";
-    src: url("../../fonts/Nunito/static/Nunito-ExtraBold.ttf");
-    font-weight: extra bold;
-}
-
-@font-face {
-    font-family: "Nunito";
-    src: url("../../fonts/Nunito/static/Nunito-ExtraBoldItalic.ttf");
-    font-weight: extra bold;
-    font-style: italic
-}
-
-@font-face {
-    font-family: "Nunito";
-    src: url("../../fonts/Nunito/static/Nunito-ExtraLight.ttf");
-    font-weight: extra light;
-}
-
-@font-face {
-    font-family: "Nunito";
-    src: url("../../fonts/Nunito/static/Nunito-ExtraLightItalic.ttf");
-    font-weight: extra light;
-    font-style: italic
-}
-
-@font-face {
-    font-family: "Nunito";
-    src: url("../../fonts/Nunito/static/Nunito-Italic.ttf");
-    font-style: italic
-}
-
-@font-face {
-    font-family: "Nunito";
-    src: url("../../fonts/Nunito/static/Nunito-LightItalic.ttf");
-    font-weight: light;
-    font-style: italic
-}
-
-@font-face {
-    font-family: "Nunito";
-    src: url("../../fonts/Nunito/static/Nunito-Light.ttf");
-    font-weight: light
-}
-
-
-@font-face {
-    font-family: "Nunito";
-    src: url("../../fonts/Nunito/static/Nunito-Medium.ttf");
-    font-weight: normal;
-}
-
 
 :root {
     
@@ -141,7 +75,7 @@ table {
     height: inherit;
     background: var(--secondary-bg-color);
     flex: 1;
-    width: 40%;
+    width: 50%;
     margin-left: 10%;
     display: flex;
     justify-content: center;
@@ -152,24 +86,42 @@ table {
 
 .compo {
     flex: 1;
-    /* background: red; */
-
-
 }
 
 .text {
-    color: #3E1408;
+    color: var(--bold-text-color);
     font-size: 2rem;
     font-family: "Nunito";
-    font-weight: extra bold;
+    font-weight: 750;
     letter-spacing: .1rem;
 }
 
-.text1 {
-    color: #3E1408;
-    font-size: 2rem;
-    font-family: "Nunito";
-    font-weight: normal;
-    font-style: italic;
-}
+/* unvisited link */
+.link:link {
+    text-decoration: none;
+    color: var(--bold-text-color);
+  }
+  
+  /* visited link */
+  .link:visited {
+    color: var(--bold-text-color);
+  }
+  
+  /* mouse over link */
+  .link:hover  {
+    color: var(--bold-text-color);
+    opacity: 0.7;
+    
+  }
+  
+  /* selected link */
+  .link:active  {
+    color: var(--bold-text-color);
+    opacity: 0.5
+  } 
 
+
+.input:focus {
+    border: none;
+    outline: none !important
+}
