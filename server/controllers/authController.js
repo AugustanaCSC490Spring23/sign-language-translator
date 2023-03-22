@@ -96,3 +96,18 @@ exports.exclusiveAccess = (...roles) => {
     next();
   };
 };
+
+exports.forgotPassword = async (req, res, next) => {
+  // get and check if user exists
+  const user = await User.findOne({ email: req.body.email });
+
+  if (!user) {
+    return next(new Err("No user with provided email is found.", 404));
+  }
+
+  // generate reset token
+  const token = user.generatePasswordResetToken();
+  await user.save({ validateBeforeSave: false }); // this helps prevent validators requiring full info of a user for reseting password
+};
+
+exports.resetPassword = (req, res, next) => {};
