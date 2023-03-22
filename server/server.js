@@ -1,8 +1,14 @@
-const app = require("./app");
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
 const mongoose = require("mongoose");
 
+process.on("uncaughtException", err => {
+  console.log('Uncaught exception! Shutting down...');
+  console.log(err.name, err.message);
+  process.exit(1);
+})
+
+const app = require("./app");
 const MONGODB_URI = process.env.MONGODB_URI;
 mongoose.connect(MONGODB_URI);
 mongoose.set("strictQuery", false);
@@ -27,3 +33,5 @@ process.on('unhandledRejection', err => {
     process.exit(1);
   });
 })
+
+
