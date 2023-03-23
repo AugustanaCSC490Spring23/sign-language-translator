@@ -23,7 +23,7 @@ const Login = () => {
                 
                 <Form className = "form" >
                 <div className = "compo">
-                    <h1 className = "mb-5 text">Login</h1>
+                    <h1 className = "mb-5 text" style = {{border: "1px solid black"}}>Login</h1>
                     <Center>
                         {/* <InputGroup> */}
                         {/* <InputGroup.Text><FontAwesomeIcon icon="fa-regular fa-circle-user" /></InputGroup.Text> */}
