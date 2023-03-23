@@ -7,8 +7,8 @@ import { Link, Outlet } from 'react-router-dom';
 function NavBar() {
     return (
         <div>
-            <Navbar className='color-nav container' style={{border: "2px solid black"}}>
-                <Container>
+            <Navbar className='color-nav ' expand="lg" style = {{border: "2px solid black"}}>
+             
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
@@ -20,7 +20,7 @@ function NavBar() {
                             <Nav.Link as={Link} to="/my-account">My Account</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
-                </Container>
+            
             </Navbar>
             <Outlet />
         </div>
