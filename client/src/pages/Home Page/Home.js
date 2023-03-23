@@ -5,9 +5,9 @@ import "./Home.css";
 const Home = () => {
 
     return (
-        <Container fluid style={{backgroundColor: 'green', height: '100vh'}}>
+        <Container fluid className= "container" style={{backgroundColor: "green", height: "100vh", border: "2px solid black"}}>
             <Row>
-                <Col>1 of 1</Col>
+                <Col>SIGN LANGUAGE TRANSLATOR</Col>
             </Row>
         </Container>
     )

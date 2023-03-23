@@ -7,7 +7,7 @@ import { Link, Outlet } from 'react-router-dom';
 function NavBar() {
     return (
         <div>
-            <Navbar className='color-nav container' expand="lg">
+            <Navbar className='color-nav container' style={{border: "2px solid black"}}>
                 <Container>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
