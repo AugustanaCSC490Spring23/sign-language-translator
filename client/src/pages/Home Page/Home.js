@@ -1,9 +1,8 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
 import "./Home.css";
 
 const Home = () => {
-
+ 
     return (
         <Container fluid className= "container" style={{backgroundColor: "green", height: "100vh", border: "2px solid black"}}>
             <Row>
