@@ -8,11 +8,17 @@ const CusButton = (props) => {
       <style type="text/css">
         {`
     .btn-custom {
-      background-color: ${props.color};
+      background-color: ${props.bgcolor};
+      color: ${props.color};
       width: 100%;
-      border-radius: ${props.radius}px;
 
+      font-weight: 720;
+      font-family: "Nunito";
+      letter-spacing: 0.1rem;
+      border-radius: ${props.radius}px
     }
+
+ 
     `}
       </style>
 
