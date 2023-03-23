@@ -5,10 +5,10 @@ import "./Home.css";
 const Home = () => {
 
     return (
-        <Container fluid>
-            <div className='backgroundcolor'>
-                <h1>SIGN LANGUAGE TRANSLATOR</h1>
-            </div>
+        <Container fluid style={{backgroundColor: 'green', height: '100vh'}}>
+            <Row>
+                <Col>1 of 1</Col>
+            </Row>
         </Container>
     )
 }
