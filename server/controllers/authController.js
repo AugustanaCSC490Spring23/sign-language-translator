@@ -5,6 +5,7 @@ const User = require("../models/user");
 const asyncCatch = require("../utils/asyncCatch");
 const Err = require("../utils/customError");
 const sendEmail = require("../utils/emailSender");
+const { use } = require("../app");
 
 const generateSignedToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -14,7 +15,18 @@ const generateSignedToken = (id) => {
 
 const sendToken = (user, statusCode, res) => {
   const token = generateSignedToken(user._id);
-
+  const cookieOptions = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true,
+  };
+  if (process.env.NODE_ENV === "production") {
+    cookieOptions.secure = true;
+  }
+  res.cookie("jwt", token);
+  // remove password from output
+  user.password = undefined;
   res.status(statusCode).json({
     status: "success",
     token,
