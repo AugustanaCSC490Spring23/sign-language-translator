@@ -1,0 +1,95 @@
+.resources{
+    min-height:1000vh;
+    width: 100vw;
+    padding-top: 100px;
+    padding: 100px;
+    padding-left: 50px;
+    padding-right: 50px
+    
+    /* background: url(https://media.istockphoto.com/id/1411385549/vector/hands-of-people-with-different-skin-colors-different-nationalities-and-religions-activists.jpg?s=612x612&w=0&k=20&c=VHyNETsP2ZKVwRoJwGtFAO7oOUCgnRBzZFekNAV7Rrg=); */
+    /* background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover; */
+    
+}
+.Resources_box{
+    width: 80vw;
+    height: 80vh;
+    background: url(https://media.istockphoto.com/id/1411385549/vector/hands-of-people-with-different-skin-colors-different-nationalities-and-religions-activists.jpg?s=612x612&w=0&k=20&c=VHyNETsP2ZKVwRoJwGtFAO7oOUCgnRBzZFekNAV7Rrg=);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover;
+    padding: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 100px;
+    /* background: white; */
+}
+
+.Resources_inner_box{
+    min-height:65vh;
+    width: 65vw;
+    padding-top: 100px;
+    padding: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+    background: white;
+
+
+}
+
+.resources_info{
+    background: white;
+    position: absolute;
+    bottom: 50px;
+    padding-top: 50px;
+}
+
+.resources_info h1{
+    font-size: 5rem;
+    position: center;
+}
+
+.resources_lines{
+    width: 50vw;
+}
+
+.Resources_text{
+    font-size: 5rem;
+}
+
+#Browse_Resources{
+    padding: 20px;
+    background: transparent;
+    border: 5px solid white;
+    color:white;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-top: 30px; 
+    transition: 0.3s ease; 
+    
+}
+
+#Browse_Resources:hover {
+transform: translateY(-20px);
+}
+
+@media(max-width: 500px){
+   .Resources_box{
+    padding-left: 10px;
+   } 
+   .resources_info{
+    left:10px;
+   }
+   .resources_info h1{
+    font-size: 2rem;
+   }
+   .resources_lines{
+    width: 50vw;
+   }
+   .resources_lines{
+    width: 85vw;
+    font-size: small;
+   }
+}
