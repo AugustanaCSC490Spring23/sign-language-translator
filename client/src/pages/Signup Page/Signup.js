@@ -10,6 +10,7 @@ import {
 import CusButton from "../../Component/CusButton";
 import "./Signup.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { signup } from "../../../../server/controllers/authController";
 
 const Center = ({ children }) => {
   return (

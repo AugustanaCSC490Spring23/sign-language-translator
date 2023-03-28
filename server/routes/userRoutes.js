@@ -20,10 +20,13 @@ router.patch(
   userController.updateUserSelf
 );
 
+router.patch("/deleteMe", authController.routeGuard, userController.deleteSelf);
+
 router.patch(
-  "/deleteMe",
+  "/updateUserRole/:id",
   authController.routeGuard,
-  userController.deleteSelf
+  authController.exclusiveAccess("admin"),
+  userController.changeRole
 );
 
 router
