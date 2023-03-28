@@ -1,4 +1,5 @@
 const User = require("../models/user");
+
 const Err = require("../utils/customError");
 const asyncCatch = require("../utils/asyncCatch");
 
@@ -69,19 +70,20 @@ exports.deleteSelf = asyncCatch(async (req, res, next) => {
   });
 });
 
-// change role of user. function exclusive to admin
+// change role of user
+// function exclusive to admin
 exports.changeRole = asyncCatch(async (req, res, next) => {
-    const body = filteredBody(req.body, "role"); // filter unallowed fields
-    const user = await User.findByIdAndUpdate(req.params.id, body, {
-      new: true,
-    });
-    res.status(200).json({
-      status: "success",
-      data: {
-        user,
-      },
-    });
-})
+  const body = filteredBody(req.body, "role"); // filter unallowed fields
+  const user = await User.findByIdAndUpdate(req.params.id, body, {
+    new: true,
+  });
+  res.status(200).json({
+    status: "success",
+    data: {
+      user,
+    },
+  });
+});
 
 exports.createUser = asyncCatch(async (req, res, next) => {
   const user = new User(req.body);

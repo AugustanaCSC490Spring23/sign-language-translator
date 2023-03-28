@@ -1,11 +1,12 @@
 const crypto = require("crypto");
 const { promisify } = require("util");
 const jwt = require("jsonwebtoken");
+
 const User = require("../models/user");
-const asyncCatch = require("../utils/asyncCatch");
+
 const Err = require("../utils/customError");
 const sendEmail = require("../utils/emailSender");
-const { use } = require("../app");
+const asyncCatch = require("../utils/asyncCatch");
 
 const generateSignedToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -21,6 +22,7 @@ const sendToken = (user, statusCode, res) => {
     ),
     httpOnly: true,
   };
+  // only do cookie when in production mode
   if (process.env.NODE_ENV === "production") {
     cookieOptions.secure = true;
   }
@@ -40,7 +42,6 @@ exports.signup = asyncCatch(async (req, res, next) => {
   const user = await User.create({
     name: req.body.name,
     email: req.body.email,
-    role: req.body.role, // admin, user, moderator
     items: req.body.items,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,

@@ -4,6 +4,7 @@ const authController = require("../controllers/authController");
 
 const router = express.Router();
 
+// AUTHORIZATION
 router.post("/signup", authController.signup);
 router.post("/login", authController.login);
 router.post("/forgotPassword", authController.forgotPassword);
@@ -14,6 +15,7 @@ router.patch(
   authController.updatePassword
 );
 
+// SELF SERVICE FOR USER
 router.patch(
   "/updateMe",
   authController.routeGuard,
@@ -22,6 +24,7 @@ router.patch(
 
 router.patch("/deleteMe", authController.routeGuard, userController.deleteSelf);
 
+// ADMIN SERVICE
 router.patch(
   "/updateUserRole/:id",
   authController.routeGuard,
@@ -31,8 +34,16 @@ router.patch(
 
 router
   .route("/")
-  .get(userController.getAllUsers)
-  .post(userController.createUser);
+  .get(
+    authController.routeGuard,
+    authController.exclusiveAccess("admin"),
+    userController.getAllUsers
+  )
+  .post(
+    authController.routeGuard,
+    authController.exclusiveAccess("admin"),
+    userController.createUser
+  );
 router.route("/:id").get(userController.getUser);
 
 module.exports = router;
