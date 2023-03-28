@@ -1,5 +1,9 @@
 const express = require("express");
 const cors = require("cors");
+const rateLimit = require("express-rate-limit");
+const helmet = require("helmet");
+const sanitizer = require("express-mongo-sanitize");
+const xss = require("xss-clean");
 
 const Err = require("./utils/customError");
 const globalErrorHandler = require("./controllers/errorController");
@@ -10,15 +14,41 @@ const personalItemRouter = require("./routes/personalItemRoutes");
 
 const app = express();
 
+//// GLOBAL MIDDLEWARES
+
+// security HTTP headers
+app.use(helmet());
+
+// allow json
+app.use(express.json({ limit: "10kb" }));
+
+// nosql query injection prevention !!DANGEROUS MALICIOUS HACKING METHOD
+// more info: https://www.imperva.com/learn/application-security/nosql-injection/
+app.use(sanitizer());
+
+// data sanitization
+app.use(xss());
+
+// prevent too many request from the same IP
+const limiter = rateLimit({
+  max: 100,
+  windowMs: 3600000,
+  message: "Too many requests. Try again in an hour.",
+});
+app.use("/api", limiter); // only apply limiter to api routes
+
+// allow cors
 app.use(cors());
-app.use(express.json());
 
+// other middlewares
 app.use((req, res, next) => {
-    req.requestTime = new Date().toISOString();
-    // console.log(req.headers);
+  req.requestTime = new Date().toISOString();
+  // console.log(req.headers);
 
-    next();
-})
+  next();
+});
+
+//// ROUTES
 
 app.use("/api/v1/items", itemRouter);
 app.use("/api/v1/users", userRouter);
