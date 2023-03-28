@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 const CusButton = (props) => {
-    const button =  <Button variant="custom" >
+    const button =  <Button variant="custom" type = "submit">
     {props.title}
   </Button>
     return (

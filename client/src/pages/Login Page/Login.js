@@ -1,3 +1,5 @@
+import {useState} from "react";
+import axios from "axios";
 import {Container, Form, Row, Col, Button, InputGroup, FloatingLabel} from 'react-bootstrap';
 import CusButton from "../../Component/CusButton";
 import "./Login.css";
@@ -15,15 +17,35 @@ const Center = ({children}) => {
     )
 }
 
+
+
 const Login = () => {
+    const [name, setName] = useState({name: ""});
+
+    const handleChange = (e) => {
+        e.preventDefault();
+        setName({name: e.target.value})
+        
+    }
+
+    const submitForm = (e) => {
+        e.preventDefault();
+        
+        axios
+        .post(`https://jsonplaceholder.typicode.com/users`, { name })
+        .then((res) => {
+        // console.log(res);
+        console.log(res.data);
+        });
+    }
  
     return (
         <Container fluid className = "container"  >
 
                 
-                <Form className = "form" >
+                <Form className = "form" onSubmit = {submitForm}>
                 <div className = "compo">
-                    <h1 className = "mb-5 text" style = {{border: "1px solid black"}}>Login</h1>
+                    <h1 className = "mb-5 text">Login</h1>
                     <Center>
                         {/* <InputGroup> */}
                         {/* <InputGroup.Text><FontAwesomeIcon icon="fa-regular fa-circle-user" /></InputGroup.Text> */}
@@ -33,6 +55,7 @@ const Login = () => {
                         placeholder="Enter email"  
                         style = {{borderRadius: "25px",  background: "#E7D4B6", boxShadow: "none", border: "none"}} 
                         className = "input"
+                        onChange = {handleChange}
                         />
                         {/* </InputGroup> */}
                     </Center>
