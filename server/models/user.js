@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 
+const Items = require("./item");
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -15,7 +17,7 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail, "Please provide a valid email"],
   },
-  items: [String],
+  items: Array,
   role: {
     type: String,
     enum: ["user", "admin", "moderator"],
@@ -76,6 +78,13 @@ userSchema.pre(/^find/, function (next) {
   this.find({ active: { $ne: false } });
   // set active field to false instead of choosing active users is essential
   // as not all users are created with an 'active' field
+  next();
+});
+
+// embed items as users'
+userSchema.pre("save", async function (next) {
+  const itemsPromises = this.items.map(async (id) => await Items.findById(id));
+  this.items = await Promise.all(itemsPromises);
   next();
 });
 
