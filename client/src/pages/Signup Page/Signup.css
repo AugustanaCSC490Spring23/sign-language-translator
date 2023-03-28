@@ -94,7 +94,6 @@ table {
     font-family: "Nunito";
     font-weight: 750;
     letter-spacing: .1rem;
-
 }
 
 /* unvisited link */
@@ -112,7 +111,7 @@ table {
   .link:hover  {
     color: var(--bold-text-color);
     opacity: 0.7;
-    
+
   }
   
   /* selected link */
