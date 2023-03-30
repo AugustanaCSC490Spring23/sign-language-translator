@@ -33,4 +33,5 @@ const TestItemSchema = new Schema({
 
 TestItemSchema.index({ difficulty: 1 });
 
-module.exports = mongoose.models.TestItem || mongoose.model("TestItem", TestItemSchema);
+module.exports =
+  mongoose.models.TestItem || mongoose.model("TestItem", TestItemSchema);

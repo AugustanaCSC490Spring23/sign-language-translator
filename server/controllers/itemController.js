@@ -9,20 +9,29 @@ const asyncCatch = require("../utils/asyncCatch");
 // get ietms based on query
 exports.getAllItems = asyncCatch(async (req, res, next) => {
   // make a copy of the real query to avoid making changes to the orginal
-  const query = { ...req.query };
+  let queryCopy = { ...req.query };
 
   // declare excluded fields such as 'page', 'sort', ...
-  const filertedOutFields = ["page"];
-  filertedOutFields.forEach((field) => delete query[field]);
+  const filertedOutFields = ["page", "sort"]; // this is essential as the first step is to filter, so we can't include other type of query
+  filertedOutFields.forEach((field) => delete queryCopy[field]);
 
   // filtering with other logics: greater than, less than, ...
-  let queryString = JSON.stringify(query);
+  let queryString = JSON.stringify(queryCopy);
   queryString = queryString.replace(
     /\b(gt|gte|lt|lte)\b/g,
-    (match) => `$${match}`
+    (expression) => `$${expression}`
   );
 
-  const items = await Item.find(JSON.parse(queryString));
+  let data = Item.find(JSON.parse(queryString));
+
+  // now sort the data after filter
+  if (req.query.sort) {
+    const sortQuery = req.query.sort.split(",").join(" ");
+    data = data.sort(sortQuery);
+  }
+
+
+  const items = await data;
   res.status(200).json({
     status: "success",
     requestedAt: req.requestTime,
