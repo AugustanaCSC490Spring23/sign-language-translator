@@ -114,7 +114,7 @@ UserSchema.methods.generatePasswordResetToken = function () {
 
   this.passwordResetToken = crypto
     .createHash("sha256") // create hash object
-    .update(token) // feed unique token so that the output is unique and unpredictable
+    .update(token) // feed unique token in the hash so that the output is unique and unpredictable
     .digest("hex"); // finalize the hash in the form of a hex
 
   console.log({ token }, this.passwordResetToken);

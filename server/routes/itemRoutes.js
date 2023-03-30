@@ -12,6 +12,6 @@ router
     authController.exclusiveAccess("admin"),
     itemController.createItem
   );
-router.route("/:text").get(itemController.getItem);
+router.route("/:text").get(itemController.getItemByText);
 
 module.exports = router;
