@@ -1,0 +1,13 @@
+.style-navbar {
+    background-color: #F0E7DE;
+    height: 20vh;
+}
+
+.style-nav {
+    display: flex;
+}
+
+.style-item {
+    padding-left: 3em;
+    padding-right: 3em;
+}
