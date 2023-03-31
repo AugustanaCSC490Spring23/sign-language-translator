@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
 const Err = require("../utils/customError");
-const sendEmail = require("../utils/emailSender");
+const EmailSender = require("../utils/emailSender");
 const asyncCatch = require("../utils/asyncCatch");
 
 const generateSignedToken = (id) => {
@@ -14,21 +14,25 @@ const generateSignedToken = (id) => {
   });
 };
 
-const sendToken = (user, statusCode, res) => {
+const sendToken = (user, statusCode, req, res) => {
   const token = generateSignedToken(user._id);
-  const cookieOptions = {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
-    ),
-    httpOnly: true,
-  };
-  // only do cookie when in production mode
+
+  // only set cookie when in production mode
   if (process.env.NODE_ENV === "production") {
-    cookieOptions.secure = true;
+    const cookieOptions = {
+      expires: new Date(
+        Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+      ),
+      httpOnly: true,
+      secure: req.headers["x-forwarded-proto"] === "https",
+      sameSite: "strict",
+    };
+    res.cookie("jwt", token, cookieOptions);
   }
-  res.cookie("jwt", token);
+
   // remove password from output
   user.password = undefined;
+
   res.status(statusCode).json({
     status: "success",
     token,
@@ -46,6 +50,9 @@ exports.signup = asyncCatch(async (req, res, next) => {
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
   });
+  const url = `${req.protocol}://${req.get("host")}/learning`;
+  await new EmailSender(user, url).sendWelcomeEmail();
+
   sendToken(user, 201, res);
 });
 
@@ -128,20 +135,12 @@ exports.forgotPassword = async (req, res, next) => {
   const token = user.generatePasswordResetToken();
   await user.save({ validateBeforeSave: false }); // this helps prevent validators requiring full info of a user for reseting password
 
-  // send token to user's email
-  const resetEmailURL = `${req.protocol}://${req.get(
-    "host"
-  )}/api/v1/users/resetPassword/${token}`;
-
-  const message = `Reset your password: ${resetEmailURL}.`;
-
   try {
-    await sendEmail({
-      email: user.email,
-      subject: "[Valid for 2 minutes] Reset your password",
-      message,
-    });
-
+    // send token to user's email
+    const resetEmailURL = `${req.protocol}://${req.get(
+      "host"
+    )}/api/v1/users/resetPassword/${token}`;
+    await new EmailSender(user, resetEmailURL).sendResetPasswordEmail();
     res.status(200).json({
       status: "success",
       message: "Token sent to specified email",
