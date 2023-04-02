@@ -1,0 +1,14 @@
+{
+    "_id": {
+      "$oid": "63f7d160b10e837b97919714"
+    },
+    "text": "how are you",
+    "signPhotos": [
+      ["how", "https://res.cloudinary.com/dfb7mq7zb/image/upload/v1677184776/96.How_fo1bfo.png"],
+      ["you", "https://res.cloudinary.com/dfb7mq7zb/image/upload/v1677184776/97.you_sv8wmk.png"]
+    ],
+    "topic": "daily conversation",
+    "category": "communication",
+    "firstLetter": "h",
+    "difficulty": 3
+  }
