@@ -71,7 +71,10 @@ exports.login = asyncCatch(async (req, res, next) => {
   const token = generateSignedToken(user._id);
   res.status(200).json({
     status: "success",
-    token,
+    data: {
+      token,
+      user
+    }
   });
 });
 
@@ -87,7 +90,7 @@ exports.routeGuard = asyncCatch(async (req, res, next) => {
 
   if (!token) {
     // check if token exists
-    return next(new Err("Access blocked. You're not logged in.", 401));
+    return next(new Err("401 Unauthorized: Access blocked. You're not logged in.", 401));
   }
 
   const decodedData = await promisify(jwt.verify)(
@@ -97,13 +100,13 @@ exports.routeGuard = asyncCatch(async (req, res, next) => {
   // check user exists
   const tempUser = await User.findById(decodedData.id);
   if (!tempUser) {
-    return next(new Err("Token no longer exists", 401));
+    return next(new Err("401 Unauthorized: Token no longer exists", 401));
   }
 
   // check if password changed after token issued
   if (tempUser.changePasswordAfterJWTIssued(decodedData.iat)) {
     return next(
-      new Err("Password recently changed! Relog-in might solve", 401)
+      new Err("401 Unauthorized: Password recently changed! Relog-in might solve", 401)
     );
   }
   // access granted
@@ -143,6 +146,7 @@ exports.forgotPassword = async (req, res, next) => {
       message: "Token sent to specified email",
     });
   } catch (err) {
+    console.log(err);
     user.passwordResetToken = undefined;
     user.passwordResetTokenExpires = undefined;
     await user.save({ validateBeforeSave: false });
@@ -186,5 +190,5 @@ exports.updatePassword = async (req, res, next) => {
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
   await user.save();
-  sendToken(user, 201, res);
+  sendToken(user, 201, req, res);
 };
