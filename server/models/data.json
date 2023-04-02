@@ -1,14 +1,24 @@
 {
-    "_id": {
-      "$oid": "63f7d160b10e837b97919714"
-    },
-    "text": "how are you",
-    "signPhotos": [
-      ["how", "https://res.cloudinary.com/dfb7mq7zb/image/upload/v1677184776/96.How_fo1bfo.png"],
-      ["you", "https://res.cloudinary.com/dfb7mq7zb/image/upload/v1677184776/97.you_sv8wmk.png"]
+  "_id": {
+    "$oid": "63f999943ad1fa601a739e09"
+  },
+  "text": "im learning sign",
+  "signPhotos": [
+    [
+      "i",
+      "https://res.cloudinary.com/dfb7mq7zb/image/upload/v1677300479/signlanguage/i_learning_fdiprn.png"
     ],
-    "topic": "daily conversation",
-    "category": "communication",
-    "firstLetter": "h",
-    "difficulty": 3
-  }
+    [
+      "learning",
+      "https://res.cloudinary.com/dfb7mq7zb/image/upload/v1677300488/signlanguage/learning_y9wlmq.png"
+    ],
+    [
+      "sign",
+      "https://res.cloudinary.com/dfb7mq7zb/image/upload/v1677300493/signlanguage/sign_olitmi.png"
+    ]
+  ],
+  "topic": "daily conversation",
+  "category": "communication",
+  "firstLetter": "i",
+  "difficulty": 2
+}

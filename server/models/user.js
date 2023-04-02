@@ -117,8 +117,6 @@ UserSchema.methods.generatePasswordResetToken = function () {
     .update(token) // feed unique token in the hash so that the output is unique and unpredictable
     .digest("hex"); // finalize the hash in the form of a hex
 
-  console.log({ token }, this.passwordResetToken);
-
   this.passwordResetTokenExpires = Date.now() + 120000;
 
   return token;

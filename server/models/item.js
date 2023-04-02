@@ -31,6 +31,6 @@ const ItemSchema = new Schema({
   meaningPhoto: String,
 });
 
-ItemSchema.index({ difficulty: 1 });
+ItemSchema.index({ difficulty: 1, firstLetter: 1 });
 
 module.exports = mongoose.models.Item || mongoose.model("Item", ItemSchema);
