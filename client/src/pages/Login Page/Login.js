@@ -1,19 +1,17 @@
 import {Container, Form, Row, Col, Button, InputGroup, FloatingLabel} from 'react-bootstrap';
 import CusButton from "../../Component/CusButton";
 import "./Login.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Center = ({children}) => {
-    return (
-        <Row className = "mb-3">
-            <Col md = {{span: 6, offset: 3}}>
-                {children}
-                
-            </Col>
+const Center = ({ children }) => {
+  return (
+    <Row className="mb-3">
+      <Col md={{ span: 6, offset: 3 }}>{children}</Col>
+    </Row>
+  );
+};
 
-        </Row>
-    )
-}
+
 
 const Login = () => {
  

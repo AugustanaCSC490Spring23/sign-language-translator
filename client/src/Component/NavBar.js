@@ -1,28 +1,38 @@
-import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import "./NavBar.css";
-import { Link, Outlet } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 function NavBar() {
     return (
         <div>
-            <Navbar className='color-nav container' expand="lg">
-                <Container>
+            <BrowserRouter>
+                <Navbar className="style-navbar" expand="lg">
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto">
-                            <Nav.Link as={Link} to="/">Home</Nav.Link>
-                            <Nav.Link href="#learning">Learning</Nav.Link>
-                            <Nav.Link as={Link} to="/translator">Translator</Nav.Link>
-                            <Nav.Link href="#quiz">Quiz</Nav.Link>
-                            <Nav.Link href="#about-us">About Us</Nav.Link>
-                            <Nav.Link as={Link} to="/my-account">My Account</Nav.Link>
+                    <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
+                        <Nav className="style-nav">
+                            <Nav.Item className="style-item">
+                                <Nav.Link href="/">Home</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item className="style-item">
+                                <Nav.Link href="#learning">Learning</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item className="style-item">
+                                <Nav.Link href="/translator">Translator</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item className="style-item">
+                                <Nav.Link href="#quiz">Quiz</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item className="style-item">
+                                <Nav.Link href="#about-us">About Us</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item className="style-item">
+                                <Nav.Link href="/my-account">My Account</Nav.Link>
+                            </Nav.Item>
                         </Nav>
                     </Navbar.Collapse>
-                </Container>
-            </Navbar>
-            <Outlet />
+                </Navbar>
+            </BrowserRouter>
         </div>
     );
 }
