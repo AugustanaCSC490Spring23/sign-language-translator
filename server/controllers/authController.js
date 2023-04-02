@@ -24,7 +24,7 @@ const sendToken = (user, statusCode, req, res) => {
         Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
       ),
       httpOnly: true,
-      secure: req.headers["x-forwarded-proto"] === "https",
+      secure: true,
       sameSite: "strict",
     };
     res.cookie("jwt", token, cookieOptions);
@@ -32,7 +32,6 @@ const sendToken = (user, statusCode, req, res) => {
 
   // remove password from output
   user.password = undefined;
-
   res.status(statusCode).json({
     status: "success",
     token,
@@ -52,8 +51,7 @@ exports.signup = asyncCatch(async (req, res, next) => {
   });
   const url = `${req.protocol}://${req.get("host")}/learning`;
   await new EmailSender(user, url).sendWelcomeEmail();
-
-  sendToken(user, 201, res);
+  sendToken(user, 201, req, res);
 });
 
 exports.login = asyncCatch(async (req, res, next) => {
@@ -178,7 +176,7 @@ exports.resetPassword = async (req, res, next) => {
   // update passwordChangedAt
 
   // log user in, send jwt
-  sendToken(user, 200, res);
+  sendToken(user, 200, req, res);
 };
 
 exports.updatePassword = async (req, res, next) => {
