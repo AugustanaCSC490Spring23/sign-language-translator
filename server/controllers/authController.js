@@ -16,7 +16,6 @@ const generateSignedToken = (id) => {
 
 const sendToken = (user, statusCode, req, res) => {
   const token = generateSignedToken(user._id);
-
   // only set cookie when in production mode
   if (process.env.NODE_ENV === "production") {
     const cookieOptions = {
@@ -24,7 +23,7 @@ const sendToken = (user, statusCode, req, res) => {
         Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
       ),
       httpOnly: true,
-      secure: true,
+      // secure: true,
       sameSite: "strict",
     };
     res.cookie("jwt", token, cookieOptions);
