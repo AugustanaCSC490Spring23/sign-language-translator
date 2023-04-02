@@ -5,7 +5,6 @@ const bcrypt = require("bcryptjs");
 
 const Items = require("./item");
 
-
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -18,7 +17,6 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail, "Please provide a valid email"],
   },
-  items: Array,
   items: Array,
   role: {
     type: String,
@@ -47,11 +45,6 @@ const userSchema = new mongoose.Schema({
     default: true,
     select: false,
   },
-  active: {
-    type: Boolean,
-    default: true,
-    select: false,
-  },
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordResetTokenExpires: Date,
@@ -59,7 +52,6 @@ const userSchema = new mongoose.Schema({
 
 //// MIDDLEWARES
 // change password
-
 userSchema.pre("save", async function (next) {
   // This function only runs if password was actually modified
   if (!this.isModified("password")) return next();

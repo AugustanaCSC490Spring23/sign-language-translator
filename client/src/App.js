@@ -1,11 +1,9 @@
 import './App.css';
-import Login from './pages/Login Page/Login';
-import Signup from "./pages/Signup Page/Signup"
+import NavBar from './Component/NavBar';
 import Home from './pages/Home Page/Home';
 import Translator from './pages/Translator Page/Translator';
 import Login from './pages/Login Page/Login';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
 
 
 function App() {

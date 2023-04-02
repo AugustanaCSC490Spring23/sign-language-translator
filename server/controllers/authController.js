@@ -1,5 +1,4 @@
 const crypto = require("crypto");
-const crypto = require("crypto");
 const { promisify } = require("util");
 const jwt = require("jsonwebtoken");
 
@@ -54,16 +53,7 @@ exports.signup = asyncCatch(async (req, res, next) => {
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
   });
-
-  const token = generateSignedToken(user._id);
-
-  res.status(201).json({
-    status: "success",
-    token,
-    data: {
-      user: user,
-    },
-  });
+  sendToken(user, 201, res);
 });
 
 exports.login = asyncCatch(async (req, res, next) => {

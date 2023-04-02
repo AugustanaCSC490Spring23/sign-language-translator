@@ -1,7 +1,13 @@
-import {Container, Form, Row, Col, Button, InputGroup, FloatingLabel} from 'react-bootstrap';
+import {
+  Container,
+  Form,
+  Row,
+  Col,
+} from "react-bootstrap";
 import CusButton from "../../Component/CusButton";
 import "./Login.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {useState} from "react";
+import axios from "axios";
 
 const Center = ({ children }) => {
   return (
@@ -11,73 +17,101 @@ const Center = ({ children }) => {
   );
 };
 
-
-
 const Login = () => {
- 
-    return (
-        <Container fluid className = "container"  >
+  const [user, setUser] = useState({
+    email: "",
+    password: ""
+  })
 
-                
-                <Form className = "form" >
-                <div className = "compo">
-                    <h1 className = "mb-5 text" style = {{border: "1px solid black"}}>Login</h1>
-                    <Center>
-                        {/* <InputGroup> */}
-                        {/* <InputGroup.Text><FontAwesomeIcon icon="fa-regular fa-circle-user" /></InputGroup.Text> */}
+  const onSubmit = (e) => {
+    console.log(e);
+    e.preventDefault();
+    axios({
+      method: 'post',
+      url: '/api/v1/users/login',
+      data: {
+        email: user.email,
+        password: user.password,
+      }
+    })
+    .then((res) => {
+      console.log(res);
 
-                        <Form.Control 
-                        type="email" 
-                        placeholder="Enter email"  
-                        style = {{borderRadius: "25px",  background: "#E7D4B6", boxShadow: "none", border: "none"}} 
-                        className = "input"
-                        />
-                        {/* </InputGroup> */}
-                    </Center>
+    })
+    .catch((e) => {
+      console.log(e)
+    });
+  }
 
-                    <Center>
-                        <Form.Control 
-                        type="password" 
-                        placeholder = "Password" 
-                        style = {{borderRadius: "25px",  background: "#E7D4B6", boxShadow: "none", border: "none"}} 
-                        className = "input"
-                        />
-                    </Center>
+  const handleChange = (e) => {
+      setUser({...user, [e.target.name]: e.target.value})
+      console.log(user.email)
+  }
 
-                    <Center>
-                        <CusButton
-                        bgcolor = "#C3A580"
-                        color = "#3E1408"
-                        radius = "25" 
-                        title = "Login"
-                        weight = "750"/>
-                    </Center>
+  return (
+    <Container fluid className="container">
+      <Form className="form" onSubmit = {onSubmit}>
+        <div className="compo">
+          <h1 className="mb-5 text">Login</h1>
 
-                    <Center>
-                        <div style = {{display: "flex", justifyContent: "space-between"}}>
-                        <Form.Text>
-                            <a className = "link" href = "https://www.w3schools.com/cssref/tryit.php?filename=trycss_sel_link_more1">
-                            Create Account
-                            </a>
-                        </Form.Text>
+          <Center>
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
+              name = "email"
+              value = {user.email}
+              className="input"
+              onChange = {handleChange}
+              
+            />
 
-                        <Form.Text>
-                            <a className = "link" href = "">
-                                Need Help?
-                            </a>
-                        </Form.Text>
-                        </div>
-                        
-                    </Center>
-                       
-                    </div>
+          </Center>
 
-                    
-                </Form>
+          <Center>
+            <Form.Control
+              type="password"
+              placeholder="Password"
+              name = "password"
+              value = {user.password}
+              className="input"
+              onChange = {handleChange}
+            />
+          </Center>
 
-            
-        </Container>
-        )
-}
+          <Center>
+            <CusButton
+              bgcolor="#C3A580"
+              color="#3E1408"
+              radius="25"
+              title="Login"
+              weight="750"
+              focus = "#C3A580"
+              type = "submit"
+            />
+          </Center>
+
+          <Center>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <Form.Text>
+                <a
+                  className="link"
+                  href="https://www.w3schools.com/cssref/tryit.php?filename=trycss_sel_link_more1"
+                >
+                  Create Account
+                </a>
+              </Form.Text>
+
+              <Form.Text>
+                <a className="link" href="">
+                  Need Help?
+                </a>
+              </Form.Text>
+            </div>
+          </Center>
+        </div>
+      </Form>
+    </Container>
+  );
+};
 
 export default Login;
