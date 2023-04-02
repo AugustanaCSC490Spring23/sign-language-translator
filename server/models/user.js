@@ -28,7 +28,7 @@ const UserSchema = new mongoose.Schema({
     required: [true, "Provide a password"],
     minlength: 8,
     select: false,
-  },
+  }, 
   passwordConfirm: {
     type: String,
     required: [true, "Confirm your password"],
@@ -104,7 +104,7 @@ UserSchema.methods.changePasswordAfterJWTIssued = function (jwtTimestamp) {
       this.passwordChangedAt.getTime() / 1000,
       10
     );
-    return jwtTimestamp < changeTimestamp;
+    return JWTTimestamp < changedTimestamp;
   }
 };
 
