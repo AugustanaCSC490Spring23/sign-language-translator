@@ -3,8 +3,6 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 
-const Items = require("./item");
-
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -17,7 +15,12 @@ const UserSchema = new mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail, "Please provide a valid email"],
   },
-  items: Array,
+  items: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Item",
+    },
+  ],
   role: {
     type: String,
     enum: ["user", "admin", "moderator"],
@@ -28,7 +31,7 @@ const UserSchema = new mongoose.Schema({
     required: [true, "Provide a password"],
     minlength: 8,
     select: false,
-  }, 
+  },
   passwordConfirm: {
     type: String,
     required: [true, "Confirm your password"],
@@ -82,11 +85,11 @@ UserSchema.pre(/^find/, function (next) {
 });
 
 // embed items as users'
-UserSchema.pre("save", async function (next) {
-  const itemsPromises = this.items.map(async (id) => await Items.findById(id));
-  this.items = await Promise.all(itemsPromises);
-  next();
-});
+// UserSchema.pre("save", async function (next) {
+//   const itemsPromises = this.items.map(async (id) => await Items.findById(id));
+//   this.items = await Promise.all(itemsPromises);
+//   next();
+// });
 
 ///// METHODS
 // check if password correct
@@ -100,11 +103,11 @@ UserSchema.methods.validPassword = async function (
 // check if password is change after jwt is issued to user
 UserSchema.methods.changePasswordAfterJWTIssued = function (jwtTimestamp) {
   if (this.passwordChangedAt) {
-    const changeTimestamp = parseInt(
+    const changedTimestamp = parseInt(
       this.passwordChangedAt.getTime() / 1000,
       10
     );
-    return JWTTimestamp < changedTimestamp;
+    return jwtTimestamp < changedTimestamp;
   }
 };
 

@@ -44,7 +44,6 @@ exports.signup = asyncCatch(async (req, res, next) => {
   const user = await User.create({
     name: req.body.name,
     email: req.body.email,
-    items: req.body.items,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
   });
@@ -73,8 +72,8 @@ exports.login = asyncCatch(async (req, res, next) => {
     status: "success",
     data: {
       token,
-      user
-    }
+      user,
+    },
   });
 });
 
@@ -90,7 +89,9 @@ exports.routeGuard = asyncCatch(async (req, res, next) => {
 
   if (!token) {
     // check if token exists
-    return next(new Err("401 Unauthorized: Access blocked. You're not logged in.", 401));
+    return next(
+      new Err("401 Unauthorized: Access blocked. You're not logged in.", 401)
+    );
   }
 
   const decodedData = await promisify(jwt.verify)(
@@ -106,7 +107,10 @@ exports.routeGuard = asyncCatch(async (req, res, next) => {
   // check if password changed after token issued
   if (tempUser.changePasswordAfterJWTIssued(decodedData.iat)) {
     return next(
-      new Err("401 Unauthorized: Password recently changed! Relog-in might solve", 401)
+      new Err(
+        "401 Unauthorized: Password recently changed! Relog-in might solve",
+        401
+      )
     );
   }
   // access granted
