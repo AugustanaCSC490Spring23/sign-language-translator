@@ -1,3 +1,5 @@
+const _ = require("lodash");
+
 const Item = require("../models/item");
 
 const Err = require("../utils/customError");
@@ -9,14 +11,13 @@ const asyncCatch = require("../utils/asyncCatch");
 // get ietms based on query
 exports.getAllItems = asyncCatch(async (req, res, next) => {
   // make a copy of the real query to avoid making changes to the orginal
-  let queryCopy = { ...req.query };
+  let { ...fields } = { ...req.query };
 
-  // declare excluded fields such as 'page', 'sort', ...
-  const filertedOutFields = ["page", "sort"]; // this is essential as the first step is to filter, so we can't include other type of query
-  filertedOutFields.forEach((field) => delete queryCopy[field]);
+  const filteredOutFields = ["sort"]; // exclude fields that can't be used for filtering
+  const filteredFilters = _.omit(fields, filteredOutFields); // lodash helps filter the filteredOutFields out of fields
 
   // filtering with other logics: greater than, less than, ...
-  let queryString = JSON.stringify(queryCopy);
+  let queryString = JSON.stringify(filteredFilters);
   queryString = queryString.replace(
     /\b(gt|gte|lt|lte)\b/g,
     (expression) => `$${expression}`
@@ -29,7 +30,6 @@ exports.getAllItems = asyncCatch(async (req, res, next) => {
     const sortQuery = req.query.sort.split(",").join(" ");
     data = data.sort(sortQuery);
   }
-
 
   const items = await data;
   res.status(200).json({
@@ -77,9 +77,27 @@ exports.getAllTopics = asyncCatch(async (req, res, next) => {
   res.status(200).json({
     status: "success",
     data: {
-      topics: topics,
+      topics,
     },
   });
 });
-// get all items in given topic
-exports.getItemsByTopic = asyncCatch(async (req, res, next) => {});
+
+// GET ALPHABET
+// return each letter in alphabet with items
+exports.getAllLetters = asyncCatch(async (req, res, next) => {
+  const letters = await Item.aggregate([
+    {
+      $group: {
+        _id: "$firstLetter",
+        count: { $sum: 1 },
+        titles: { $push: "$text" },
+      },
+    },
+  ]);
+  res.status(200).json({
+    status: "success",
+    data: {
+      letters,
+    },
+  });
+});
