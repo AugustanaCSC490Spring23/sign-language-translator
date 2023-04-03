@@ -2,6 +2,7 @@ const nodemailer = require("nodemailer");
 const fs = require("fs");
 const handlebars = require("handlebars");
 const layouts = require("handlebars-layouts");
+const util = require("util");
 
 // Register the 'text' block helper in hbs file in views
 handlebars.registerHelper(layouts(handlebars));
@@ -12,6 +13,10 @@ module.exports = class EmailSender {
     this.from = process.env.FROM_EMAIL;
     this.userName = user.name.split(" ")[0];
     this.url = url;
+    this.transport = this.transporter();
+    this.sendMailAsync = util
+      .promisify(this.transport.sendMail)
+      .bind(this.transport);
   }
 
   transporter() {
@@ -60,19 +65,19 @@ module.exports = class EmailSender {
       html,
     };
 
-    // create a transport and mail
-    this.transporter().sendMail(emailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-        // console.log("Email sent: " + info.response);
-      }
-    });
+    // send email
+    try {
+      await this.sendMailAsync(emailOptions);
+      console.log("Email sent");
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async sendWelcomeEmail() {
     await this.sendEmail("welcome", "Welcome to sign language translator");
   }
+
   async sendResetPasswordEmail() {
     await this.sendEmail(
       "resetPassword",
