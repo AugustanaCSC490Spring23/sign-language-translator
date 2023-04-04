@@ -1,6 +1,6 @@
 const Err = require("../utils/customError");
 
-const sendDevErr = (err, res) => {
+const sendErrorInDevelopment = (err, res) => {
   res.status(err.statusCode).json({
     status: err.status,
     message: err.message,
@@ -9,7 +9,7 @@ const sendDevErr = (err, res) => {
   });
 };
 
-const sendProdErr = (err, res) => {
+const sendErrorInProduction = (err, res) => {
   if (err.isOperational) {
     // Trusted error, easy to read so just send it to client
     res.status(err.statusCode).json({
@@ -18,7 +18,6 @@ const sendProdErr = (err, res) => {
     });
   } else {
     // Programming or unknown error, just send simple details to client, these errors may come from 3rd party: Mongoose...
-    // console.log("!!!Error!!!:", err);
     res.status(500).json({
       status: "error",
       message: "Something went wrong",
@@ -27,13 +26,11 @@ const sendProdErr = (err, res) => {
 };
 
 const handleCastErrorDB = (err) => {
-  const message = `Invalid ${err.path}: ${err.value}`;
-  return new Err(message, 400);
+  return new Err(`Invalid ${err.path}: ${err.value}`, 400);
 };
 
 const handleDuplicateFieldDB = (err) => {
-  const message = `Duplicate field value: ${err.keyValue.email}.`;
-  return new Err(message, 400);
+  return new Err(`Duplicate field value: ${err.keyValue.email}.`, 400);
 };
 
 const handleValidationErrorDB = (err) => {
@@ -47,7 +44,7 @@ module.exports = (err, req, res, next) => {
   err.status = err.status || "error";
 
   if (process.env.NODE_ENV === "development") {
-    sendDevErr(err, res);
+    sendErrorInDevelopment(err, res);
   } else {
     let error = { ...err };
     if (error.kind === "ObjectId") error = handleCastErrorDB(error);
@@ -55,6 +52,6 @@ module.exports = (err, req, res, next) => {
     if (error._message === "User validation failed")
       error = handleValidationErrorDB(error);
 
-    sendProdErr(error, res);
+    sendErrorInProduction(error, res);
   }
 };
