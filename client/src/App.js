@@ -1,31 +1,30 @@
 import './App.css';
-import React from 'react';
+import NavBar from './Component/NavBar';
+import Home from './pages/Home Page/Home';
 import Translator from './pages/Translator Page/Translator';
-import {Routes,BrowserRouter, Route, useNavigate} from "react-router-dom";
+import Login from './pages/Login Page/Login';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
 
 function App() {
- 
- 
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Home />,
+    },
+    {
+      path: "/translator",
+      element: <Translator />,
+    },
+    {
+      path: "/my-account",
+      element: <Login />,
+    },
+  ]);
   return (
     <div className="App">
-      <header className="App-header">
-        Hi team Oriole
-        
-      </header>
-      {/* <div> */}
-        {/* <BrowserRouter>
-          <Routes> 
-            <Route path ="/Translator" element={<Translator />} />
-          
-
-          </Routes>
-        </BrowserRouter> */} 
-        
-
-         {/* <button onClick={()=>navigate("/pages/Translator Page/Translator")}> Translator </button> */}
-
-       {/* </div>  */}
-      
+      <NavBar />
+      <RouterProvider router={router} />
     </div>
   );
 }

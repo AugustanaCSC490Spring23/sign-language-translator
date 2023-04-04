@@ -1,6 +1,7 @@
 # Sign Language Translator
 
 ## A web app specialized in assisting people who want to learn sign language.
+## Our weekly blog updates are here: [Weekly Blog](https://sites.google.com/augustana.edu/sign-language-translator)
 
 ### Recommended code editor is Visual Studio Code
 
