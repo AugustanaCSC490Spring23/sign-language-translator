@@ -29,7 +29,9 @@ function About(){
          </div> 
         </div>
     </div>
-    <div className="empty"></div>
+    <div className="empty">
+        
+    </div>
 
         <div className="About_footer">
 
