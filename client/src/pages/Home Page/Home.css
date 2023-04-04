@@ -1,0 +1,20 @@
+.home-container {
+    background-color: #F0E7DE;
+    height: 80vh;
+}
+
+.style-title {
+    font-size: 6em;
+    color: #41110C;
+    text-align: start;
+}
+
+.position-small-content {
+    align-items: center;
+}
+
+.style-small-content {
+    color: #41110C;
+    text-align: start;
+    padding-top: 1em;
+}

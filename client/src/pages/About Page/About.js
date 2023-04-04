@@ -1,62 +1,34 @@
-import React from 'react';
-import "./About.css";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import "./about.css";
 
 function About(){
+
     return(
-    <div className="about">
-     <div className="about_box">
-        <div className="about_inner_box">
-        <div className= "about-info">
-        <p>
-            <span>Learn more</span>
-        </p>
-        <h1>About us </h1>
-        <p className="About_Text">
-            Writing effectively is an art. Start by using
-            simple, everyday words people can easily understand. Be clear
-            and direct to the point. Keep your thoughts flowing
-            logically, and aim for brevity unless you're writing in the 
-            long form.
-        </p>
+        <div className = "about">
+           <div className = "title">
+            <h1> About us</h1>
+           </div> 
+           <div className = "content">
+            <h3>
+                We are team Oreale 
+            </h3>
+            <p> Our app is going to be used to be used to translate sign language into te</p>
+           </div>
+           <div className = "comment">
+            <p> Leave a comment</p>
+                <fom className ="comment-form">
+                <input type ="text" placeholder="Name"/>
+                <input type ="email" placeholder="Email"/>
+                <input type ="text" placeholder="Website"/>
+                <textarea rows ="10" placeholder="Write your comment"></textarea>
+                <button type = "submit">Submit</button>
+                </fom>
 
-        <p className="About_Text2">
-            Your ideas have a purpose so choose words that accurately 
-            express them. Ensure your grammar is flawless as it impacts 
-            your credibility. Use the active voice whenever possible 
-            as it makes any narrative easier to read.
-        </p>
-        {/* <button id="Browse_Aboutus">BROWSE MORE AboutS</button> */}
-         </div> 
-        </div>
-    </div>
-    <div className="empty">
-        
-    </div>
-
-        <div className="About_footer">
-
-            <div className="footer_box">
-                <h3>box 1</h3>
-            </div>
-
-            <div className="footer_box2">
-                <h3>box 2</h3>
-            </div>
-
-            <div className="footer_box3">
-                <h3>box 3</h3>        
-            </div>
-
-            <div className="footer_box4">
-                <h3>box 4</h3>
-            </div>
+           </div>
 
         </div>
-
-    <div className="empty"></div>
-
-    </div> 
-    );  
+    );
 }
 
 export default About;
