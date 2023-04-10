@@ -7,6 +7,8 @@ import Login from "./pages/Login Page/Login";
 import Learning from "./pages/Learning Page/Learning";
 import Dictionary from "./pages/Dictionary Page/Dictionary";
 import Lessons from "./pages/Lessons Page/Lessons";
+import Words from "./pages/Words Page/Words";
+import WordDetails from "./pages/Word Details Page/WordDetails";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -31,6 +33,14 @@ function App() {
     {
       path: "/learning/dictionary",
       element: <Dictionary />
+    },
+    {
+      path: "/learning/dictionary/:letter",
+      element: <Words />
+    },
+    {
+      path: "/learning/dictionary/:letter/:text",
+      element: <WordDetails />
     },
     {
       path: "/learning/lessons",

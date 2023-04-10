@@ -1,7 +1,7 @@
-const axios = require("axios");
+import axios from "axios";
 
-const signUp = (user) => {
-  axios
+const signUp = async (user) => {
+  return await axios
     .post("/api/v1/user/signup", {
       name: user.name,
       email: user.email,
@@ -11,6 +11,7 @@ const signUp = (user) => {
     })
     .then(function (response) {
       console.log(response);
+      return response;
     })
     .catch(function (error) {
       console.log(error);
