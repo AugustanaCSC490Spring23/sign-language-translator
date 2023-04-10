@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
+import Jumbotron from "../../Component/Jumbotron.js";
+
 import "./Dictionary.css";
 
 function LetterButton(props) {
@@ -32,7 +34,7 @@ const Dictionary = () => {
   const letters = Array.from(Array(26), (_, i) => String.fromCharCode(65 + i)); // creates an array of 26 letters of the alphabet
   return (
     <>
-      <h1>Dictionary</h1>
+      <Jumbotron />
       <div className="letter-container">
         {letters.map((letter, index) => (
           <LetterButton key={index} letter={letter} />
