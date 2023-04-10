@@ -33,6 +33,10 @@ function App() {
       element: <Dictionary />
     },
     {
+      path: "/learning/dictionary/:letter",
+      element: <Dictionary />
+    },
+    {
       path: "/learning/lessons",
       element: <Lessons />
     }
