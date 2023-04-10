@@ -1,0 +1,24 @@
+{
+  "_id": {
+    "$oid": "63f999943ad1fa601a739e09"
+  },
+  "text": "im learning sign",
+  "signPhotos": [
+    [
+      "i",
+      "https://res.cloudinary.com/dfb7mq7zb/image/upload/v1677300479/signlanguage/i_learning_fdiprn.png"
+    ],
+    [
+      "learning",
+      "https://res.cloudinary.com/dfb7mq7zb/image/upload/v1677300488/signlanguage/learning_y9wlmq.png"
+    ],
+    [
+      "sign",
+      "https://res.cloudinary.com/dfb7mq7zb/image/upload/v1677300493/signlanguage/sign_olitmi.png"
+    ]
+  ],
+  "topic": "daily conversation",
+  "category": "communication",
+  "firstLetter": "i",
+  "difficulty": 2
+}

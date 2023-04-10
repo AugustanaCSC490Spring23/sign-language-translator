@@ -6,10 +6,6 @@ const router = express.Router();
 
 router
   .route("/")
-  .get(
-    authController.routeGuard,
-    authController.exclusiveAccess("admin"),
-    personalItemController.getAllPersonalItems
-  );
+  .get(authController.routeGuard, personalItemController.getAllPersonalItems);
 
 module.exports = router;

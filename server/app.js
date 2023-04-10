@@ -4,6 +4,7 @@ const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
 const sanitizer = require("express-mongo-sanitize");
 const xss = require("xss-clean");
+const cookieParser = require("cookie-parser");
 
 const Err = require("./utils/customError");
 const globalErrorHandler = require("./controllers/errorController");
@@ -14,6 +15,9 @@ const personalItemRouter = require("./routes/personalItemRoutes");
 
 const app = express();
 
+app.use(cookieParser());
+app.enable("trust proxy");
+
 //// GLOBAL MIDDLEWARES
 
 // security HTTP headers
@@ -21,6 +25,7 @@ app.use(helmet());
 
 // allow json
 app.use(express.json({ limit: "10kb" }));
+app.use(express.static(`${__dirname}/public`));
 
 // nosql query injection prevention !!DANGEROUS MALICIOUS HACKING METHOD
 // more info: https://www.imperva.com/learn/application-security/nosql-injection/
