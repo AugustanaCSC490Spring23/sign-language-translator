@@ -9,7 +9,6 @@ import {
 } from "react-bootstrap";
 import CusButton from "../../Component/CusButton";
 import "./Login.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Center = ({ children }) => {
   return (

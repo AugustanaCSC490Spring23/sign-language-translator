@@ -7,7 +7,7 @@ function NavBar() {
     return (
         <div>
             <BrowserRouter>
-                <Navbar className="style-navbar" expand="lg">
+                <Navbar className="style-navbar" expand="lg" fixed="top">
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
                         <Nav className="style-nav">

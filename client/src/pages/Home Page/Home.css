@@ -1,9 +1,16 @@
 .home-container {
     background-color: #F0E7DE;
-    height: 80vh;
+    height: 85vh;
 }
 
-.style-title {
+.style-title-upper {
+    font-size: 6em;
+    color: #41110C;
+    text-align: start;
+    padding-top: 2vh;
+}
+
+.style-title-lower {
     font-size: 6em;
     color: #41110C;
     text-align: start;
