@@ -9,12 +9,12 @@ const Home = () => {
     return (
         <Container fluid className="home-container">
             <Row>
-                <Col className="style-title" md={{ span: 8, offset: 1 }}>
+                <Col className="style-title-upper" md={{ span: 8, offset: 1 }}>
                     SIGN LANGUAGE
                 </Col>
             </Row>
             <Row>
-                <Col className="style-title" md={{ span: 2, offset: 1 }}>
+                <Col className="style-title-lower" md={{ span: 2, offset: 1 }}>
                     TRANSLATOR
                 </Col>
             </Row>
