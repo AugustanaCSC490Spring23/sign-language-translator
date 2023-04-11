@@ -23,7 +23,7 @@ const Words = () => {
       <Jumbotron />
       <div className="letter-container">
         {words.map((word, index) => (
-          <WordCard word={word} letter={letter}/>
+          <WordCard key={word.id} word={word} letter={letter} />
         ))}
       </div>
     </>
