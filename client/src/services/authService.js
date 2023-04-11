@@ -5,7 +5,6 @@ const signUp = async (user) => {
     .post("/api/v1/user/signup", {
       name: user.name,
       email: user.email,
-      role: user.role,
       password: user.password,
       passwordConfirm: user.passwordConfirm,
     })
