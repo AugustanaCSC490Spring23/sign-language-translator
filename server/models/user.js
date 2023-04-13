@@ -84,13 +84,6 @@ UserSchema.pre(/^find/, function (next) {
   next();
 });
 
-// embed items as users'
-// UserSchema.pre("save", async function (next) {
-//   const itemsPromises = this.items.map(async (id) => await Items.findById(id));
-//   this.items = await Promise.all(itemsPromises);
-//   next();
-// });
-
 ///// METHODS
 // check if password correct
 UserSchema.methods.validPassword = async function (

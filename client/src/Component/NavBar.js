@@ -7,7 +7,7 @@ function NavBar() {
     return (
         <div>
             <BrowserRouter>
-                <Navbar className="style-navbar" expand="lg">
+                <Navbar className="style-navbar" expand="lg" fixed="top">
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
                         <Nav className="style-nav">
@@ -15,13 +15,13 @@ function NavBar() {
                                 <Nav.Link href="/">Home</Nav.Link>
                             </Nav.Item>
                             <Nav.Item className="style-item">
-                                <Nav.Link href="#learning">Learning</Nav.Link>
+                                <Nav.Link href="/learning">Learning</Nav.Link>
                             </Nav.Item>
                             <Nav.Item className="style-item">
                                 <Nav.Link href="/translator">Translator</Nav.Link>
                             </Nav.Item>
                             <Nav.Item className="style-item">
-                                <Nav.Link href="#quiz">Quiz</Nav.Link>
+                                <Nav.Link href="/quiz">Quiz</Nav.Link>
                             </Nav.Item>
                             <Nav.Item className="style-item">
                                 <Nav.Link href="/about">About Us</Nav.Link>
