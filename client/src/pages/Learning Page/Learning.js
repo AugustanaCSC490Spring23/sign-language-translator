@@ -1,31 +1,43 @@
+import React from "react";
 import Card from "react-bootstrap/Card";
-import CardGroup from "react-bootstrap/CardGroup";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
+
+import DictionaryImage from "../../Resources/Images/dictionary-image.png";
+import LessonsImage from "../../Resources/Images/lessons-image.png";
+
+import "./Learning.css"; // Import your custom CSS file for styling
+
 const Learning = () => {
+  const navigate = useNavigate();
+
+  const handleDictionaryClick = () => {
+    navigate("/learning/dictionary");
+  };
+
+  const handleLessonsClick = () => {
+    navigate("/learning/lessons");
+  };
+
   return (
-    <CardGroup>
-      <Card style={{ width: "18rem" }}>
-        {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+    <div className="card-container">
+      <Card className="learning-card" onClick={handleDictionaryClick}>
+        <Card.Img variant="top" src={DictionaryImage} className="card-image" />
         <Card.Body>
           <Card.Title>Dictionary</Card.Title>
           <Card.Text>Search words based on letters</Card.Text>
-          <Link to="/learning/dictionary">
-            <Button variant="outline-dark">Search</Button>
-          </Link>
+          <Button variant="outline-dark">Search</Button>
         </Card.Body>
       </Card>
-      <Card style={{ width: "18rem" }}>
-        {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+      <Card className="learning-card" onClick={handleLessonsClick}>
+        <Card.Img variant="top" src={LessonsImage} className="card-image" />
         <Card.Body>
           <Card.Title>Lessons</Card.Title>
           <Card.Text>Learn sign language by lessons</Card.Text>
-          <Link to="/learning/lessons">
-            <Button variant="outline-dark">Learn</Button>
-          </Link>
+          <Button variant="outline-dark">Learn</Button>
         </Card.Body>
       </Card>
-    </CardGroup>
+    </div>
   );
 };
 
