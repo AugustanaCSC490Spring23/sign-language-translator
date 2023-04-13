@@ -15,7 +15,7 @@ function Resources(){
                     association provides reliable sources of learning and teaching sign language for 
                     both children and parents. Highly recommended!!!
                 </p>
-                <button id="Browse_Resourcse">More</button>
+                <button id="browse_resources">More</button>
             </div> 
         </div>
      </div>
