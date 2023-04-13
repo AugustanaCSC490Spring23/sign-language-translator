@@ -1,0 +1,21 @@
+.lessons-container {
+    background-color: #F0E7DE;
+    height: 85vh;
+}
+
+.lessons-top-page {
+    background-color: #E8CBA2;
+}
+
+.lessons-welcome { 
+    padding-top: 3em;
+    text-align: start;
+}
+
+.lessons-card-locate { 
+    padding: 2em;
+}
+
+.lessons-card {
+    background-color: #F5F5CF !important;
+}
