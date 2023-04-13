@@ -1,31 +1,23 @@
 .resources{
     min-height:1000vh;
     width: 100vw;
-    padding-top: 100px;
-    padding: 100px;
+    padding: 50px;
     padding-left: 50px;
-    padding-right: 50px
+    padding-right: 50px;
+    background-color: #F0E7DE;
     
-    /* background: url(https://media.istockphoto.com/id/1411385549/vector/hands-of-people-with-different-skin-colors-different-nationalities-and-religions-activists.jpg?s=612x612&w=0&k=20&c=VHyNETsP2ZKVwRoJwGtFAO7oOUCgnRBzZFekNAV7Rrg=); */
-    /* background-position: center;
-    background-repeat: no-repeat;
-    background-size:cover; */
     
 }
 .Resources_box{
     width: 90vw;
     height: 80vh;
-    /*better picture for box background*/
     background: url(https://media.istockphoto.com/id/1411385549/vector/hands-of-people-with-different-skin-colors-different-nationalities-and-religions-activists.jpg?s=612x612&w=0&k=20&c=VHyNETsP2ZKVwRoJwGtFAO7oOUCgnRBzZFekNAV7Rrg=);
     background-position: center;
     background-repeat: no-repeat;
     background-size:cover;
-    /* background-size: inherit; */
-    /* padding: 50px; */
     padding-left: 150px;
     padding-right: 50px;
     padding-top: 90px;
-    /* background: white; */
 }
 
 .Resources_inner_box{

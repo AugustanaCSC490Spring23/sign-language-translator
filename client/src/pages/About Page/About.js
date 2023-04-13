@@ -1,8 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./about.css";
+import "./About.css";
+import vietNguyen from '../../assets/viet-nguyen.jpg'
+import huyNguyen from '../../assets/huy-ngyen.jpg'
+import samuelTklemariam from '../../assets/samuel-teklemariam.jpg'
+
 
 function About(){
+
     return(
     <div className="about">
      <div className="about_box">
@@ -31,25 +36,67 @@ function About(){
         </div>
     </div>
     <div className="empty">
-        
+    <h2>Our Team</h2>
     </div>
 
         <div className="About_footer">
+        
 
             <div className="footer_box">
-                <h3>box 1</h3>
+                <div class="card">
+                  <div class="img-container">
+                    <img src="vietNguyen" alt= "viet nguyen"/>
+                    </div> 
+                    <h3>Viet Nguyen</h3> 
+                    <p>Major: Computer Science</p>
+                    {/* <p> I aspired to be a teacher. Now I see how technology can help me reach my goals. So I need to learn to code first.</p> */}
+                    
+                    <div class="icons">
+                        <a href="#">
+                        <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#">
+                        <i class="fa-brands fa-linkedin"></i>
+                        </a>
+                        <a href="#">
+                        <i class="fa-brands fa-github"></i>
+                        </a>
+                        <a href="#">
+                        <i class="fa-brands fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
             </div>
 
             <div className="footer_box2">
-                <h3>box 2</h3>
+            <div class="card">
+                  <div class="img-container">
+                    <img src="huyNguyen" alt= "huy nguyen"/>
+                    </div> 
+                    <h3>Huy Nguyen</h3> 
+                    <p>Major: Computer Science</p>
+                </div>
             </div>
 
             <div className="footer_box3">
-                <h3>box 3</h3>        
+            <div class="card">
+                  <div class="img-container">
+                    <img src="samuelTeklemariam" alt= "samuel teklemariam"/>
+                    </div> 
+                    <h3>Samuel Teklemariam</h3> 
+                    <p>Major: Computer Science</p>
+                </div>        
             </div>
 
             <div className="footer_box4">
-                <h3>box 4</h3>
+            <div class="card">
+                  <div class="img-container">
+                    {/* <img src="" alt= ""> */}
+                    </div> 
+                    <h3>Azee Nguyen</h3> 
+                    <p>Major: Computer Science</p>
+                </div>
             </div>
 
         </div>

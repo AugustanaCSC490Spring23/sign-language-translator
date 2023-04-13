@@ -30,6 +30,10 @@ function NavBar() {
                             <Nav.Item className="style-item">
                                 <Nav.Link href="/resources">Resources</Nav.Link>
 
+                                </Nav.Item>
+                            <Nav.Item className="style-item">
+                                <Nav.Link href="/lessons">Lessons</Nav.Link>
+
                             </Nav.Item>
                             <Nav.Item className="style-item">
                                 <Nav.Link href="/my-account">My Account</Nav.Link>

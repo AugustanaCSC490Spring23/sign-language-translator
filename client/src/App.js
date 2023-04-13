@@ -4,7 +4,7 @@ import Home from './pages/Home Page/Home';
 import Translator from './pages/Translator Page/Translator';
 import Login from './pages/Login Page/Login';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import About from "./pages/About Page/about";
+import About from "./pages/About Page/About";
 import Resources from "./pages/Resources Page/Resources";
 import SignupPage from "./pages/Signup Page/Signup";
 
@@ -31,10 +31,7 @@ function App() {
       path: "/resources",
       element: <Resources />
     },
-    {
-      path: "/resources",
-      element: <Resources />
-    }
+    
   ]);
   return (
     <div className="App">
