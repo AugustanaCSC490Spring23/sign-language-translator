@@ -9,6 +9,7 @@ import Dictionary from "./pages/Dictionary Page/Dictionary";
 import Lessons from "./pages/Lessons Page/Lessons";
 import Words from "./pages/Words Page/Words";
 import WordDetails from "./pages/Word Details Page/WordDetails";
+import Profile from "./pages/Profile Page/Profile";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -45,6 +46,10 @@ function App() {
     {
       path: "/learning/lessons",
       element: <Lessons />
+    },
+    {
+      path: "/me",
+      element: <Profile />
     }
   ]);
   return (
