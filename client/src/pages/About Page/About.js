@@ -92,7 +92,7 @@ function About(){
             <div className="footer_box4">
             <div class="card">
                   <div class="img-container">
-                    {/* <img src="" alt= ""> */}
+                  <img src="azeeNguyen" alt= "azee nguyen"/>
                     </div> 
                     <h3>Azee Nguyen</h3> 
                     <p>Major: Computer Science</p>
