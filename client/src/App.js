@@ -9,6 +9,7 @@ import Dictionary from "./pages/Dictionary Page/Dictionary";
 import Lessons from "./pages/Lessons Page/Lessons";
 import Words from "./pages/Words Page/Words";
 import WordDetails from "./pages/Word Details Page/WordDetails";
+import Profile from "./pages/Profile Page/Profile";
 import About from "./pages/About Page/About";
 import Resources from "./pages/Resources Page/Resources";
 
@@ -55,6 +56,10 @@ function App() {
     {
       path: "/learning/lessons",
       element: <Lessons />
+    },
+    {
+      path: "/me",
+      element: <Profile />
     }
   ]);
   return (
