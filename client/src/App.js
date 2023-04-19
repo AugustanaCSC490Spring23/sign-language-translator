@@ -12,7 +12,6 @@ import Lessons from "./pages/Lessons Page/Lessons";
 import Words from "./pages/Words Page/Words";
 import WordDetails from "./pages/Word Details Page/WordDetails";
 import Profile from "./pages/Profile Page/Profile";
-import Signup from "./pages/Signup Page/Signup";
 
 import {
   createBrowserRouter,
@@ -33,10 +32,6 @@ function App() {
     {
       path: "/login",
       element: <Login />,
-    },
-    {
-      path: "/signup",
-      element: <Signup />,
     },
     {
       path: "/learning",
