@@ -1,0 +1,87 @@
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    /* background-color: #F0E7DE; */
+
+}
+
+body{
+    background-color: #F0E7DE;
+}
+
+.user_box{
+    display: flex;
+    
+    padding: 4em 6em;
+    text-align: center;
+    /* background-color: #F0E7DE; */
+}
+
+.profile_box1{
+    box-shadow: 0 0 2.2em rgba(25, 0, 58, 0.15);
+    height: 40rem;
+    width:100% ;
+    padding: 10em 10em;
+    border-radius: 0.6em;
+    cursor: pointer;
+    background-color: white;
+}
+
+
+.variant:hover{
+    background: linear-gradient( rgb(20, 157, 231), rgb(172, 139, 33));
+    color: white;
+}
+
+.profile_box1 .img-container{
+    width: 12em;
+    height: 12em;
+    background-color: bisque;
+    padding: 0.5em;
+    border-radius: 40%;
+    margin: 0 auto 2em auto;
+}
+
+.profile_box1 h3{
+    font-size: 20px;
+    font-weight: 10;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-transform: uppercase;
+    margin: 0.5em 0 2em 0;
+    color: black;
+}
+
+.profile_box1 h4{
+    font-size: 20px;
+    font-weight: 10;
+    text-transform: uppercase;
+    margin: 0.5em 0 2em 0;
+    color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    
+}
+
+.profile_box2{
+    height: 10rem;
+    width:100% ;
+    padding: 10em 10em;
+    border-radius: 0.6em;
+    color: azure;
+    cursor: pointer;
+    /* display: flex; */
+    flex-wrap: wrap;
+
+}
+
+.profile_box2 h3{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+
+.profile_box2-card{
+    margin: 10cm;
+}
