@@ -1,13 +1,39 @@
 .style-navbar {
-    background-color: #F0E7DE;
-    height: 15vh;
+  background-color: #f0e7de;
+  height: 15vh;
+  font-weight: 600;
 }
 
 .style-nav {
-    display: flex;
+  display: flex;
 }
 
 .style-item {
-    padding-left: 3em;
-    padding-right: 3em;
+  padding-left: 3em;
+  padding-right: 3em;
 }
+
+/* Set the style for the login and signup buttons */
+.style-nav .style-item button {
+  margin-right: 10px;
+  border-radius: 1rem;
+}
+
+/* Change the background color of the buttons on hover */
+.style-nav .style-item button:hover {
+  background-color: #3b1404;
+}
+
+/* Set the style for the links */
+.style-nav .style-item a {
+  color: #3b1404;
+  text-decoration: none;
+}
+
+/* Change the color of the links on hover */
+.style-nav .style-item a:hover {
+  color: #1f0707;
+  text-decoration: none;
+}
+
+
