@@ -1,4 +1,5 @@
 import axios from "axios";
+import notifier from "../utils/notifier";
 
 const signUp = async (user) => {
   try {
@@ -33,9 +34,11 @@ const logIn = async (credentials) => {
         localStorage.setItem("jwt", res.data.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.data.user));
         window.location.assign("/");
+        notifier.success("Login successful!")
       });
   } catch (err) {
     console.log(err);
+    notifier.error("Login failed!")
   }
 };
 

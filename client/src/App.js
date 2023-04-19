@@ -1,4 +1,6 @@
 import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 import NavBar from "./Component/NavBar";
 import Home from "./pages/Home Page/Home";
@@ -66,6 +68,7 @@ function App() {
       <BrowserRouter>
         <NavBar />
       </BrowserRouter>
+      <ToastContainer />
       <RouterProvider router={router} />
     </div>
   );

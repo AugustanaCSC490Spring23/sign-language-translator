@@ -1,7 +1,7 @@
+import requireAuth from "../../hoc/requireAuth";
 
-
-function ProfilePage () {
-    return <div>Profile page</div>
+function ProfilePage() {
+  return <div>Profile page</div>;
 }
 
-export default ProfilePage;
+export default requireAuth(ProfilePage);
