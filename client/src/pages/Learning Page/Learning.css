@@ -1,0 +1,53 @@
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 30cm;
+  margin: 0 auto;
+}
+
+.learning-card {
+  height: 10cm;
+  width: 9cm;
+  margin: 1cm;
+  border: none;
+  border-radius: 1.2rem;
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+  box-shadow: 0 0.2cm 0.5cm rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.learning-card:hover {
+  transform: scale(1.02);
+}
+
+.card-image {
+  max-width: 30%; /* Update the max-width to your desired size */
+  max-height: 30%; /* Update the max-height to your desired size */
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.2s ease-in-out;
+  margin-top: 4rem;
+}
+
+.card-image:hover {
+  transform: scale(1.05);
+}
+
+.card-body {
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.card-title {
+  font-size: 1.2rem;
+}
+
+.card-text {
+  font-size: 1rem;
+}
