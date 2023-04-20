@@ -37,11 +37,14 @@ const Login = () => {
       email: user.email,
       password: user.password,
     });
-    
   };
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const handleCreateAccountClick = () => {
+    window.location.assign("/signup");
   };
 
   return (
@@ -87,7 +90,7 @@ const Login = () => {
           <Center>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <Form.Text>
-                <Link to="/signup" className="link">
+                <Link className="link" onClick={handleCreateAccountClick}>
                   Create Account
                 </Link>
               </Form.Text>

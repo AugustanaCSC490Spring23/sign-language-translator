@@ -12,6 +12,9 @@ import Lessons from "./pages/Lessons Page/Lessons";
 import Words from "./pages/Words Page/Words";
 import WordDetails from "./pages/Word Details Page/WordDetails";
 import Profile from "./pages/Profile Page/Profile";
+import Resources from "./pages/Resources Page/Resources";
+import About from "./pages/About Page/About";
+import Signup from "./pages/Signup Page/Signup";
 
 import {
   createBrowserRouter,
@@ -34,6 +37,10 @@ function App() {
       element: <Login />,
     },
     {
+      path: "/signup",
+      element: <Signup />,
+    },
+    {
       path: "/learning",
       element: <Learning />,
     },
@@ -44,6 +51,14 @@ function App() {
     {
       path: "/learning/dictionary/:letter",
       element: <Words />,
+    },
+    {
+      path: "/resources",
+      element: <Resources />,
+    },
+    {
+      path: "/about-us",
+      element: <About />,
     },
     {
       path: "/learning/dictionary/:letter/:text",

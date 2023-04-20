@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
 import Dropdown from "react-bootstrap/Dropdown";
+import { useLocation } from "react-router-dom";
 
 import "./NavBar.css";
 
@@ -16,8 +17,10 @@ function AuthButtons() {
     localStorage.removeItem("jwt");
     localStorage.removeItem("user");
     setLoggedIn(false);
-    window.location.reload(); // Reload the page after signout to update the UI
+    window.location.assign("/login")
   };
+
+  const location = useLocation();
 
   if (loggedIn) {
     return (
@@ -38,12 +41,16 @@ function AuthButtons() {
   } else {
     return (
       <Nav.Item className="style-item">
-        <Button size="sm" variant="outline-secondary" className="nav-btn">
-          <Nav.Link href="/login">Login</Nav.Link>
-        </Button>
-        <Button size="sm" variant="outline-secondary" className="nav-btn">
-          <Nav.Link href="/signup">Signup</Nav.Link>
-        </Button>
+        {location.pathname !== "/login" && (
+          <Button size="sm" variant="outline-secondary" className="nav-btn">
+            <Nav.Link href="/login">Login</Nav.Link>
+          </Button>
+        )}
+        {location.pathname !== "/signup" && (
+          <Button size="sm" variant="outline-secondary" className="nav-btn">
+            <Nav.Link href="/signup">Signup</Nav.Link>
+          </Button>
+        )}
       </Nav.Item>
     );
   }
