@@ -1,0 +1,66 @@
+.container {
+  height: 100vh;
+  background: var(--main-bg-color);
+  display: flex;
+  flex-direction: column;
+  align-items: flex;
+}
+
+.form {
+  height: inherit;
+  background: var(--secondary-bg-color);
+  flex: 1;
+  width: 50%;
+  margin-left: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.compo {
+  flex: 1;
+}
+
+.text {
+  color: var(--bold-text-color);
+  font-size: 2rem;
+  font-family: "Nunito";
+  font-weight: 750;
+  letter-spacing: 0.1rem;
+}
+
+/* unvisited link */
+.link:link {
+  text-decoration: none;
+  color: var(--bold-text-color);
+}
+
+/* visited link */
+.link:visited {
+  color: var(--bold-text-color);
+}
+
+/* mouse over link */
+.link:hover {
+  color: var(--bold-text-color);
+  opacity: 0.7;
+}
+
+/* selected link */
+.link:active {
+  color: var(--bold-text-color);
+  opacity: 0.5;
+}
+
+.input:not(active) {
+  border-radius: 25px;
+  background: #e7d4b6;
+  box-shadow: none;
+  border: none;
+}
+
+.input:focus {
+  box-shadow: none !important;
+  background: #e7d4b6 !important;
+  outline: none !important;
+}

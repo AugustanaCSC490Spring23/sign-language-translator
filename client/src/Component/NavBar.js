@@ -8,7 +8,10 @@ function NavBar() {
   return (
     <Navbar className="style-navbar" expand="lg" fixed="top">
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
+      <Navbar.Collapse
+        className="justify-content-end"
+        id="basic-navbar-nav"
+      >
         <Nav className="style-nav">
           <Nav.Item className="style-item">
             <Nav.Link href="/">Home</Nav.Link>

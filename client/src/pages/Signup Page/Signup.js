@@ -1,9 +1,9 @@
 import { Container, Form, Row, Col } from "react-bootstrap";
 import CusButton from "../../Component/CusButton";
-import "./Signup.css";
 import { useState, useEffect } from "react";
 import { signUp } from "../../services/authService";
 import { useNavigate } from "react-router-dom";
+import style from "./Signup.module.css";
 
 const Center = ({ children }) => {
   return (
@@ -58,10 +58,10 @@ const Signup = () => {
   };
 
   return (
-    <Container fluid className="container">
-      <Form className="form" onSubmit={onSubmit}>
-        <div className="compo">
-          <h1 className="mb-5 text">Sign Up</h1>
+    <Container fluid className={style.container}>
+      <Form className={style.form} onSubmit={onSubmit}>
+        <div className={style.compo}>
+          <h1 className={`mb-5 ${style.text}`}>Sign Up</h1>
 
           <Row>
             <Col
@@ -73,7 +73,7 @@ const Signup = () => {
                 type="email"
                 name="email"
                 placeholder="Enter email"
-                className="input"
+                className={style.input}
                 value={user.email}
                 onChange={handleChange}
               />
@@ -84,7 +84,7 @@ const Signup = () => {
                 type="text"
                 name="name"
                 placeholder="Enter Username"
-                className="input"
+                className={style.input}
                 value={user.name}
                 onChange={handleChange}
               />
@@ -97,13 +97,17 @@ const Signup = () => {
                 type="password"
                 name="password"
                 placeholder="Password"
-                style={error ? { border: "2px solid red" } : { border: "none" }}
-                className="input"
+                style={
+                  error
+                    ? { border: "2px solid red" }
+                    : { border: "none" }
+                }
+                className={style.input}
                 value={user.password}
                 onChange={handleChange}
               />
               <Form.Text
-                className="mt-2 text"
+                className={`mt-2 ${style.text}`}
                 style={{ color: "red", fontSize: "0.8rem" }}
               >
                 {error ? "Please input a correct password!" : ""}
@@ -117,14 +121,18 @@ const Signup = () => {
                 type="password"
                 name="passwordConfirm"
                 placeholder="Confirm Password"
-                style={error ? { border: "2px solid red" } : { border: "none" }}
+                style={
+                  error
+                    ? { border: "2px solid red" }
+                    : { border: "none" }
+                }
                 // style = {{borderRadius: "25px",  background: "#E7D4B6", boxShadow: "none", border: "none"}}
-                className="input"
+                className={style.input}
                 value={user.passwordConfirm}
                 onChange={handleChange}
               />
               <Form.Text
-                className="mt-2 text"
+                className={`mt-2 ${style.text}`}
                 style={{ color: "red", fontSize: "0.8rem" }}
               >
                 {error ? "Please confirm your password!s" : ""}
@@ -132,6 +140,17 @@ const Signup = () => {
             </Form.Group>
           </Center>
 
+          <Center>
+            <CusButton
+              bgcolor="#C3A580"
+              color="#3E1408"
+              radius="25"
+              title="Sign Up"
+              weight="750"
+              type="submit"
+              focus="#C3A580"
+            />
+          </Center>
           <Center>
             <CusButton
               bgcolor="#C3A580"

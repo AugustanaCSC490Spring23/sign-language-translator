@@ -5,7 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 import { logIn } from "../../services/authService";
 
-import "./Login.css";
+import style from "./Login.module.css";
 
 const Center = ({ children }) => {
   return (
@@ -48,10 +48,10 @@ const Login = () => {
   };
 
   return (
-    <Container fluid className="container">
-      <Form className="form" onSubmit={onSubmit}>
-        <div className="compo">
-          <h1 className="mb-5 text">Login</h1>
+    <Container fluid className={style.container}>
+      <Form className={style.form} onSubmit={onSubmit}>
+        <div className={style.compo}>
+          <h1 className={`mb-5 ${style.text}`}>Login</h1>
 
           <Center>
             <Form.Control
@@ -59,7 +59,7 @@ const Login = () => {
               placeholder="Enter email"
               name="email"
               value={user.email}
-              className="input"
+              className={style.input}
               onChange={handleChange}
             />
           </Center>
@@ -70,7 +70,7 @@ const Login = () => {
               placeholder="Password"
               name="password"
               value={user.password}
-              className="input"
+              className={style.input}
               onChange={handleChange}
             />
           </Center>
@@ -88,15 +88,26 @@ const Login = () => {
           </Center>
 
           <Center>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
               <Form.Text>
-                <Link className="link" onClick={handleCreateAccountClick}>
+                <Link
+                  className="link"
+                  onClick={handleCreateAccountClick}
+                >
                   Create Account
                 </Link>
               </Form.Text>
 
               <Form.Text>
-                <a className="link" href="">
+                <a
+                  className={style.link}
+                  href="https://www.w3schools.com/cssref/tryit.php?filename=trycss_sel_link_more1"
+                >
                   Need Help?
                 </a>
               </Form.Text>
