@@ -1,25 +1,28 @@
-const express = require("express");
-const itemController = require("../controllers/itemController");
-const authController = require("../controllers/authController");
+const express = require('express');
+const itemController = require('../controllers/itemController');
+const authController = require('../controllers/authController');
 
 const router = express.Router();
 
 router
-  .route("/")
+  .route('/')
   .get(itemController.getAllItems)
   .post(
     authController.routeGuard,
-    authController.exclusiveAccess("admin"),
+    authController.exclusiveAccess('admin'),
     itemController.createItem
   );
 
 // get individual item by text
-router.route("/text/:text").get(itemController.getItemByText);
+router.route('/text/:text').get(itemController.getItemByText);
+
+// get individual item by sentence
+router.route('/sentence/:text').get(itemController.getItemBySentence);
 
 // topics
-router.route("/topics").get(itemController.getAllTopics);
+router.route('/topics').get(itemController.getAllTopics);
 
 // letters
-router.route("/letters").get(itemController.getAllLetters);
+router.route('/letters').get(itemController.getAllLetters);
 
 module.exports = router;

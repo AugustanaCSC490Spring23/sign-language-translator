@@ -23,11 +23,13 @@ const CusButton = (props) => {
     .btn-custom:hover, .btn-custom:focus {
       font-size: 1.1rem;
       background: ${props.focus};
+      color: ${props.color};
       opacity: 1.1;
     }
 
     .btn-custom:active, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active  {
       background: ${props.focus};
+      color: ${props.color}
       opacity: 0.5;
       border: none;
       font-size: 1rem
