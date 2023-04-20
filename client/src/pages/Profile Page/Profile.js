@@ -1,60 +1,70 @@
-import React from 'react';
-import { Container, Row, Col, Card, Image } from 'react-bootstrap';
 
-import requireAuth from "../../hoc/requireAuth";
-import userAva from "../../Resources/Images/user-profile-img.png";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import "./Profile.css";
+import { Button } from "react-bootstrap";
 
-import './Profile.css';
 
-const Profile = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  return (
-    <Container>
-      <Row>
-        <Col md={4} className="profile-divider">
-          <Card className="profile-card">
-            <Image src={user.avatar || `${userAva}`} className="profile-avatar" />
-            <Card.Body>
-              <Card.Title>{user.name}</Card.Title>
-              <Card.Text>{user.email}</Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={8}>
-          <Row className="profile-row">
-            <Col>
-              <h2>Achievements</h2>
-              <div className="profile-images">
-                {user.items.map((achievement) => (
-                  <Image key={achievement._id} src={achievement.meaningPhoto} />
-                ))}
-              </div>
-            </Col>
-          </Row>
-          <Row className="profile-row">
-            <Col>
-              <h2>Flashcards</h2>
-              <div className="profile-images">
-                {user.items.map((flashcard) => (
-                  <Image key={flashcard._id} src={flashcard.meaningPhoto} />
-                ))}
-              </div>
-            </Col>
-          </Row>
-          <Row className="profile-row">
-            <Col>
-              <h2>Lessons</h2>
-              <div className="profile-images">
-                {user.items.map((lesson) => (
-                  <Image key={lesson._id} src={lesson.meaningPhoto} />
-                ))}
-              </div>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
-    </Container>
-  );
-};
+function profile(){
 
-export default requireAuth(Profile);
+    return(
+    <div className="user_box">
+
+    <div className="profile_box1">
+
+        <div class="picture_card">
+            <div class="img-container">
+            <img src="vietNguyen" alt= "viet nguyen"/>
+            </div>
+            
+        </div>
+
+        <div class="user-details">
+            <h3>Viet Nguyen</h3> 
+            <h3>email</h3>
+            <h4>city</h4>
+        </div>
+
+        <div className="edit_button">
+        <Button variant="outline-dark">edit</Button>
+        </div>
+
+    </div>
+
+    <div className="profile_box2">
+        <div className="level">
+            <div class="card">
+                    <h3>Level</h3> 
+            </div>
+        </div>
+
+        <div className="Completed cources">
+            <div class="card">
+                    <h3>Completed cources</h3> 
+            </div>
+        </div>
+
+        <div className="Started">
+            <div class="card">
+                    <h3>Started Lessons</h3> 
+            </div>
+        </div>
+
+        <div className="Cources">
+            <div class="card">
+                    <h3>Cources</h3> 
+            </div>
+        </div>
+
+
+    </div>
+
+    </div>
+    
+   
+    );
+    
+
+}
+
+export default profile;
