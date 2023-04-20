@@ -1,4 +1,6 @@
-.card-container {
+.cardContainer {
+  min-height: 100vh;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,8 +9,8 @@
   margin: 0 auto;
 }
 
-.learning-card {
-  height: 10cm;
+.learningCard {
+  height: 11cm;
   width: 9cm;
   margin: 1cm;
   border: none;
@@ -21,11 +23,11 @@
   justify-content: center;
 }
 
-.learning-card:hover {
+.learningCard:hover {
   transform: scale(1.02);
 }
 
-.card-image {
+.cardImage {
   max-width: 30%; /* Update the max-width to your desired size */
   max-height: 30%; /* Update the max-height to your desired size */
   width: auto;
@@ -35,19 +37,19 @@
   margin-top: 4rem;
 }
 
-.card-image:hover {
+.cardImage:hover {
   transform: scale(1.05);
 }
 
-.card-body {
+.cardBody {
   text-align: center;
   margin-top: 4rem;
 }
 
-.card-title {
+.cardTitle {
   font-size: 1.2rem;
 }
 
-.card-text {
+.cardText {
   font-size: 1rem;
 }

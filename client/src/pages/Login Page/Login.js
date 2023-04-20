@@ -1,8 +1,11 @@
 import { Container, Form, Row, Col } from "react-bootstrap";
 import CusButton from "../../Component/CusButton";
+import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+
+import { logIn } from "../../services/authService";
+
 import style from "./Login.module.css";
-import { useState } from "react";
-import axios from "axios";
 
 const Center = ({ children }) => {
   return (
@@ -13,33 +16,35 @@ const Center = ({ children }) => {
 };
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  // if logged in already, user will be directed to homepage
+  useEffect(() => {
+    if (localStorage.getItem("jwt")) {
+      navigate("/");
+    }
+  }, [navigate]);
+
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
 
-  const onSubmit = (e) => {
-    console.log(e);
+  const onSubmit = async (e) => {
     e.preventDefault();
-    axios({
-      method: "post",
-      url: "/api/v1/users/login",
-      data: {
-        email: user.email,
-        password: user.password,
-      },
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+
+    await logIn({
+      email: user.email,
+      password: user.password,
+    });
   };
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
-    console.log(user.email);
+  };
+
+  const handleCreateAccountClick = () => {
+    window.location.assign("/signup");
   };
 
   return (
@@ -90,12 +95,12 @@ const Login = () => {
               }}
             >
               <Form.Text>
-                <a
-                  className={style.link}
-                  href="https://www.w3schools.com/cssref/tryit.php?filename=trycss_sel_link_more1"
+                <Link
+                  className="link"
+                  onClick={handleCreateAccountClick}
                 >
                   Create Account
-                </a>
+                </Link>
               </Form.Text>
 
               <Form.Text>

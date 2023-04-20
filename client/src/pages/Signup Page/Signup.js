@@ -1,9 +1,9 @@
 import { Container, Form, Row, Col } from "react-bootstrap";
 import CusButton from "../../Component/CusButton";
-import style from "./Signup.module.css";
-import { useState } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
 import { signUp } from "../../services/authService";
+import { useNavigate } from "react-router-dom";
+import style from "./Signup.module.css";
 
 const Center = ({ children }) => {
   return (
@@ -14,6 +14,14 @@ const Center = ({ children }) => {
 };
 
 const Signup = () => {
+  const navigate = useNavigate();
+
+  // if logged in already, user will be directed to homepage
+  useEffect(() => {
+    if (localStorage.getItem("jwt")) {
+      navigate("/");
+    }
+  }, [navigate]);
   //user data
   const [user, setUser] = useState({
     email: "",
@@ -32,7 +40,7 @@ const Signup = () => {
   };
 
   //onSubmit event
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (user.password !== user.passwordConfirm) {
       setError(true);
@@ -40,20 +48,13 @@ const Signup = () => {
     }
 
     setError(false);
-    axios({
-      method: "post",
-      url: "/api/v1/users/signup",
-      data: {
-        email: user.email,
-        name: user.name,
-        password: user.password,
-        passwordConfirm: user.passwordConfirm,
-      },
-    })
-      .then((res) => {})
-      .catch((e) => {
-        console.log(e);
-      });
+    const signedUpUser = {
+      email: user.email,
+      name: user.name,
+      password: user.password,
+      passwordConfirm: user.passwordConfirm,
+    };
+    signUp(signedUpUser);
   };
 
   return (
@@ -139,6 +140,17 @@ const Signup = () => {
             </Form.Group>
           </Center>
 
+          <Center>
+            <CusButton
+              bgcolor="#C3A580"
+              color="#3E1408"
+              radius="25"
+              title="Sign Up"
+              weight="750"
+              type="submit"
+              focus="#C3A580"
+            />
+          </Center>
           <Center>
             <CusButton
               bgcolor="#C3A580"

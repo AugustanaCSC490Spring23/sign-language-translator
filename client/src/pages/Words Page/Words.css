@@ -3,6 +3,7 @@
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 2rem;
+    max-height: 100vh;
   }
   
   .letter-container > * {
