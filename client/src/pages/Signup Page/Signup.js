@@ -151,17 +151,6 @@ const Signup = () => {
               focus="#C3A580"
             />
           </Center>
-          <Center>
-            <CusButton
-              bgcolor="#C3A580"
-              color="#3E1408"
-              radius="25"
-              title="Sign Up"
-              weight="750"
-              type="submit"
-              focus="#C3A580"
-            />
-          </Center>
         </div>
       </Form>
     </Container>

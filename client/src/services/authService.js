@@ -20,7 +20,7 @@ const signUp = async (user) => {
       });
   } catch (err) {
     console.log(err);
-    errorHandler(err);
+    errorHandler(err.message);
   }
 };
 

@@ -5,7 +5,7 @@ import WordCard from "../../Component/WordCard.js";
 
 import { getWordsByFirstLetter } from "../../services/itemsService.js";
 
-import "./Words.css";
+import styles from "./Words.module.css";
 import { useEffect, useState } from "react";
 
 const Words = () => {
@@ -21,7 +21,7 @@ const Words = () => {
   return (
     <>
       <Jumbotron />
-      <div className="letter-container">
+      <div className={styles.letterContainer}>
         {words.map((word, index) => (
           <WordCard key={word.id} word={word} letter={letter} />
         ))}
