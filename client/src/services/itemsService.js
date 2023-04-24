@@ -1,13 +1,14 @@
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
+import errorHandler from "../utils/errorHandler";
 
 const getWordsByFirstLetter = async (letter) => {
-  return await axios
+  return await axiosInstance
     .get(`/api/v1/items?sort=-firstLetter&firstLetter=${letter}`)
     .then(function (response) {
       return response;
     })
     .catch(function (error) {
-      console.log(error);
+      errorHandler(error.message);
     });
 };
 

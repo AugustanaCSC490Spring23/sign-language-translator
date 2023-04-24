@@ -1,9 +1,10 @@
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
+import errorHandler from "../utils/errorHandler";
 import notifier from "../utils/notifier";
 
 const signUp = async (user) => {
   try {
-    return await axios
+    return await axiosInstance
       .post("/api/v1/users/signup", {
         name: user.name,
         email: user.email,
@@ -19,12 +20,13 @@ const signUp = async (user) => {
       });
   } catch (err) {
     console.log(err);
+    errorHandler(err);
   }
 };
 
 const logIn = async (credentials) => {
   try {
-    return await axios
+    return await axiosInstance
       .post("/api/v1/users/login", {
         email: credentials.email,
         password: credentials.password,
@@ -37,8 +39,8 @@ const logIn = async (credentials) => {
         notifier.success("Login successful!")
       });
   } catch (err) {
-    console.log(err);
-    notifier.error("Login failed!")
+    console.log(err.message);
+    errorHandler(err.message);
   }
 };
 
