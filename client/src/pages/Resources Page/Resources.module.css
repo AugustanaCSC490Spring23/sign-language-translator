@@ -1,90 +1,89 @@
-.resources{
-    min-height:100vh;
+.resources {
+    min-height: 100vh;
     width: 100vw;
     padding: 50px;
-    padding-left: 50px;
-    padding-right: 50px;
-    background-color: #F0E7DE;
-    
-    
-}
-.Resources_box{
+    background-color: #f0e7de;
+  }
+  
+  .resources_box {
     width: 90vw;
     height: 80vh;
     background: url(https://media.istockphoto.com/id/1411385549/vector/hands-of-people-with-different-skin-colors-different-nationalities-and-religions-activists.jpg?s=612x612&w=0&k=20&c=VHyNETsP2ZKVwRoJwGtFAO7oOUCgnRBzZFekNAV7Rrg=);
     background-position: center;
     background-repeat: no-repeat;
-    background-size:cover;
+    background-size: cover;
     padding-left: 150px;
     padding-right: 50px;
     padding-top: 90px;
-}
-
-.Resources_inner_box{
-    min-height:65vh;
+  }
+  
+  .resources_inner_box {
     width: 65vw;
-    padding-top: 100px;
     padding: 50px;
-    padding-left: 50px;
-    padding-right: 50px;
     background: white;
-
-
-}
-
-.resources_info{
-    background: white;
-    position: absolute;
+  }
+  
+  .resources_info {
+    position: relative;
     bottom: 50px;
     padding-top: 50px;
-}
-
-.resources_info h1{
+  }
+  
+  .resources_info h1 {
     font-size: 5rem;
-    position: center;
-}
-
-.resources_lines{
-    width: 50vw;
-}
-
-.Resources_text{
-    font-size: 5rem;
-}
-
-#browse_resources{
+    text-align: center;
+  }
+  
+  .resources_text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-top: 2rem;
+  }
+  
+  .browse_resources {
     padding: 20px;
-    background: blck;
+    background: black;
     border: 5px solid white;
-    color:black;
-    font-size: 1rem;
+    color: white;
+    font-size: 1.2rem;
     font-weight: 800;
     letter-spacing: 1px;
-    margin-top: 30px; 
-    transition: 0.3s ease; 
-    border-radius: 100;
+    margin-top: 30px;
+    transition: 0.3s ease;
+    border-radius: 100px;
+  }
+  
+  .browse_resources:hover {
+    transform: translateY(-20px);
+  }
+  
+  @media (max-width: 500px) {
+    .resources_box {
+      padding-left: 10px;
+      height: 60vh;
+    }
     
-}
-
-#Browse_Resources:hover {
-transform: translateY(-20px);
-}
-
-@media(max-width: 500px){
-   .Resources_box{
-    padding-left: 10px;
-   } 
-   .resources_info{
-    left:10px;
-   }
-   .resources_info h1{
-    font-size: 2rem;
-   }
-   .resources_lines{
-    width: 50vw;
-   }
-   .resources_lines{
-    width: 85vw;
-    font-size: small;
-   }
-}
+    .resources_inner_box {
+      width: 85vw;
+    }
+    
+    .resources_info {
+      bottom: 0;
+      padding: 1rem;
+    }
+    
+    .resources_info h1 {
+      font-size: 2.5rem;
+    }
+    
+    .resources_text {
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .browse_resources {
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+  }
+  

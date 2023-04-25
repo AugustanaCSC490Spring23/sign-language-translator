@@ -67,7 +67,7 @@ h2{
     size: 20px;
 }
 
-.card .img-container{
+.card .imgContainer{
     width: 8em;
     height: 8em;
     background-color: bisque;
@@ -112,12 +112,10 @@ h2{
     flex: 1;
     height:250px;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAA1BMVEXmzLM/Muu8AAAASElEQVR4nO3BgQAAAADDoPlTX+AIVQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwDcaiAAFXD1ujAAAAAElFTkSuQmCC);
-
-    
 }
 
 
-.About_info{
+.about_info{
     color: white;
     position: absolute;
     bottom: 50px;

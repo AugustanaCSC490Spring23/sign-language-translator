@@ -1,14 +1,14 @@
 import React from "react";
-import "./Home.module.css";
+import styles from "./Home.module.css";
 import CusButton from "../../Component/CusButton";
 import { Container, Row, Col } from "react-bootstrap";
 
 const Home = () => {
   return (
-    <Container fluid className="home-container">
+    <Container fluid className={styles.homeContainer}>
       <Row>
         <Col
-          className="style-title-upper"
+          className={styles.styleTitleUpper}
           md={{ span: 8, offset: 1 }}
         >
           SIGN LANGUAGE
@@ -16,15 +16,15 @@ const Home = () => {
       </Row>
       <Row>
         <Col
-          className="style-title-lower"
+          className={styles.styleTitleUpper}
           md={{ span: 2, offset: 1 }}
         >
           TRANSLATOR
         </Col>
       </Row>
-      <Row className="position-small-content">
+      <Row className={styles.positionSmallContent}>
         <Col
-          className="style-small-content"
+          className={styles.positionSmallContent}
           md={{ span: 3, offset: 1 }}
         >
           <h4>Hello!</h4>
