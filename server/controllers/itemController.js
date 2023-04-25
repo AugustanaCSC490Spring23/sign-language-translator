@@ -45,26 +45,36 @@ const arrayConverter = (res) => {
   return sentence;
 };
 exports.getItemBySentence = asyncCatch(async (req, res, next) => {
-  const elements = arrayConverter(req.params.text);
-  const promiseItems = elements.map(async (element) => {
-    const item = await Item.findOne({ text: element });
-    let temp = '';
-    if (!item) {
-      const notFoundElements = [...element];
-      temp = notFoundElements.map(async (value) => {
-        return await Item.findOne({ text: value });
-      });
-      return Promise.all(temp);
-    } else {
-      return item;
-    }
-  });
-  Promise.all(promiseItems).then((values) => {
+  const item = await Item.findOne({ text: req.params.text });
+  if (item) {
     res.status(200).json({
       status: 'success',
-      data: { item: values },
+      data: { item: [item] },
     });
-  });
+  } else {
+    const elements = arrayConverter(req.params.text);
+    const promiseItems = elements.map(async (element) => {
+      const item = await Item.findOne({ text: element });
+      let temp = '';
+      if (!item) {
+        const notFoundElements = [...element];
+        temp = notFoundElements.map(async (value) => {
+          return await Item.findOne({ text: value });
+        });
+        return Promise.all(temp);
+      } else {
+        return item;
+      }
+    });
+    Promise.all(promiseItems).then((values) => {
+      res.status(200).json({
+        status: 'success',
+        data: { item: values },
+      });
+    });
+  }
+
+  // return next(new Err('No word found', 404));
 });
 
 exports.getItemByText = asyncCatch(async (req, res, next) => {
