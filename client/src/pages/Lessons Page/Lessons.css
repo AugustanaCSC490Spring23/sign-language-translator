@@ -8,14 +8,17 @@
 }
 
 .lessons-welcome { 
-    padding-top: 3em;
+    display: flex;
     text-align: start;
-}
-
-.lessons-card-locate { 
-    padding: 2em;
+    align-items: center;
 }
 
 .lessons-card {
-    background-color: #F5F5CF !important;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    background-color: #F5F5CF;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    border-radius: 10px;
 }
+
