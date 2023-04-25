@@ -3,14 +3,21 @@ import { useParams } from "react-router-dom";
 import Jumbotron from "../../Component/Jumbotron.js";
 import WordCard from "../../Component/WordCard.js";
 
-import { getWordsByFirstLetter, getWordsByTopic } from "../../services/itemsService.js";
+import {
+  getWordsByFirstLetter,
+  getWordsByTopic,
+} from "../../services/itemsService.js";
 
 import styles from "./Words.module.css";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const Words = () => {
   const { letter, topic } = useParams();
   const [words, setWords] = useState([]);
+
+  const { pathname } = useLocation();
+  const [showJumbotron, setShowJumbotron] = useState(true);
 
   useEffect(() => {
     if (letter) {
@@ -23,11 +30,14 @@ const Words = () => {
         setWords(response.data.data.items);
       });
     }
-  }, [letter, topic]);
+    if (pathname.includes("/lessons/")) {
+      setShowJumbotron(false);
+    }
+  }, [letter, topic, pathname]);
 
   return (
     <>
-      <Jumbotron />
+      {showJumbotron && <Jumbotron />}
       <div className={styles.letterContainer}>
         {words.map((word, index) => (
           <WordCard key={word.id} word={word} letter={letter} />
