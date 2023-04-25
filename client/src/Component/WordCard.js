@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 
-import './WordCard.css';
+import styles from './WordCard.module.css';
 
 const WordCard = ({ word, letter }) => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const WordCard = ({ word, letter }) => {
   if (word.meaningPhoto) {
     return (
       <Card
-        className="word-card"
+        className={styles.wordCard}
         style={{
           width: "6cm",
           height: "6cm",
@@ -41,7 +41,7 @@ const WordCard = ({ word, letter }) => {
   } else {
     return (
       <Card
-        className="word-card"
+        className={styles.wordCard}
         style={{
           width: "6cm",
           height: "6cm",

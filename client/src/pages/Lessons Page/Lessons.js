@@ -1,82 +1,45 @@
-import React from 'react';
-import "./Lessons.css";
+import React, { useEffect, useState } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import styles from "./Lessons.module.css";
+import { getAllTopics } from "../../services/itemsService";
 
-function lessons(){
-    return(
-    <div className="lessons">
-     <div className="lessons_box">
-        <h1>Lessons</h1>
-     </div>
-     <div className="lessons_box">
-        <div className="column">
-            <div className="card">
-                {/* <div className="img-container">
-                    <img src="" alt="" />
-                </div> */}
-                <h3>Lesson One: FAMILY</h3>
-            </div>
-        </div>
-     </div>
+function Lessons() {
+  const [topics, setTopics] = useState([]);
+  const navigate = useNavigate();
 
-     <div className="lessons_box">
-        <div className="column">
-            <div className="card">
-                {/* <div className="img-container">
-                    <img src="" alt="" />
-                </div> */}
-                <h3>Lesson Two: SCHOOL</h3>
-            </div>
-        </div>
-     </div>
+  useEffect(() => {
+    getAllTopics().then((res) => {
+      setTopics(res.data.data.topics);
+    });
+  }, []);
 
-     <div className="lessons_box">
-        <div className="column">
-            <div className="card">
-                {/* <div className="img-container">
-                    <img src="" alt="" />
-                </div> */}
-                <h3>Lesson Three: DIRECTIONS</h3>
-            </div>
-        </div>
-     </div>
+  function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
 
-     <div className="lessons_box">
-        <div className="column">
-            <div className="card">
-                {/* <div className="img-container">
-                    <img src="" alt="" />
-                </div> */}
-                <h3>Lesson Four: HOUSEHOLD</h3>
-            </div>
-        </div>
-     </div>
+  function handleTopicClick(topicId) {
+    navigate(`/learning/lessons/${topicId}`);
+  }
 
-     <div className="lessons_box">
-        <div className="column">
-            <div className="card">
-                {/* <div className="img-container">
-                    <img src="" alt="" />
-                </div> */}
-                <h3>Lesson Five: COUNTRIES</h3>
-            </div>
-        </div>
-     </div>
-
-     <div className="lessons_box">
-        <div className="column">
-            <div className="card">
-                {/* <div className="img-container">
-                    <img src="" alt="" />
-                </div> */}
-                <h3>Lesson Six: SHOPPING</h3>
-            </div>
-        </div>
-     </div>
-
-    </div> 
-    );  
+  return (
+    <Container>
+      <Row className={`${styles.lessons} justify-content-center`}>
+        <Col>
+          <h1>Lessons</h1>
+        </Col>
+      </Row>
+      <Row className={`${styles.lessons} justify-content-center`}>
+        {topics.map((topic) => {
+          return (
+            <Col md={4} className={styles.column} onClick={() => handleTopicClick(topic._id)}>
+              <h3>{capitalize(topic._id)}</h3>
+            </Col>
+          );
+        })}
+      </Row>
+    </Container>
+  );
 }
 
-export default lessons;
-
-//////////////////////////////////////////////
+export default Lessons;

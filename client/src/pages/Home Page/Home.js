@@ -1,5 +1,5 @@
 import React from "react";
-import "./Home.css";
+import "./Home.module.css";
 import CusButton from "../../Component/CusButton";
 import { Container, Row, Col } from "react-bootstrap";
 

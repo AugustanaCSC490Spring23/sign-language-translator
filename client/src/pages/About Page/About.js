@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./About.css";
+import "./About.module.css";
 import vietNguyen from "../../assets/viet-nguyen.jpg";
 import huyNguyen from "../../assets/huy-ngyen.jpg";
 import samuelTklemariam from "../../assets/samuel-teklemariam.jpg";

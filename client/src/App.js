@@ -53,6 +53,10 @@ function App() {
       element: <Words />,
     },
     {
+      path: "/learning/lessons/:topic",
+      element: <Words />,
+    },
+    {
       path: "/resources",
       element: <Resources />,
     },

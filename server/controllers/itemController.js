@@ -1,9 +1,9 @@
-const _ = require('lodash');
+const _ = require("lodash");
 
-const Item = require('../models/item');
+const Item = require("../models/item");
 
-const Err = require('../utils/customError');
-const asyncCatch = require('../utils/asyncCatch');
+const Err = require("../utils/customError");
+const asyncCatch = require("../utils/asyncCatch");
 
 // MIDDLEWARES
 
@@ -13,7 +13,7 @@ exports.getAllItems = asyncCatch(async (req, res, next) => {
   // make a copy of the real query to avoid making changes to the orginal
   let { ...fields } = { ...req.query };
 
-  const filteredOutFields = ['sort']; // exclude fields that can't be used for filtering
+  const filteredOutFields = ["sort"]; // exclude fields that can't be used for filtering
   const filteredFilters = _.omit(fields, filteredOutFields); // lodash helps filter the filteredOutFields out of fields
 
   // filtering with other logics: greater than, less than, ...
@@ -27,28 +27,28 @@ exports.getAllItems = asyncCatch(async (req, res, next) => {
 
   // now sort the data after filter
   if (req.query.sort) {
-    const sortQuery = req.query.sort.split(',').join(' ');
+    const sortQuery = req.query.sort.split(",").join(" ");
     data = data.sort(sortQuery);
   }
 
   const items = await data;
   res.status(200).json({
-    status: 'success',
+    status: "success",
     requestedAt: req.requestTime,
     count: items.length,
     data: { items: items },
   });
 });
 const arrayConverter = (res) => {
-  let temp = res.replace(/[^a-zA-Z0-9 ]/g, '');
-  let sentence = temp.split(' ');
+  let temp = res.replace(/[^a-zA-Z0-9 ]/g, "");
+  let sentence = temp.split(" ");
   return sentence;
 };
 exports.getItemBySentence = asyncCatch(async (req, res, next) => {
   const elements = arrayConverter(req.params.text);
   const promiseItems = elements.map(async (element) => {
     const item = await Item.findOne({ text: element });
-    let temp = '';
+    let temp = "";
     if (!item) {
       const notFoundElements = [...element];
       temp = notFoundElements.map(async (value) => {
@@ -61,7 +61,7 @@ exports.getItemBySentence = asyncCatch(async (req, res, next) => {
   });
   Promise.all(promiseItems).then((values) => {
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: { item: values },
     });
   });
@@ -70,11 +70,11 @@ exports.getItemBySentence = asyncCatch(async (req, res, next) => {
 exports.getItemByText = asyncCatch(async (req, res, next) => {
   const item = await Item.findOne({ text: req.params.text });
   if (!item) {
-    return next(new Err('No word found', 404));
+    return next(new Err("No word found", 404));
   }
   console.log(item);
   res.status(200).json({
-    status: 'success',
+    status: "success",
     data: { item: item },
   });
 });
@@ -83,7 +83,7 @@ exports.createItem = asyncCatch(async (req, res, next) => {
   const item = new Item(req.body);
   await item.save();
   res.status(200).json({
-    status: 'success',
+    status: "success",
     data: { item: item },
   });
 });
@@ -94,14 +94,17 @@ exports.getAllTopics = asyncCatch(async (req, res, next) => {
   const topics = await Item.aggregate([
     {
       $group: {
-        _id: '$topic',
+        _id: "$topic",
         count: { $sum: 1 },
-        titles: { $push: '$text' },
+        titles: { $push: "$text" },
       },
+    },
+    {
+      $sort: { _id: 1 }, // sort by _id field in ascending order
     },
   ]);
   res.status(200).json({
-    status: 'success',
+    status: "success",
     data: {
       topics,
     },
@@ -114,14 +117,14 @@ exports.getAllLetters = asyncCatch(async (req, res, next) => {
   const letters = await Item.aggregate([
     {
       $group: {
-        _id: '$firstLetter',
+        _id: "$firstLetter",
         count: { $sum: 1 },
-        titles: { $push: '$text' },
+        titles: { $push: "$text" },
       },
     },
   ]);
   res.status(200).json({
-    status: 'success',
+    status: "success",
     data: {
       letters,
     },
