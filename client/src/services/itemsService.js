@@ -34,4 +34,15 @@ const getAllTopics = async () => {
     });
 };
 
-export { getWordsByFirstLetter, getWordsByTopic, getAllTopics };
+const getWordByText = async (text) => {
+  return await axiosInstance
+    .get(`/api/v1/items/text/${text}`)
+    .then(function (response) {
+      return response;
+    })
+    .catch(function (error) {
+      errorHandler(error.message);
+    });
+};
+
+export { getWordsByFirstLetter, getWordsByTopic, getAllTopics, getWordByText };
