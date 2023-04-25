@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Container, Form, Row, Col, Image } from "react-bootstrap";
 import CusButton from "../../Component/CusButton";
 import style from "./Translator.module.css";
@@ -7,58 +7,53 @@ import axios from "axios";
 const Translator = () => {
   const [sentence, setSentence] = useState("");
   const [imgArray, setImgArray] = useState([]);
-  let imgList;
-
+  const [imgList, setImgList] = useState([]);
+  const [id, setId] = useState(0);
   useEffect(() => {
-    // console.log(imgArray);
-    imgList = [];
-    //Runs only on the first render
     imgArray.map((item) => {
-      console.log(item);
-      // console.log(item);
-      // item.map((value) => {
-      //   let photo = value.signPhotos;
+      if (Array.isArray(item)) {
+        item.map((img) => {
+          img.signPhotos.map((photo) => {
+            photo.push(id);
 
-      //   imgList.push(photo);
-      //   photo.map((link) => {
-
-      //   });
-      // });
+            setImgList((prev) => {
+              return [...prev, photo];
+            });
+            setId((prev) => {
+              photo.push(prev + 1);
+              return prev + 1;
+            });
+          });
+        });
+      } else {
+        item.signPhotos.map((photo) => {
+          setImgList((prev) => {
+            return [...prev, photo];
+          });
+          setId((prev) => {
+            photo.push(prev + 1);
+            return prev + 1;
+          });
+        });
+      }
     });
-    // console.log(imgList[0]);
+
+    return () => {
+      console.log("chay");
+      setImgList([]);
+      setId(0);
+    };
   }, [imgArray]);
 
   const onTranslate = (e) => {
-    console.log(sentence);
     e.preventDefault();
 
     axios({
       method: "get",
       url: "/api/v1/items/sentence/" + sentence,
     }).then(function (response) {
-      // console.log(response.data.data.item);
-      // console.log(response.data.data.item);
+      console.log(response.data.data.item);
       setImgArray(response.data.data.item);
-      // setImgArray(response.data.data.item);
-      // imgArray.map((item) => {
-      //   item.signPhotos.map((link) => {
-
-      //   });
-
-      // });
-      // console.log(imgArray);
-
-      // console.log(response.data.data.item);
-      // imgArray.map((item) => {
-      //   console.log(item);
-      //   if (item.length > 1) {
-      //     item.map((value) => {
-      //       console.log(value);
-      //     });
-      //   } else {
-      //     console.log(item.meaningPhoto);
-      //   }
-      // });
     });
   };
 
@@ -78,14 +73,8 @@ const Translator = () => {
         style={{ flex: "1", height: "100%" }}
         className="h-70 mb-3"
       >
-        <Form
-          onSubmit={onTranslate}
-          style={{ height: "100%", border: "1px solid cyan" }}
-        >
-          <Row
-            className={`${style.form} mb-4 mx mx-3`}
-            style={{ border: "1px solid black" }}
-          >
+        <Form onSubmit={onTranslate} style={{ height: "100%" }}>
+          <Row className={`${style.form} mb-4 mx mx-3`}>
             <Col md={{ span: 6 }} style={{ padding: "0 2px" }}>
               <Form.Control
                 as="textarea"
@@ -106,7 +95,7 @@ const Translator = () => {
             <Col
               style={{
                 padding: "0 2px",
-                border: "2px solid red",
+                border: "2px solid black",
                 background: "white",
                 borderRadius: "5px",
                 height: "inherent",
@@ -114,67 +103,21 @@ const Translator = () => {
                 overflow: "auto",
               }}
             >
-              {/* {imgList.map(item => {
+              {imgList.map((item) => {
                 return (
                   <Image
-                  key={item[0][0]}
-                  style={{
-                    height: "50%",
-                    width: "30%",
-                    border: "1px solid black",
-                  }}
-                  src={item.}
-                />
-                )
-              })} */}
-
-              {/* {imgArray.length > 0 &&
-                imgArray.map((item) => {
-                  console.log(item);
-                  if (item.length > 1) {
-
-                  return (
-                    <Image
-                      key={item}
-                      style={{
-                        height: "50%",
-                        width: "30%",
-                        border: "1px solid black",
-                      }}
-                      src={item.signPhotos}
-                    />
-                  );
-                  }
-                })} */}
-              {/* else {
-                    console.log("o 2");
-                    console.log(item);
-                    item.signPhotos.map((link) => {
-                      // console.log(link[1]);
-                      return (
-                        <Image
-                          style={{
-                            height: "50%",
-                            width: "30%",
-                            border: "1px solid black",
-                          }}
-                          src={link[1]}
-                        />
-                      );
-                    });
-                  } */}
-              {/* {imgArray.map((item) => {
-                console.log("o day ne");
-                return <img src={item} />;
-              })} */}
-              {/* <Image
-                style={{
-                  height: "50%",
-                  width: "30%",
-                  border: "1px solid black",
-                }}
-                src="https://res.cloudinary.com/dfb7mq7zb/image/upload/v1677129379/signlanguage/grandma_afvcxm.png"
-              /> */}
+                    key={item[2]}
+                    style={{
+                      margin: "1rem",
+                      height: "50%",
+                      width: "30%",
+                      border: "2px solid black",
+                      borderRadius: "10px",
+                    }}
+                    src={item[1]}
+                  />
+                );
+              })}
             </Col>
           </Row>
           <Row>
