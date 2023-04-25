@@ -1,26 +1,28 @@
-.home-container {
+.homeContainer {
+    min-height: 100vh;
+    width: 100vw;
     background-color: #F0E7DE;
     height: 85vh;
 }
 
-.style-title-upper {
+.styleTitleUpper {
     font-size: 6em;
     color: #41110C;
     text-align: start;
     padding-top: 2vh;
 }
 
-.style-title-lower {
+.styleTitleLower {
     font-size: 6em;
     color: #41110C;
     text-align: start;
 }
 
-.position-small-content {
+.positionSmallContent {
     align-items: center;
 }
 
-.style-small-content {
+.styleSmallContent {
     color: #41110C;
     text-align: start;
     padding-top: 1em;

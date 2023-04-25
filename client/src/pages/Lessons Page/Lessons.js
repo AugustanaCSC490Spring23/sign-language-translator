@@ -1,45 +1,45 @@
-import React from 'react';
-import "./Lessons.css";
-import CusButton from "../../Component/CusButton";
-import { Container, Row, Col, Card, ProgressBar } from 'react-bootstrap';
+import React, { useEffect, useState } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import styles from "./Lessons.module.css";
+import { getAllTopics } from "../../services/itemsService";
 
-const Lessons = () => {
-    const now = 60;
+function Lessons() {
+  const [topics, setTopics] = useState([]);
+  const navigate = useNavigate();
 
-    return (
-        <Container fluid className="lessons-container">
-            <Row className="lessons-top-page">
-                <Col className="lessons-welcome" md={{ span: 3, offset: 4 }}>
-                    <div className="welcome-title">
-                        <h4>Hi Henry!</h4>
-                        <p>Welcome back<br></br>
-                            to my class
-                        </p>
-                    </div>
-                </Col>
-                <Col className="lessons-card-locate" md={{ span: 3 }}>
-                    <div className="lessons-card">
-                        <h4>Lesson 2</h4>
-                        <p>Hello and welcome!</p>
-                        <Row>
-                            <Col md={{ span: 8, offset: 2 }}>
-                                <CusButton
-                                    bgcolor="#3B1404"
-                                    color="#F8E5DA"
-                                    radius="25"
-                                    title="Continue"
-                                    weight="750" />
-                            </Col>
-                        </Row>
-                    </div>
-                </Col>
-            </Row>
-            <Row>
-                <h3>Lesson 1: Family</h3>
-                <ProgressBar now={now} label={`${now}%`} />
-            </Row>
-        </Container>
-    )
+  useEffect(() => {
+    getAllTopics().then((res) => {
+      setTopics(res.data.data.topics);
+    });
+  }, []);
+
+  function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  function handleTopicClick(topicId) {
+    navigate(`/learning/lessons/${topicId}`);
+  }
+
+  return (
+    <Container>
+      <Row className={`${styles.lessons} justify-content-center`}>
+        <Col>
+          <h1>Lessons</h1>
+        </Col>
+      </Row>
+      <Row className={`${styles.lessons} justify-content-center`}>
+        {topics.map((topic) => {
+          return (
+            <Col md={4} className={styles.column} onClick={() => handleTopicClick(topic._id)}>
+              <h3>{capitalize(topic._id)}</h3>
+            </Col>
+          );
+        })}
+      </Row>
+    </Container>
+  );
 }
 
 export default Lessons;

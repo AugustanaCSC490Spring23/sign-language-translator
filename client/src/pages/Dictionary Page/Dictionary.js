@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 
 import Jumbotron from "../../Component/Jumbotron.js";
 
-import "./Dictionary.css";
+import styles from "./Dictionary.module.css";
 
 function LetterButton(props) {
   const navigate = useNavigate();
@@ -11,10 +11,17 @@ function LetterButton(props) {
   const handleClick = () => {
     navigate(`/learning/dictionary/${props.letter.toLowerCase()}`);
   };
+
+  const buttonClasses = {
+    "d-flex": true,
+    "align-items-center": true,
+    [styles.button]: true,
+  };
+
   return (
     <Button
       variant="light"
-      className="button d-flex align-items-center"
+      className={buttonClasses}
       style={{
         width: "4.25cm",
         height: "4.25cm",
@@ -23,7 +30,14 @@ function LetterButton(props) {
       }}
       onClick={handleClick}
     >
-      <span className="letter" style={{ fontSize: "3cm", lineHeight: "5cm" }}>
+      <span
+        className={styles.letter}
+        style={{
+          fontSize: "3cm",
+          lineHeight: "5cm",
+          textAlign: "center",
+        }}
+      >
         {props.letter}
       </span>
     </Button>
@@ -31,13 +45,18 @@ function LetterButton(props) {
 }
 
 const Dictionary = () => {
-  const letters = Array.from(Array(26), (_, i) => String.fromCharCode(65 + i)); // creates an array of 26 letters of the alphabet
+  const letters = Array.from(Array(26), (_, i) =>
+    String.fromCharCode(65 + i),
+  ); // creates an array of 26 letters of the alphabet
   return (
     <>
       <Jumbotron />
-      <div className="letter-container">
+      <div className={styles.letterContainer}>
         {letters.map((letter, index) => (
-          <LetterButton key={index} letter={letter} />
+          <LetterButton
+            key={index}
+            letter={letter}
+          />
         ))}
       </div>
     </>

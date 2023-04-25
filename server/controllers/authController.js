@@ -33,9 +33,9 @@ const sendToken = (user, statusCode, req, res) => {
   user.password = undefined;
   res.status(statusCode).json({
     status: "success",
-    token,
     data: {
       user,
+      token
     },
   });
 };
@@ -60,19 +60,19 @@ exports.login = asyncCatch(async (req, res, next) => {
     return next(new Err("Please provide email and password", 400));
   }
   // check user exists and correct password
-  const user = await User.findOne({ email: email }).select("+password");
+  const user = await User.findOne({ email: email }).select("+password").populate("items");
 
   if (!user || !(await user.validPassword(password, user.password))) {
     return next(new Err("Email or password not correct", 401));
   }
-
+  const userWithoutPassword = { ...user.toObject(), password: undefined }; // remove password from user object
   // if pass, send token to client
   const token = generateSignedToken(user._id);
   res.status(200).json({
     status: "success",
     data: {
       token,
-      user,
+      user: userWithoutPassword,
     },
   });
 });
