@@ -1,7 +1,7 @@
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./Profile.css";
+import "./Profile.module.css";
 import { Button } from "react-bootstrap";
 
 

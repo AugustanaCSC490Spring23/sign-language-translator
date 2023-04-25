@@ -40,7 +40,7 @@ const limiter = rateLimit({
   windowMs: 3600000,
   message: 'Too many requests. Try again in an hour.',
 });
-app.use('/api', limiter); // only apply limiter to api routes
+app.use('/api/v1/login', limiter); // only apply limiter to api routes
 
 // allow cors
 app.use(cors());

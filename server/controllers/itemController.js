@@ -109,6 +109,9 @@ exports.getAllTopics = asyncCatch(async (req, res, next) => {
         titles: { $push: '$text' },
       },
     },
+    {
+      $sort: { _id: 1 }, // sort by _id field in ascending order
+    },
   ]);
   res.status(200).json({
     status: 'success',
