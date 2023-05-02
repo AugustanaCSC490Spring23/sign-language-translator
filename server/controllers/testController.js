@@ -3,10 +3,8 @@ const mongoose = require("mongoose");
 const Test = require("../models/test");
 const Quiz = require("../models/quiz");
 const Item = require("../models/item");
-const User = require("../models/user");
 const asyncCatch = require("../utils/asyncCatch");
 
-// ** create test using TestSchema.generateQuizzes ** //
 // ** create test using TestSchema.generateQuizzes ** //
 exports.createTest = asyncCatch(async (req, res, next) => {
   const {

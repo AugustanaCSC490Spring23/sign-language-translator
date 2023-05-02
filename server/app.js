@@ -11,7 +11,6 @@ const globalErrorHandler = require("./controllers/errorController");
 
 const itemRouter = require("./routes/itemRoutes");
 const userRouter = require("./routes/userRoutes");
-const personalItemRouter = require("./routes/personalItemRoutes");
 const testRouter = require("./routes/testRoutes");
 const quizRouter = require("./routes/quizRoutes");
 
@@ -59,7 +58,6 @@ app.use((req, res, next) => {
 
 app.use("/api/v1/items", itemRouter);
 app.use("/api/v1/users", userRouter);
-app.use("/api/v1/personal", personalItemRouter);
 app.use("/api/v1/test", testRouter);
 app.use("/api/v1/quiz", quizRouter);
 
