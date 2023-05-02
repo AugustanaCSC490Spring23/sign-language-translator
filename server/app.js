@@ -1,22 +1,23 @@
-const express = require('express');
-const cors = require('cors');
-const rateLimit = require('express-rate-limit');
-const helmet = require('helmet');
-const sanitizer = require('express-mongo-sanitize');
-const xss = require('xss-clean');
-const cookieParser = require('cookie-parser');
+const express = require("express");
+const cors = require("cors");
+const rateLimit = require("express-rate-limit");
+const helmet = require("helmet");
+const sanitizer = require("express-mongo-sanitize");
+const xss = require("xss-clean");
+const cookieParser = require("cookie-parser");
 
-const Err = require('./utils/customError');
-const globalErrorHandler = require('./controllers/errorController');
+const Err = require("./utils/customError");
+const globalErrorHandler = require("./controllers/errorController");
 
-const itemRouter = require('./routes/itemRoutes');
-const userRouter = require('./routes/userRoutes');
-const personalItemRouter = require('./routes/personalItemRoutes');
+const itemRouter = require("./routes/itemRoutes");
+const userRouter = require("./routes/userRoutes");
+const testRouter = require("./routes/testRoutes");
+const quizRouter = require("./routes/quizRoutes");
 
 const app = express();
 
 app.use(cookieParser());
-app.enable('trust proxy');
+app.enable("trust proxy");
 
 //// GLOBAL MIDDLEWARES
 
@@ -24,7 +25,7 @@ app.enable('trust proxy');
 app.use(helmet());
 
 // allow json
-app.use(express.json({ limit: '10kb' }));
+app.use(express.json({ limit: "10kb" }));
 app.use(express.static(`${__dirname}/public`));
 
 // nosql query injection prevention !!DANGEROUS MALICIOUS HACKING METHOD
@@ -38,9 +39,9 @@ app.use(xss());
 const limiter = rateLimit({
   max: 100,
   windowMs: 3600000,
-  message: 'Too many requests. Try again in an hour.',
+  message: "Too many requests. Try again in an hour.",
 });
-app.use('/api/v1/login', limiter); // only apply limiter to api routes
+app.use("/api/v1/login", limiter); // only apply limiter to api routes
 
 // allow cors
 app.use(cors());
@@ -55,11 +56,12 @@ app.use((req, res, next) => {
 
 //// ROUTES
 
-app.use('/api/v1/items', itemRouter);
-app.use('/api/v1/users', userRouter);
-app.use('/api/v1/personal', personalItemRouter);
+app.use("/api/v1/items", itemRouter);
+app.use("/api/v1/users", userRouter);
+app.use("/api/v1/test", testRouter);
+app.use("/api/v1/quiz", quizRouter);
 
-app.all('*', (req, res, next) => {
+app.all("*", (req, res, next) => {
   next(new Err(`Can't find ${req.originalUrl}!`, 404));
 });
 

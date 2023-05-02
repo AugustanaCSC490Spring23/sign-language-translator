@@ -48,6 +48,12 @@ const UserSchema = new mongoose.Schema({
     default: true,
     select: false,
   },
+  tests: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Test",
+    },
+  ],
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordResetTokenExpires: Date,
