@@ -35,7 +35,7 @@ const sendToken = (user, statusCode, req, res) => {
     status: "success",
     data: {
       user,
-      token
+      token,
     },
   });
 };
@@ -60,7 +60,10 @@ exports.login = asyncCatch(async (req, res, next) => {
     return next(new Err("Please provide email and password", 400));
   }
   // check user exists and correct password
-  const user = await User.findOne({ email: email }).select("+password").populate("items");
+  const user = await User.findOne({ email: email })
+    .select("+password")
+    .populate("items")
+    .populate("tests");
 
   if (!user || !(await user.validPassword(password, user.password))) {
     return next(new Err("Email or password not correct", 401));

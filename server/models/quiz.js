@@ -23,19 +23,30 @@ const QuizSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Item",
   },
-  isCorrect: {
-    type: Boolean,
-    default: false,
-  },
+  isCorrect: Boolean,
   topic: String, // specific topic
 });
 
 // MIDDLEWARES
-// populate items
-QuizSchema.pre("save", async function (next) {
-  next();
-});
 
-QuizSchema.index({ orderNumber: 1, isCorrect: 1 });
+// METHODS
+// ** Grade quiz ** //
+QuizSchema.methods.gradeQuiz = async function (userAnswer) {
+  if (!userAnswer) {
+    this.isCorrect = false; // If the user didn't answer, mark it as incorrect
+    await this.save();
+    return;
+  }
+
+  const correctAnswer = await this.populate("correctAnswer").then(
+    (q) => q.correctAnswer
+  );
+
+  this.userAnswer = userAnswer;
+
+  this.isCorrect = this.userAnswer.equals(correctAnswer._id);
+
+  await this.save();
+};
 
 module.exports = mongoose.models.Quiz || mongoose.model("Quiz", QuizSchema);

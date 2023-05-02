@@ -33,6 +33,7 @@ TestSchema.index({ difficulty: 1, dateTaken: 1, title: 1 });
 
 /////////// METHODS
 
+// ** generate new quizzes for test ** //
 TestSchema.methods.generateQuizzes = async (
   numQuizzes,
   difficulty,
@@ -40,7 +41,9 @@ TestSchema.methods.generateQuizzes = async (
   category,
   specialPool
 ) => {
-  const query = {};
+  const query = {
+    category: { $ne: "alphabet" },
+  };
 
   // Add the category and difficulty conditions to the query object if they are specified
   if (topic) {
@@ -52,7 +55,7 @@ TestSchema.methods.generateQuizzes = async (
     query.difficulty = difficulty;
   }
 
-  // Override the query object if a special pool is specified
+  // Override the query object if a special pool (flashcards) is specified
   if (specialPool) {
     query._id = { $in: specialPool };
   }
@@ -77,7 +80,7 @@ TestSchema.methods.generateQuizzes = async (
 
     // Set the quiz type to "b" and select wrong answers from the same category with category "communication"
     let queryWrongChoices = { _id: { $ne: correctAnswer } };
-    if (category === "letter" || category === "communication") {
+    if (category === "alphabet" || category === "communication") {
       queryWrongChoices = {
         category: "communication",
         _id: { $ne: correctAnswer },
@@ -122,7 +125,7 @@ TestSchema.methods.generateQuizzes = async (
       orderNumber: i + 1, // increment the counter for each quiz
       choices,
       correctAnswer,
-      topic: quizTopic, // set default value if category is not specified
+      topic: quizTopic,
     });
 
     await quiz.save();
@@ -133,7 +136,7 @@ TestSchema.methods.generateQuizzes = async (
   return quizzes;
 };
 
-// grade test
+// ** grade test ** //
 TestSchema.methods.gradeTest = async function (responses) {
   const quizIds = responses.map((response) => response.quizId);
   const quizzes = await Quiz.find({ _id: { $in: quizIds } })
@@ -141,16 +144,28 @@ TestSchema.methods.gradeTest = async function (responses) {
     .exec();
 
   let score = 0;
-  let total = quizzes.length;
-  for (let i = 0; i < total; i++) {
-    const quiz = quizzes[i];
-    const response = responses.find((r) => r.quizId === quiz._id.toString());
-    const isCorrect = quiz.correctAnswer.toString() === response.answerId;
-    const userAnswer = mongoose.Types.ObjectId(response.answerId);
+  let total = 0;
+
+  // Use a Map to quickly look up the correct answer for each quiz
+  const correctAnswerMap = new Map();
+  quizzes.forEach((quiz) => {
+    correctAnswerMap.set(quiz._id.toString(), quiz.correctAnswer.toString());
+    total++;
+  });
+
+  // Iterate through the user's responses and grade each one
+  for (let i = 0; i < responses.length; i++) {
+    const response = responses[i];
+    let isCorrect = false;
+    let userAnswer = null;
+    if (response.answerId) {
+      isCorrect = correctAnswerMap.get(response.quizId) === response.answerId;
+      userAnswer = mongoose.Types.ObjectId(response.answerId);
+    }
 
     // Update the quiz with the user's answer and correctness
     await Quiz.updateOne(
-      { _id: quiz._id },
+      { _id: response.quizId },
       { $set: { userAnswer: userAnswer, isCorrect: isCorrect } }
     ).exec();
 
@@ -158,7 +173,6 @@ TestSchema.methods.gradeTest = async function (responses) {
       score++;
     }
   }
-
   // Calculate the score as a percentage
   const percentage = Math.round((score / total) * 100);
   this.score = percentage;

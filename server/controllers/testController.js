@@ -3,8 +3,11 @@ const mongoose = require("mongoose");
 const Test = require("../models/test");
 const Quiz = require("../models/quiz");
 const Item = require("../models/item");
+const User = require("../models/user");
 const asyncCatch = require("../utils/asyncCatch");
 
+// ** create test using TestSchema.generateQuizzes ** //
+// ** create test using TestSchema.generateQuizzes ** //
 exports.createTest = asyncCatch(async (req, res, next) => {
   const {
     numQuizzes,
@@ -38,18 +41,47 @@ exports.createTest = asyncCatch(async (req, res, next) => {
     specialPoolObjectIds
   );
 
+  // Exclude the correctAnswer property from each quiz object
+  const quizzesWithoutCorrectAnswers = test.quizzes.map((quiz) => {
+    const { correctAnswer, ...quizWithoutCorrectAnswer } = quiz.toObject();
+    return quizWithoutCorrectAnswer;
+  });
+
   await test.save();
+
+  // Add the test to the user's `tests` array
+  req.user.tests.push(test);
+
+  // Disable validation for this operation
+  await req.user.save({ validateBeforeSave: false });
 
   res.status(200).send({
     status: "success",
     data: {
-      test,
+      test: {
+        ...test.toObject(),
+        quizzes: quizzesWithoutCorrectAnswers,
+      },
     },
   });
 });
 
+// ** get test by id, can only be retrieved after being taken ** //
 exports.getTest = asyncCatch(async (req, res, next) => {
-  const test = await Test.findOne({ _id: req.params.id }).lean().exec();
+  const test = await Test.findOne({
+    _id: req.params.id,
+    score: { $exists: true },
+  })
+    .lean()
+    .exec();
+
+  if (!test) {
+    return res.status(404).send({
+      status: "error",
+      message: "Test not found or not scored yet",
+    });
+  }
+
   const quizIds = test.quizzes.map((quiz) => quiz.toString());
 
   const quizPromises = quizIds.map((quizId) =>
@@ -71,6 +103,7 @@ exports.getTest = asyncCatch(async (req, res, next) => {
   });
 });
 
+// ** create a single quiz for a particular purpose ** //
 exports.createQuiz = asyncCatch(async (req, res, next) => {
   const word = req.body.word;
 
@@ -127,24 +160,36 @@ exports.createQuiz = asyncCatch(async (req, res, next) => {
   return res.status(200).json({ quiz });
 });
 
-exports.getQuiz = async (req, res, next) => {
-  const quizId = req.params.id;
-  try {
-    const quiz = await Quiz.findById(quizId);
-    if (!quiz) {
-      return res.status(404).json({ message: "Quiz not found" });
-    }
-    res.status(200).json(quiz);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
+// ** get quiz by id only when it's already scored** //
+exports.getQuiz = asyncCatch(async (req, res, next) => {
+  const quiz = await Quiz.findOne({
+    _id: req.params.id,
+    isCorrect: { $exists: true }, // only return quizzes that have been scored
+  })
+    .lean()
+    .populate("choices")
+    .populate("correctAnswer")
+    .exec();
 
-//// Grade Test
+  if (!quiz) {
+    return res.status(404).send({
+      status: "fail",
+      message: "Quiz not found or has not been scored yet",
+    });
+  }
+
+  res.status(200).send({
+    status: "success",
+    data: {
+      quiz,
+    },
+  });
+});
+
+// ** Grade test using TestSchema.gradeTest ** //
 exports.gradeTest = asyncCatch(async (req, res, next) => {
   const testId = req.params.id;
-  const { responses } = req.body;
+  const responses = req.body.responses;
 
   const test = await Test.findById(testId).populate("quizzes").exec();
   if (!test) {
@@ -154,24 +199,15 @@ exports.gradeTest = asyncCatch(async (req, res, next) => {
     });
   }
 
-  // Get quizzes with their order numbers
-  const quizOrderMap = new Map();
-  test.quizzes.forEach((quiz) => {
-    quizOrderMap.set(quiz.orderNumber, quiz._id.toString());
-  });
+  // Check if the test has already been graded
+  if (test.score) {
+    return res.status(400).json({
+      success: false,
+      message: "Test has already been graded",
+    });
+  }
 
-  // Transform user's response into array of quizId and answerId
-  const transformedResponses = responses.map((answer, index) => {
-    const quizId = quizOrderMap.get(index + 1);
-    if (!quizId) {
-      throw new Error(`Quiz with order number ${index + 1} not found`);
-    }
-    return { quizId, answerId: answer };
-  });
-
-  console.log(transformedResponses);
-
-  const score = await test.gradeTest(transformedResponses);
+  const score = await test.gradeTest(responses);
   await test.save(); // save the updated score to the database
 
   return res.status(200).json({
@@ -180,6 +216,34 @@ exports.gradeTest = asyncCatch(async (req, res, next) => {
     score,
     test,
   });
+});
+
+// ** Grade quiz using QuizSchema.gradeQuiz ** //
+exports.gradeQuiz = asyncCatch(async (req, res, next) => {
+  const quizId = req.params.id;
+  const userAnswerId = req.body.userAnswerId;
+
+  try {
+    const quiz = await Quiz.findById(quizId).exec();
+    if (!quiz) {
+      return res.status(404).json({ message: "Quiz not found" });
+    }
+
+    const userAnswer = await Item.findById(userAnswerId).exec();
+    if (!userAnswer) {
+      return res.status(404).json({ message: "User answer not found" });
+    }
+
+    await quiz.gradeQuiz(userAnswer);
+
+    res.status(200).send({
+      status: "success",
+      message: "Quiz graded successfully",
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
 //// ONLY FOR DELETING THE DATABASE AFTER TESTING DB
