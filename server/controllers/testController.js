@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const Test = require("../models/test");
 const Quiz = require("../models/quiz");
 const Item = require("../models/item");
+const FlashcardsCollection = require("../models/flashcardsCollection");
+
 const asyncCatch = require("../utils/asyncCatch");
 
 // ** create test using TestSchema.generateQuizzes ** //
@@ -28,7 +30,13 @@ exports.createTest = asyncCatch(async (req, res, next) => {
 
   let specialPoolObjectIds;
   if (specialPool) {
-    specialPoolObjectIds = specialPool.map((id) => mongoose.Types.ObjectId(id));
+    const specialPoolDoc = await FlashcardsCollection.findOne(
+      { _id: specialPool },
+      { items: 1 }
+    ).lean();
+    specialPoolObjectIds = specialPoolDoc.items.map((id) =>
+      mongoose.Types.ObjectId(id)
+    );
   }
 
   test.quizzes = await test.generateQuizzes(
