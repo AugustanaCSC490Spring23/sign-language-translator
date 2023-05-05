@@ -24,10 +24,19 @@ const QuizSchema = new Schema({
     ref: "Item",
   },
   isCorrect: Boolean,
-  topic: String, // specific topic
+  topic: String,
 });
 
 // MIDDLEWARES
+QuizSchema.pre("save", function (next) {
+  if (this.quizType === "a") {
+    this.question = "Which of the hand sign represents this word?";
+  } else if (this.quizType === "b") {
+    this.question =
+      "Which word or phrases are represented by the following hand sign?";
+  }
+  next();
+});
 
 // METHODS
 // ** Grade quiz ** //

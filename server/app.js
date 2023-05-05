@@ -13,6 +13,7 @@ const itemRouter = require("./routes/itemRoutes");
 const userRouter = require("./routes/userRoutes");
 const testRouter = require("./routes/testRoutes");
 const quizRouter = require("./routes/quizRoutes");
+const flashcardsCollectionRouter = require("./routes/flashcardsCollectionRoutes");
 
 const app = express();
 
@@ -60,6 +61,7 @@ app.use("/api/v1/items", itemRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/test", testRouter);
 app.use("/api/v1/quiz", quizRouter);
+app.use("/api/v1/flashcards", flashcardsCollectionRouter);
 
 app.all("*", (req, res, next) => {
   next(new Err(`Can't find ${req.originalUrl}!`, 404));

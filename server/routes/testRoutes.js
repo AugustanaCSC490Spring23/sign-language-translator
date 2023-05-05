@@ -6,7 +6,12 @@ const authController = require("../controllers/authController");
 const router = express.Router();
 
 router.route("/").post(authController.routeGuard, testController.createTest);
-router.route("/delete").delete(testController.deleteAll);
-router.route("/:id").get(testController.getTest).post(testController.gradeTest);
+router
+  .route("/delete")
+  .delete(authController.exclusiveAccess("admin"), testController.deleteAll);
+router
+  .route("/:id")
+  .get(authController.routeGuard, testController.getTest)
+  .post(testController.gradeTest);
 
 module.exports = router;

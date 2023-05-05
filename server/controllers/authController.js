@@ -62,7 +62,7 @@ exports.login = asyncCatch(async (req, res, next) => {
   // check user exists and correct password
   const user = await User.findOne({ email: email })
     .select("+password")
-    .populate("items")
+    .populate("flashcardsCollections")
     .populate("tests");
 
   if (!user || !(await user.validPassword(password, user.password))) {
