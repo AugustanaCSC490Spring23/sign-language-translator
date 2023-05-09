@@ -4,7 +4,7 @@
 }
 
 .mainWordDetails {
-    font-size: 5em;
+    font-size: 4em;
     font-weight: bold;
     color: #41110C;
     text-align: start;
@@ -18,4 +18,8 @@
 .detailsWordDetails {
     padding-top: 2vh;
     text-align: start;
+}
+
+.mainImageWordDetails {
+    padding-top: 2vh;
 }
