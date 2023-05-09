@@ -5,7 +5,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { useLocation } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 
-import "./NavBar.css";
+import styles from "./NavBar.module.css";
 
 function AuthButtons() {
   const [loggedIn, setLoggedIn] = useState(
@@ -36,7 +36,7 @@ function AuthButtons() {
   return (
     <>
       {loggedIn ? (
-        <Dropdown className="style-item">
+        <Dropdown className={styles.styleItem}>
           <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
             My Account
           </Dropdown.Toggle>
@@ -50,7 +50,7 @@ function AuthButtons() {
           </Dropdown.Menu>
         </Dropdown>
       ) : (
-        <Nav.Item className="style-item">
+        <Nav.Item className={styles.styleItem}>
           {location.pathname !== "/login" && (
             <Button
               size="sm"
