@@ -11,7 +11,7 @@ const globalErrorHandler = require('./controllers/errorController');
 
 const itemRouter = require('./routes/itemRoutes');
 const userRouter = require('./routes/userRoutes');
-const personalItemRouter = require('./routes/personalItemRoutes');
+
 
 const app = express();
 
@@ -57,7 +57,7 @@ app.use((req, res, next) => {
 
 app.use('/api/v1/items', itemRouter);
 app.use('/api/v1/users', userRouter);
-app.use('/api/v1/personal', personalItemRouter);
+
 
 app.all('*', (req, res, next) => {
   next(new Err(`Can't find ${req.originalUrl}!`, 404));
