@@ -81,7 +81,7 @@ h2{
     size: 20px;
 }
 
-.card .img-container{
+.card .imgContainer{
     width: 8em;
     height: 8em;
     background-color: bisque;
@@ -101,17 +101,6 @@ h2{
     text-transform: uppercase;
     margin: 0.5em 0 2em 0;
 }
-
-.card:hover{
-    background: linear-gradient( orange, brown);
-    color: white;
-}
-
-.card:hover .img-container{
-    transform: scale(1.2);
-}
-
-
 
 .footer_box2{
     /* margin-right: 20px;
@@ -137,12 +126,10 @@ h2{
     flex: 1;
     height:250px;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAA1BMVEXmzLM/Muu8AAAASElEQVR4nO3BgQAAAADDoPlTX+AIVQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwDcaiAAFXD1ujAAAAAElFTkSuQmCC);
-
-    
 }
 
 
-.About_info{
+.about_info{
     color: white;
     position: absolute;
     bottom: 50px;

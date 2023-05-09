@@ -1,16 +1,4 @@
-/* 
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-    background-color: #F0E7DE;
 
-}
-
-body{
-    background-color: #F0E7DE;
-} */
 
 .user_box{
     display:grid;

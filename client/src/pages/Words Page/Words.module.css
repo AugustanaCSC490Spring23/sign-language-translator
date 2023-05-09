@@ -1,0 +1,11 @@
+.letterContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 2rem;
+  max-height: 100vh;
+}
+
+.letterContainer > * {
+  margin: 1rem;
+}

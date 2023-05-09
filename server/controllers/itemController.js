@@ -39,14 +39,50 @@ exports.getAllItems = asyncCatch(async (req, res, next) => {
     data: { items: items },
   });
 });
+const arrayConverter = (res) => {
+  let temp = res.replace(/[^a-zA-Z0-9 ]/g, "");
+  let sentence = temp.split(" ");
+  return sentence;
+};
+exports.getItemBySentence = asyncCatch(async (req, res, next) => {
+  const item = await Item.findOne({ text: req.params.text });
+  if (item) {
+    res.status(200).json({
+      status: "success",
+      data: { item: [item] },
+    });
+  } else {
+    const elements = arrayConverter(req.params.text);
+    const promiseItems = elements.map(async (element) => {
+      const item = await Item.findOne({ text: element });
+      let temp = "";
+      if (!item) {
+        const notFoundElements = [...element];
+        temp = notFoundElements.map(async (value) => {
+          return await Item.findOne({ text: value });
+        });
+        return Promise.all(temp);
+      } else {
+        return item;
+      }
+    });
+    Promise.all(promiseItems).then((values) => {
+      res.status(200).json({
+        status: "success",
+        data: { item: values },
+      });
+    });
+  }
+
+  // return next(new Err('No word found', 404));
+});
 
 exports.getItemByText = asyncCatch(async (req, res, next) => {
   const item = await Item.findOne({ text: req.params.text });
-
   if (!item) {
     return next(new Err("No word found", 404));
   }
-
+  console.log(item);
   res.status(200).json({
     status: "success",
     data: { item: item },
@@ -72,6 +108,9 @@ exports.getAllTopics = asyncCatch(async (req, res, next) => {
         count: { $sum: 1 },
         titles: { $push: "$text" },
       },
+    },
+    {
+      $sort: { _id: 1 }, // sort by _id field in ascending order
     },
   ]);
   res.status(200).json({
@@ -100,4 +139,34 @@ exports.getAllLetters = asyncCatch(async (req, res, next) => {
       letters,
     },
   });
+});
+
+// fetch previous or next items
+
+exports.getNextOrPreviousItem = asyncCatch(async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const currentItem = await Item.findById(id);
+    if (!currentItem) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+
+    let nextItem, previousItem;
+
+    nextItem = await Item.findOne({
+      _id: { $gt: currentItem._id },
+      topic: currentItem.topic,
+    }).sort({ _id: 1 });
+    previousItem = await Item.findOne({
+      _id: { $lt: currentItem._id },
+      topic: currentItem.topic,
+    }).sort({ _id: -1 });
+
+    res
+      .status(200)
+      .json({ status: "success", data: { nextItem, previousItem } });
+  } catch (error) {
+    next(error);
+  }
 });

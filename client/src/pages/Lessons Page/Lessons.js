@@ -1,82 +1,81 @@
-import React from 'react';
-import "./Lessons.css";
+import React, { useEffect, useState } from "react";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  ProgressBar,
+} from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import styles from "./Lessons.module.css";
+import { getAllTopics } from "../../services/itemsService";
+import CusButton from "../../Component/CusButton";
 
-function lessons(){
-    return(
-    <div className="lessons">
-     <div className="lessons_box">
-        <h1>Lessons</h1>
-     </div>
-     <div className="lessons_box">
-        <div className="column">
-            <div className="card">
-                {/* <div className="img-container">
-                    <img src="" alt="" />
-                </div> */}
-                <h3>Lesson One: FAMILY</h3>
-            </div>
-        </div>
-     </div>
+const Lessons = () => {
+  const now = 60;
+  const [topics, setTopics] = useState([]);
+  const navigate = useNavigate();
 
-     <div className="lessons_box">
-        <div className="column">
-            <div className="card">
-                {/* <div className="img-container">
-                    <img src="" alt="" />
-                </div> */}
-                <h3>Lesson Two: SCHOOL</h3>
-            </div>
-        </div>
-     </div>
+  useEffect(() => {
+    getAllTopics().then((res) => {
+      setTopics(res.data.data.topics);
+    });
+  }, []);
 
-     <div className="lessons_box">
-        <div className="column">
-            <div className="card">
-                {/* <div className="img-container">
-                    <img src="" alt="" />
-                </div> */}
-                <h3>Lesson Three: DIRECTIONS</h3>
-            </div>
-        </div>
-     </div>
+  function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
 
-     <div className="lessons_box">
-        <div className="column">
-            <div className="card">
-                {/* <div className="img-container">
-                    <img src="" alt="" />
-                </div> */}
-                <h3>Lesson Four: HOUSEHOLD</h3>
-            </div>
-        </div>
-     </div>
+  function handleTopicClick(topicId) {
+    navigate(`/learning/lessons/${topicId}`);
+  }
+  return (
+    <Container fluid className={styles.lessonsContainer}>
+      <Row className={styles.lessonsTopPage}>
+        <Col
+          className={styles.lessonsWelcome}
+          md={{ span: 3, offset: 4 }}
+        >
+          <h4>Hi Henry!</h4>
+          <p>
+            Welcome back<br></br>
+            to my class
+          </p>
+        </Col>
+        <Col className={styles.lessonsCardLocate} md={{ span: 3 }}>
+          <Card className={styles.lessonsCard}>
+            <Card.Body>
+              <h4>Lesson 2</h4>
+              <p>Hello and welcome!</p>
+              <Row>
+                <Col md={{ span: 8, offset: 2 }}>
+                  <CusButton
+                    bgcolor="#3B1404"
+                    color="#F8E5DA"
+                    radius="25"
+                    title="Continue"
+                    weight="750"
+                  />
+                </Col>
+              </Row>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+      {topics.map((topic) => {
+        return (
+          <Row
+            className={styles.lessonRow}
+            onClick={() => handleTopicClick(topic._id)}
+            style={{ marginTop: "1em" }}
+          >
+            <h3>Lesson: {capitalize(topic._id)}</h3>
+            {/* <ProgressBar now={now} label={`${now}%`} /> */}
+          </Row>
+        );
+      })}
+    </Container>
+  );
+};
 
-     <div className="lessons_box">
-        <div className="column">
-            <div className="card">
-                {/* <div className="img-container">
-                    <img src="" alt="" />
-                </div> */}
-                <h3>Lesson Five: COUNTRIES</h3>
-            </div>
-        </div>
-     </div>
-
-     <div className="lessons_box">
-        <div className="column">
-            <div className="card">
-                {/* <div className="img-container">
-                    <img src="" alt="" />
-                </div> */}
-                <h3>Lesson Six: SHOPPING</h3>
-            </div>
-        </div>
-     </div>
-
-    </div> 
-    );  
-}
-
-export default lessons;
-
-//////////////////////////////////////////////
+export default Lessons;

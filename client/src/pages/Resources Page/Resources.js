@@ -1,66 +1,27 @@
+import React from "react";
+import styles from "./Resources.module.css";
 
 import React from 'react';
 import "./Resources.css";
 
-
-
 function Resources(){
     return(
-    <div className="resources">
-     <div className="Resources_box">
-        <div className="Resources_inner_box">
-            <div className= "resources-info">
+        <div className={styles.resources}>
+        <div className={styles.resources_box}>
+          <div className={styles.resources_inner_box}>
+            <div className={styles.resources_info}>
                 <h1>Resources for learning sign language</h1>
-                <p className="Resources_Text">
+                <p className={styles.resources_text}>
                     National Association of Deaf(NAD): The National Association of the Deaf
                     (NAD) is the nation's premier civil rights organization of, by and for 
                     deaf and hard of hearing individuals in the United States of America. The 
                     association provides reliable sources of learning and teaching sign language for 
-                    both children and parents.
+                    both children and parents. Highly recommended!!!
                 </p>
-                <p className='Resources text2'>
-                The National Association of the Deaf (NAD) is the oldest and largest 
-                organization representing the deaf community in the United States. 
-                Founded in 1880, the NAD advocates for the rights of deaf and hard of 
-                hearing people, and provides resources and support for the community. 
-                The organization works to improve education, employment, and accessibility 
-                for deaf and hard of hearing individuals, and has been involved in numerous 
-                legal battles to ensure their rights are protected. Through its work, the NAD 
-                aims to promote full inclusion and equality for deaf and hard of hearing people 
-                in all aspects of society.
-
-                </p>
-                <p className='Resources text3'>
-                Deaf Linx is an online resource center that provides information and 
-                resources for the deaf and hard of hearing community. The website features
-                a directory of deaf-related organizations, a job board, and a news section 
-                with articles and information relevant to the community. In addition, Deaf Linx
-                offers a comprehensive directory of sign language interpreters, as well as 
-                listings for deaf-owned businesses and products. Deaf Linx also offers a 
-                forum where members of the community can connect and discuss topics related 
-                to deaf culture, education, and advocacy.
-                </p>
-
-
+                <button id="browse_resources">More</button>
             </div> 
         </div>
-        
-
-     </div>
-
-     <div className="feedback">
-        <h3>Feedback</h3>
-    <form>
-        <label htmlFor="feedback">Feedback:</label>
-        <textarea id="feedback" name="feedback" placeholder="Enter your feedback here"></textarea>
-        <button type="submit">Submit</button>
-        <label htmlFor="supportRequest">Support Request:</label>
-        <textarea id="supportRequest" name="supportRequest" placeholder="Enter your support request here"></textarea>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-
-    <div className='Resources_box_2'>
+        <div className='Resources_box_2'>
         <div className='other'>
             <div className="other">
                 <h3>Other Resources</h3>  
@@ -119,11 +80,11 @@ function Resources(){
         </div>
     </div>
 
+     </div>
      <div className="empty"></div>
     </div> 
     );  
 }
 
 export default Resources;
-
 

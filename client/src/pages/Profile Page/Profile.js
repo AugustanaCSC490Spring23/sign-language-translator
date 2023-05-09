@@ -1,83 +1,56 @@
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./Profile.css";
+import styles from "./Profile.module.css";
 import { Button } from "react-bootstrap";
 
-
-function profile(){
-
-    return(
-    <div className="user_box">
-
-    <div className="profile_box1">
-
-        <div class="picture_card">
-            <div class="img-container">
-            <img src="vietNguyen" alt= "viet nguyen"/>
-            </div>
-            
+function Profile() {
+  return (
+    <div className={styles.user_box}>
+      <div className={styles.profile_box1}>
+        <div className={styles.picture_card}>
+          <div className={styles.img_container}>
+            <img src="vietNguyen" alt="viet nguyen" />
+          </div>
         </div>
 
-        <div class="user-details">
-            <h3>Viet Nguyen</h3> 
-            <h3>email</h3>
-            <h4>city</h4>
+        <div className={styles.user_details}>
+          <h3>Viet Nguyen</h3>
+          <h3>email</h3>
+          <h4>city</h4>
         </div>
 
-        <div className="edit_button">
-        <Button variant="outline-dark">edit</Button>
+        <div className={styles.edit_button}>
+          <Button variant="outline-dark">edit</Button>
+        </div>
+      </div>
+
+      <div className={styles.profile_box2}>
+        <div className={styles.level}>
+          <div className={styles.card}>
+            <h3>Level</h3>
+          </div>
         </div>
 
+        <div className={styles.completed_courses}>
+          <div className={styles.card}>
+            <h3>Completed Courses</h3>
+          </div>
+        </div>
+
+        <div className={styles.started_lessons}>
+          <div className={styles.card}>
+            <h3>Started Lessons</h3>
+          </div>
+        </div>
+
+        <div className={styles.courses}>
+          <div className={styles.card}>
+            <h3>Courses</h3>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div className="profile_box2">
-        <div className="level">
-            <div class="card">
-                    <h3>Level</h3> 
-            </div>
-        </div>
-
-        <div className="Completed cources">
-            <div class="card">
-                    <h3>Completed cources</h3> 
-            </div>
-        </div>
-
-        <div className="Started">
-            <div class="card">
-                    <h3>Started Lessons</h3> 
-            </div>
-        </div>
-
-        <div className="Cources">
-            <div class="card">
-                    <h3>Cources</h3> 
-            </div>
-        </div>
-
-        <div className="Resources">
-            <div class="card">
-                    <h3>Resources</h3> 
-            </div>
-        </div>
-
-        <div className="About us">
-            <div class="card">
-                    <h3>About us</h3> 
-            </div>
-        </div>
-
-
-    </div>
-
-    </div>
-    
-   
-    );
-    
-
+  );
 }
 
-export default profile;
-
+export default Profile;

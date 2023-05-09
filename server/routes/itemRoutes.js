@@ -16,8 +16,14 @@ router
 // get individual item by text
 router.route("/text/:text").get(itemController.getItemByText);
 
+// get individual item by sentence
+router.route("/sentence/:text").get(itemController.getItemBySentence);
+
 // topics
 router.route("/topics").get(itemController.getAllTopics);
+
+// get next or previous items
+router.route("/nextorprevious/:id").get(itemController.getNextOrPreviousItem);
 
 // letters
 router.route("/letters").get(itemController.getAllLetters);
