@@ -1,35 +1,23 @@
 .resources{
-    min-height:1000vh;
-    width: 100vw;
-    padding: 50px;
-    padding-left: 50px;
-    padding-right: 50px;
+    
+    display:grid;
+    grid-template: 0.05fr 1fr  0.5fr/0.05fr 1fr  0.5fr ;
+    gap: 50px;
+    text-align: center;
     background-color: #F0E7DE;
     
     
 }
 .Resources_box{
-    width: 90vw;
-    height: 80vh;
-    background: url(https://media.istockphoto.com/id/1411385549/vector/hands-of-people-with-different-skin-colors-different-nationalities-and-religions-activists.jpg?s=612x612&w=0&k=20&c=VHyNETsP2ZKVwRoJwGtFAO7oOUCgnRBzZFekNAV7Rrg=);
     background-position: center;
     background-repeat: no-repeat;
     background-size:cover;
-    padding-left: 150px;
-    padding-right: 50px;
-    padding-top: 90px;
+    grid-row: 2/3;
+    grid-column: 2/3;
 }
 
-.Resources_inner_box{
-    min-height:65vh;
-    width: 65vw;
-    padding-top: 100px;
-    padding: 50px;
-    padding-left: 50px;
-    padding-right: 50px;
-    background: white;
-
-
+.Resources_box h1{
+    color: #41110C;
 }
 
 .resources_info{
@@ -37,9 +25,11 @@
     position: absolute;
     bottom: 50px;
     padding-top: 50px;
+
 }
 
 .resources_info h1{
+    color: #41110C;
     font-size: 5rem;
     position: center;
 }
@@ -50,6 +40,29 @@
 
 .Resources_text{
     font-size: 5rem;
+}
+
+.Resources_box_2{
+    grid-row: 2/4;
+    grid-column: 3/4;
+
+}
+
+.Resources_box_2 h3{
+    color: #41110C;
+}
+
+.feedback{
+    gap: 20px;
+    grid-row: 3/4;
+    grid-column: 2/3;
+    border: black;
+    border-radius: 5px;
+
+}
+
+.feedback h3{
+    color: #41110C;
 }
 
 #browse_resources{
@@ -87,4 +100,6 @@ transform: translateY(-20px);
     width: 85vw;
     font-size: small;
    }
-}
+} 
+
+

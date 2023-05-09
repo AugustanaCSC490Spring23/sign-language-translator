@@ -56,6 +56,18 @@ function profile(){
             </div>
         </div>
 
+        <div className="Resources">
+            <div class="card">
+                    <h3>Resources</h3> 
+            </div>
+        </div>
+
+        <div className="About us">
+            <div class="card">
+                    <h3>About us</h3> 
+            </div>
+        </div>
+
 
     </div>
 
@@ -68,3 +80,4 @@ function profile(){
 }
 
 export default profile;
+

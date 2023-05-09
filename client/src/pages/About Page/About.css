@@ -1,10 +1,17 @@
 .about{
-    min-height:100vh;
+    /* min-height:100vh;
     width: 100vw;
     padding: 50px;
     padding-left: 50px;
     padding-right: 50px;
+    background-color: #F0E7DE; */
+
+    display:grid;
+    grid-template: 0.2fr 1fr 0.1fr 0.5fr/ 1fr  1fr 1fr ;
+    gap: 5px;
+    text-align: center;
     background-color: #F0E7DE;
+
     
 }
 .about_box{
@@ -14,11 +21,16 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size:cover;
-    padding: 50px;
+    /* padding: 50px;
     padding-left: 50px;
     padding-right: 50px;
-    padding-top: 50px;
+    padding-top: 50px; */
     /* background: white; */
+    padding-left: 50px;
+    padding-top: 50px;
+    gap: 5px;
+    grid-row: 2/3;
+    grid-column: 2/3;
 }
 
 .about_inner_box{
@@ -32,6 +44,8 @@
 .About_footer{
     display: flex;
     background: transparent;
+    grid-row: 4/5;
+    grid-column: 2/3;
 }
 
 .footer_box{

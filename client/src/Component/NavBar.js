@@ -24,6 +24,9 @@ function NavBar() {
                                 <Nav.Link href="/quiz">Quiz</Nav.Link>
                             </Nav.Item>
                             <Nav.Item className="style-item">
+                                <Nav.Link href="/FlashCard">FlashCard</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item className="style-item">
                                 <Nav.Link href="/about">About Us</Nav.Link>
                             
                             </Nav.Item>

@@ -1,23 +1,23 @@
-
+/* 
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
-    /* background-color: #F0E7DE; */
+    background-color: #F0E7DE;
 
 }
 
 body{
     background-color: #F0E7DE;
-}
+} */
 
 .user_box{
-    display: flex;
-    
-    padding: 4em 6em;
+    display:grid;
+    grid-template: 0.5fr 1fr  0.5fr/ 1fr  1fr 1fr ;
+    gap: 5px;
     text-align: center;
-    /* background-color: #F0E7DE; */
+    background-color: #F0E7DE;
 }
 
 .profile_box1{
@@ -27,7 +27,9 @@ body{
     padding: 10em 10em;
     border-radius: 0.6em;
     cursor: pointer;
-    background-color: white;
+    background-color:azure;
+    grid-row: 2/4;
+    grid-column: 1/2;
 }
 
 
@@ -66,14 +68,14 @@ body{
 }
 
 .profile_box2{
-    height: 10rem;
+    height: 40rem;
     width:100% ;
-    padding: 10em 10em;
+    padding: 10px;
     border-radius: 0.6em;
-    color: azure;
+    background-color:azure;
     cursor: pointer;
-    /* display: flex; */
-    flex-wrap: wrap;
+    grid-row: 2/4;
+    grid-column: 2/4;
 
 }
 

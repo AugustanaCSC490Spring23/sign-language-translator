@@ -31,12 +31,11 @@ function About(){
             your credibility. Use the active voice whenever possible 
             as it makes any narrative easier to read.
         </p>
-        {/* <button id="Browse_Aboutus">BROWSE MORE AboutS</button> */}
          </div> 
         </div>
     </div>
     <div className="empty">
-    <h2>Our Team</h2>
+    {/* <h2>Our Team</h2> */}
     </div>
 
         <div className="About_footer">
@@ -51,20 +50,6 @@ function About(){
                     <p>Major: Computer Science</p>
                     {/* <p> I aspired to be a teacher. Now I see how technology can help me reach my goals. So I need to learn to code first.</p> */}
                     
-                    <div class="icons">
-                        <a href="#">
-                        <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#">
-                        <i class="fa-brands fa-linkedin"></i>
-                        </a>
-                        <a href="#">
-                        <i class="fa-brands fa-github"></i>
-                        </a>
-                        <a href="#">
-                        <i class="fa-brands fa-instagram"></i>
-                        </a>
-                    </div>
                 </div>
                 
             </div>
@@ -100,6 +85,7 @@ function About(){
             </div>
 
         </div>
+        
 
     <div className="empty"></div>
 
