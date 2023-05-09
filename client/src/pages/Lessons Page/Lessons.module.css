@@ -19,3 +19,16 @@
 .lessonsCard {
   background-color: #f5f5cf !important;
 }
+
+.lessonRow {
+  margin-bottom: 1em;
+  transition: all 0.2s ease-in-out;
+}
+
+.lessonRow:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+

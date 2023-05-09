@@ -62,17 +62,15 @@ const Lessons = () => {
           </Card>
         </Col>
       </Row>
-      <Row>
-        <h3>Lesson 1: Family</h3>
-        <ProgressBar now={now} label={`${now}%`} />
-      </Row>
       {topics.map((topic) => {
         return (
           <Row
+            className={styles.lessonRow}
             onClick={() => handleTopicClick(topic._id)}
+            style={{ marginTop: "1em" }}
           >
-            <h3>{capitalize(topic._id)}</h3>
-            <ProgressBar now={now} label={`${now}%`} />
+            <h3>Lesson: {capitalize(topic._id)}</h3>
+            {/* <ProgressBar now={now} label={`${now}%`} /> */}
           </Row>
         );
       })}

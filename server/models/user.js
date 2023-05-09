@@ -15,10 +15,10 @@ const UserSchema = new mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail, "Please provide a valid email"],
   },
-  items: [
+  flashcardsCollections: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Item",
+      ref: "FlashcardsCollection",
     },
   ],
   role: {
@@ -48,6 +48,12 @@ const UserSchema = new mongoose.Schema({
     default: true,
     select: false,
   },
+  tests: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Test",
+    },
+  ],
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordResetTokenExpires: Date,
