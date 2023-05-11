@@ -1,7 +1,5 @@
 import React from "react";
 import styles from "./Resources.module.css";
-
-import React from 'react';
 import "./Resources.css";
 
 function Resources(){
@@ -21,7 +19,8 @@ function Resources(){
                 <button id="browse_resources">More</button>
             </div> 
         </div>
-        <div className='Resources_box_2'>
+
+        <div className={styles.Resources_box_2}>
         <div className='other'>
             <div className="other">
                 <h3>Other Resources</h3>  

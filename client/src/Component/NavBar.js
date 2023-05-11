@@ -28,6 +28,9 @@ function NavBar() {
           <Nav.Item className="style-item">
             <Nav.Link href="/resources">Resources</Nav.Link>
           </Nav.Item>
+          <Nav.Item className="style-item">
+            <Nav.Link href="/flashcard">Flashcard</Nav.Link>
+          </Nav.Item>
           <AuthButtons />
         </Nav>
       </Navbar.Collapse>
