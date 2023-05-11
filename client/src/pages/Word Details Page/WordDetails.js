@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from "./WordDetails.module.css";
 import CusButton from "../../Component/CusButton";
-import WordCard from "../../Component/WordCard.js";
 import { useEffect, useState } from "react";
 import { Col, Container, Row, Card } from 'react-bootstrap';
 import { useParams } from "react-router-dom";
@@ -21,16 +20,15 @@ const WordDetails = () => {
     return (
         <Container fluid className={styles.wordDetailsContainer}>
             <Row>
-                <Col className={styles.mainWordDetails} md={{ span: 6, offset: 1 }}>
+                <Col className={styles.mainWordDetails} md={{ span: 4, offset: 1 }}>
                     {text}
                 </Col>
-                <Col>
+                <Col className={styles.mainImageWordDetails}>
                     <Card
                         style={{
-                            width: "6cm",
-                            height: "6cm",
+                            width: "4cm",
+                            height: "4cm",
                             borderRadius: "10px",
-                            border: "solid 1px #dcdcdc",
                             overflow: "hidden",
                             display: "flex",
                             justifyContent: "center",
@@ -62,6 +60,34 @@ const WordDetails = () => {
                     This is because it is a semantic element, whereas b is not.
                     Non-semantic elements are worse for accessibility and can make content localization and future-proofing difficult.
                     Additionally, if the text bolding is purely stylistic, its better to use CSS and keep all page styling separate from the content.
+                </Col>
+                <Col>
+                    {word.signPhotos.map((signPhoto) => {
+                        signPhoto.map((photo) => {
+                            return (
+                                <Card
+                                    style={{
+                                        width: "4cm",
+                                        height: "4cm",
+                                        borderRadius: "10px",
+                                        overflow: "hidden",
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                    }}>
+                                    <Card.Img
+                                        variant="top"
+                                        src={photo}
+                                        style={{
+                                            width: "4.25cm",
+                                            height: "4.25cm",
+                                            borderRadius: "10px",
+                                        }}
+                                    />
+                                </Card>
+                            );
+                    })})}
+                      
                 </Col>
             </Row>
 
