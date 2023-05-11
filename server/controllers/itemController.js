@@ -82,7 +82,6 @@ exports.getItemByText = asyncCatch(async (req, res, next) => {
   if (!item) {
     return next(new Err("No word found", 404));
   }
-  console.log(item);
   res.status(200).json({
     status: "success",
     data: { item: item },

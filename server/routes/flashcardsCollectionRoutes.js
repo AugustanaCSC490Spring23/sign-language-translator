@@ -12,22 +12,26 @@ router
     flashcardsCollectionController.getAllCollections
   );
 router
-  .route("/:id")
+  .route("/:slug")
   .get(
     authController.routeGuard,
-    flashcardsCollectionController.getCollectionById
-  )
-  .patch(
-    authController.routeGuard,
-    flashcardsCollectionController.addFlashcards
-  )
-  .patch(
-    authController.routeGuard,
-    flashcardsCollectionController.removeFlashcards
+    flashcardsCollectionController.getCollectionBySlug
   )
   .delete(
     authController.routeGuard,
     flashcardsCollectionController.removeCollection
+  );
+router
+  .route("/addFlashcards/:slug")
+  .patch(
+    authController.routeGuard,
+    flashcardsCollectionController.addFlashcards
+  );
+router
+  .route("/removeFlashcards/:slug")
+  .patch(
+    authController.routeGuard,
+    flashcardsCollectionController.removeFlashcards
   );
 
 module.exports = router;

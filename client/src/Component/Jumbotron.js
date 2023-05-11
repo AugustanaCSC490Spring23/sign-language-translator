@@ -3,7 +3,7 @@ import { Card, Form, InputGroup, Button } from "react-bootstrap";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import "./Jumbotron.css";
+import styles from "./Jumbotron.module.css";
 
 function Jumbotron() {
   const [searchText, setSearchText] = useState("");
@@ -14,7 +14,7 @@ function Jumbotron() {
   };
 
   return (
-    <Card className="jumbotron">
+    <Card className={styles.jumbotron}>
       <Card.Body>
         <Card.Title>Dictionary</Card.Title>
         <Form onSubmit={handleSearch}>

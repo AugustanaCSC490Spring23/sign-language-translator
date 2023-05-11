@@ -15,6 +15,8 @@ import WordDetails from "./pages/Word Details Page/WordDetails";
 import Profile from "./pages/Profile Page/Profile";
 import Resources from "./pages/Resources Page/Resources";
 import About from "./pages/About Page/About";
+import FlashcardsCollections from "./pages/FlashcardsCollections Page/FlashcardsCollections";
+import Flashcards from "./pages/Flashcards Page/Flashcards";
 
 import {
   createBrowserRouter,
@@ -75,6 +77,14 @@ function App() {
     {
       path: "/me",
       element: <Profile />,
+    },    
+    {
+      path: "/flashcards",
+      element: <FlashcardsCollections />,
+    },
+    {
+      path: "/flashcards/:slug",
+      element: <Flashcards />,
     },
   ]);
   return (
