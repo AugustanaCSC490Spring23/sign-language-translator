@@ -15,6 +15,7 @@ import WordDetails from "./pages/Word Details Page/WordDetails";
 import Profile from "./pages/Profile Page/Profile";
 import Resources from "./pages/Resources Page/Resources";
 import About from "./pages/About Page/About";
+import Flashcards from "./pages/Flashcards Page/Flashcards";
 
 import {
   createBrowserRouter,
@@ -76,6 +77,11 @@ function App() {
       path: "/me",
       element: <Profile />,
     },
+    {
+      path: "/flashcards",
+      element: <Flashcards />,
+    },
+
   ]);
   return (
     <div className="App">
