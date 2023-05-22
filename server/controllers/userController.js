@@ -26,7 +26,7 @@ exports.getAllUsers = asyncCatch(async (req, res, next) => {
 });
 
 exports.getUser = asyncCatch(async (req, res, next) => {
-  const user = await User.findOne({ _id: req.params.id }).populate("items");
+  const user = await User.findOne({ _id: req.params.id }).populate("flashcardsCollections").populate("tests");
 
   if (!user) {
     return next(new Err("No user found with given ID", 404));

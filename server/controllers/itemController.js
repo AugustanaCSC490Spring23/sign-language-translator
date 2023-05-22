@@ -145,6 +145,7 @@ exports.getAllLetters = asyncCatch(async (req, res, next) => {
 exports.getNextOrPreviousItem = asyncCatch(async (req, res, next) => {
   try {
     const { id } = req.params;
+    const { filter } = req.query;
 
     const currentItem = await Item.findById(id);
     if (!currentItem) {
@@ -153,14 +154,25 @@ exports.getNextOrPreviousItem = asyncCatch(async (req, res, next) => {
 
     let nextItem, previousItem;
 
-    nextItem = await Item.findOne({
-      _id: { $gt: currentItem._id },
-      topic: currentItem.topic,
-    }).sort({ _id: 1 });
-    previousItem = await Item.findOne({
-      _id: { $lt: currentItem._id },
-      topic: currentItem.topic,
-    }).sort({ _id: -1 });
+    if (filter === "topic") {
+      nextItem = await Item.findOne({
+        _id: { $gt: currentItem._id },
+        topic: currentItem.topic,
+      }).sort({ _id: 1 });
+      previousItem = await Item.findOne({
+        _id: { $lt: currentItem._id },
+        topic: currentItem.topic,
+      }).sort({ _id: -1 });
+    } else if (filter === "firstLetter") {
+      nextItem = await Item.findOne({
+        _id: { $gt: currentItem._id },
+        firstLetter: currentItem.firstLetter,
+      }).sort({ _id: 1 });
+      previousItem = await Item.findOne({
+        _id: { $lt: currentItem._id },
+        firstLetter: currentItem.firstLetter,
+      }).sort({ _id: -1 });
+    }
 
     res
       .status(200)

@@ -24,7 +24,7 @@ exports.getCollectionBySlug = asyncCatch(async (req, res, next) => {
     const collection = await FlashcardsCollection.findOne({
       slug: req.params.slug,
     }).populate("items");
-    
+
     res.status(200).json({
       status: "success",
       data: collection,
@@ -68,27 +68,36 @@ exports.addFlashcards = asyncCatch(async (req, res, next) => {
   try {
     const { slug } = req.params;
     const { flashcards } = req.body;
-    const items = [];
 
-    for (let i = 0; i < flashcards.length; i++) {
-      items.push(flashcards[i]._id);
-    }
-
-    const collection = await FlashcardsCollection.findOneAndUpdate(
-      { slug, creator: req.user._id }, // Updated filter to include creator
-      {
-        $set: { updatedAt: Date.now() },
-        $push: { items: { $each: items } },
-      },
-      { new: true }
-    );
+    const collection = await FlashcardsCollection.findOne({
+      slug,
+      creator: req.user._id,
+    });
 
     if (!collection) {
       return res.status(404).json({ message: "Collection not found" });
     }
+
+    // Check if any flashcards already exist in the items array
+    const existingFlashcards = collection.items.filter((item) =>
+      flashcards.includes(item)
+    );
+    const newFlashcards = flashcards.filter(
+      (flashcard) => !collection.items.includes(flashcard)
+    );
+
+    // Add only the new flashcards to the items array
+    collection.items.push(...newFlashcards);
+
+    // Update the updatedAt field
+    collection.updatedAt = Date.now();
+
+    // Save the updated collection
+    const updatedCollection = await collection.save();
+
     res.status(200).json({
       status: "success",
-      data: collection,
+      data: updatedCollection,
     });
   } catch (error) {
     next(error);
@@ -101,14 +110,12 @@ exports.removeFlashcards = asyncCatch(async (req, res, next) => {
     const { slug } = req.params;
     const { flashcards } = req.body;
 
-    const items = [];
-    for (let i = 0; i < flashcards.length; i++) {
-      items.push(flashcards[i]._id);
-    }
-
     const collection = await FlashcardsCollection.findOneAndUpdate(
       { slug, creator: req.user._id }, // Updated filter to include creator
-      { $pull: { items: { $in: items } }, $set: { updatedAt: Date.now() } },
+      {
+        $pull: { items: { $in: flashcards } },
+        $set: { updatedAt: Date.now() },
+      },
       { new: true }
     );
     if (!collection) {
@@ -122,7 +129,6 @@ exports.removeFlashcards = asyncCatch(async (req, res, next) => {
     next(error);
   }
 });
-
 
 // Remove a collection
 exports.removeCollection = asyncCatch(async (req, res, next) => {

@@ -74,7 +74,7 @@ function AuthButtons() {
 
       <Modal show={showModal} onHide={handleModalClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Confirm Signout</Modal.Title>
+          <Modal.Title>Leaving so soon?</Modal.Title>
         </Modal.Header>
         <Modal.Body>Are you sure you want to sign out?</Modal.Body>
         <Modal.Footer>

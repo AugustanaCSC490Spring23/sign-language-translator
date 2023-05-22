@@ -1,0 +1,20 @@
+{
+  "_id": {
+    "$oid": "63f6f60798d6dc8c28c0d019"
+  },
+  "text": "mother",
+  "meaningPhoto": "https://res.cloudinary.com/dfb7mq7zb/image/upload/v1677128549/signlanguage/Mother_uvpciu.png",
+  "topic": "family",
+  "difficulty": 1,
+  "category": "vocabulary", // either "vocabulary", "alphabet", or "communication"
+  "firstLetter": "m",
+  "signPhotos": [
+    [
+      "mother",
+      "https://res.cloudinary.com/dfb7mq7zb/image/upload/v1677128573/signlanguage/Family_-_Mother_zcwiuk.png"
+    ]
+  ],
+  "instructions": "Start by forming the ASL letter \"M\" sign: Extend your thumb, index, and middle fingers, and tuck your ring and pinky fingers into your palm.\nPlace your hand on your chin, with your fingertips pointing upward.\nKeeping your hand in the same position, move it down and forward a few inches, until your fingertips are pointing forward."
+}
+
+// for topic: [alphabet, animal, daily conversation, emotion, family, food, nature, places, school, transportation, weather, work]

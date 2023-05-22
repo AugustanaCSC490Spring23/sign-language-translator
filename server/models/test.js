@@ -83,13 +83,11 @@ TestSchema.methods.generateQuizzes = async (
     if (category === "alphabet" || category === "communication") {
       queryWrongChoices = {
         category: "communication",
-        _id: { $ne: correctAnswer },
       };
       quizType = "b";
     } else {
       queryWrongChoices = {
         category: "vocabulary",
-        _id: { $ne: correctAnswer },
       };
       quizType = "a";
     }
