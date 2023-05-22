@@ -26,7 +26,7 @@ function NavBar() {
             <Nav.Link href="/about-us">About Us</Nav.Link>
           </Nav.Item>
           <Nav.Item className="style-item">
-            <Nav.Link href="/flashcards">Resources</Nav.Link>
+            <Nav.Link href="/resources">Resources</Nav.Link>
           </Nav.Item>
           <Nav.Item className="style-item">
             <Nav.Link href="/flashcards">Flashcard</Nav.Link>
