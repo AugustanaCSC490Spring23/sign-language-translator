@@ -78,7 +78,7 @@ function App() {
       element: <Profile />,
     },
     {
-      path: "/flashcards",
+      path: "/Flashcards",
       element: <Flashcards />,
     },
 
