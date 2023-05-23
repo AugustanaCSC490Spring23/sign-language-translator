@@ -20,8 +20,7 @@ function Resources(){
         </div>
 
         <div className={styles.Resources_box_2}>
-        <div className='other'>
-            <div className="other">
+        <div className={styles.other}>
                 <h3>Other Resources</h3>  
                     <p>
                     Americans with Disabilities Act (ADA): The ADA 
@@ -46,13 +45,9 @@ function Resources(){
                     Visit:  https://www.hhs.gov/civil-rights/for-individuals/disability/rehabilitation-act/index.html
                     </p>
                 
-
-            </div>
-
         </div>
 
-        <div className='Community'>
-            <div className="community">
+        <div className={styles.Community}>
                 <h3>Community</h3> 
                 <p>
                     Deaf Planet: This website provides information 
@@ -74,14 +69,16 @@ function Resources(){
                     Visit: https://www.deafculturecentre.ca/
                     </p>
                 
-            </div>
+            
         </div>
     </div>
 
      </div>
-     <div className="empty"></div>
+     <div className={styles.empty}></div>
     </div> 
     );  
 }
 
 export default Resources;
+
+

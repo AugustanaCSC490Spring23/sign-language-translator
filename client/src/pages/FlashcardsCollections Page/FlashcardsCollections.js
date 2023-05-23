@@ -11,8 +11,10 @@ const Collection = ({ title, description }) => {
     <div className={styles.collectionContainer}>
       <div className={styles.collection}>
         <div className={styles.mainCard}>
+
           <div className={styles.mainCardBody}>{title}</div>
         </div>
+        
         <div className={styles.backCard}>
           <div className={styles.backCardBody}>{description}</div>
         </div>
@@ -61,3 +63,5 @@ const FlashcardsCollectionsPage = () => {
 };
 
 export default requireAuth(FlashcardsCollectionsPage);
+
+
