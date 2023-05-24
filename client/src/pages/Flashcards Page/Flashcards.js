@@ -346,7 +346,12 @@ const FlashcardsPage = () => {
     updateUser();
   };
 
-  if (!flashcards.length) return <div>Loading...</div>;
+  if (!flashcards.length)
+    return (
+      <div style={{ marginTop: "50px" }}>
+        Empty collection. Add more flashcards!
+      </div>
+    );
 
   return (
     <div>
@@ -358,7 +363,8 @@ const FlashcardsPage = () => {
         onDeleteFlashcard={onDeleteFlashcard}
       />
 
-      <FlashcardsTable></FlashcardsTable>
+      <FlashcardsTable flashcards={flashcards}></FlashcardsTable>
+
     </div>
   );
 };

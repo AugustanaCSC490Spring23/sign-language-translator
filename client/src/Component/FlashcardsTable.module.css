@@ -1,3 +1,12 @@
 .table {
     margin: 5rem 0;
+    border-radius: 5px;
+}
+
+.image {
+    max-width: 30%;
+    max-height: 30%;
+    margin: 5px;
+    border-radius: 5px;
+    float: left;
 }

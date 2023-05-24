@@ -77,6 +77,7 @@ TestSchema.methods.generateQuizzes = async (
     const correctAnswer = items[i]._id;
     const quizTopic = items[i].topic;
     const category = items[i].category;
+    let keys;
 
     // Set the quiz type to "b" and select wrong answers from the same category with category "communication"
     let queryWrongChoices = { _id: { $ne: correctAnswer } };
@@ -85,31 +86,27 @@ TestSchema.methods.generateQuizzes = async (
         category: "communication",
       };
       quizType = "b";
+      keys = items[i].signPhotos;
     } else {
       queryWrongChoices = {
         category: "vocabulary",
       };
       quizType = "a";
+      keys = items[i].text;
     }
 
-    const promises = [
+    const [wrongChoices] = await Promise.all([
       Item.aggregate([
         { $match: queryWrongChoices },
         { $sample: { size: 3 } },
         { $project: { _id: 1 } },
       ]),
+    ]);
+
+    const choices = [
+      correctAnswer,
+      ...wrongChoices.map((choice) => choice._id.toString()),
     ];
-
-    const [wrongChoices] = await Promise.all(promises);
-
-    const allChoices = await Item.find({
-      _id: {
-        $in: [correctAnswer, ...wrongChoices.map((choice) => choice._id)],
-      },
-    })
-      .lean()
-      .exec();
-    let choices = allChoices.map((choice) => choice._id.toString());
 
     // Shuffle the choices array using the Fisher-Yates shuffle algorithm
     for (let i = choices.length - 1; i > 0; i--) {
@@ -123,6 +120,7 @@ TestSchema.methods.generateQuizzes = async (
       orderNumber: i + 1, // increment the counter for each quiz
       choices,
       correctAnswer,
+      keys,
       topic: quizTopic,
     });
 

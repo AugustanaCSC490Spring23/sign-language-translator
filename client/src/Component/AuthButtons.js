@@ -44,7 +44,7 @@ function AuthButtons() {
           <Dropdown.Menu>
             <Dropdown.Item href="/me">My Profile</Dropdown.Item>
             <Dropdown.Item href="/flashcards">Flashcards</Dropdown.Item>
-            <Dropdown.Item href="/quiz">Quiz</Dropdown.Item>
+            <Dropdown.Item href="/quizzes">Quiz</Dropdown.Item>
             <Dropdown.Divider />
             <Dropdown.Item onClick={handleSignout}>Signout</Dropdown.Item>
           </Dropdown.Menu>

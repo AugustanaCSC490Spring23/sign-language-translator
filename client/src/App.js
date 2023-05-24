@@ -1,7 +1,7 @@
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css"; 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import { ToastContainer } from "react-toastify";
 
@@ -20,6 +20,8 @@ import Resources from "./pages/Resources Page/Resources";
 import About from "./pages/About Page/About";
 import FlashcardsCollections from "./pages/FlashcardsCollections Page/FlashcardsCollections";
 import Flashcards from "./pages/Flashcards Page/Flashcards";
+import Quizzes from "./pages/Quizzes Page/Quizzes";
+import QuizDashboard from "./pages/QuizDashboard Page/QuizDashboard";
 
 import {
   createBrowserRouter,
@@ -88,6 +90,14 @@ function App() {
     {
       path: "/flashcards/:slug",
       element: <Flashcards />,
+    },
+    {
+      path: "/quizzes/:id",
+      element: <Quizzes />,
+    },
+    {
+      path: "/quizzes",
+      element: <QuizDashboard />,
     },
   ]);
   return (

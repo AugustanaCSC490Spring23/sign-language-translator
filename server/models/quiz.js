@@ -23,6 +23,7 @@ const QuizSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Item",
   },
+  keys: Array,
   isCorrect: Boolean,
   topic: String,
 });

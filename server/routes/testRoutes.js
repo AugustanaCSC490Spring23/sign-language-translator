@@ -10,8 +10,11 @@ router
   .route("/delete")
   .delete(authController.exclusiveAccess("admin"), testController.deleteAll);
 router
-  .route("/:id")
+  .route("/testReview/:id")
   .get(authController.routeGuard, testController.getTest)
   .post(testController.gradeTest);
+router
+  .route("/testDisplay/:id")
+  .get(authController.routeGuard, testController.getTestWithoutAnswers);
 
 module.exports = router;

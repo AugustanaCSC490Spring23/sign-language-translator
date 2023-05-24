@@ -1,6 +1,7 @@
 .styleNavbar {
   background-color: #f0e7de;
-  height: 15vh;
+  height: 8vh;
+  font-weight: 500;
 }
 
 .styleNav {
@@ -8,8 +9,7 @@
 }
 
 .styleItem {
-  padding-left: 3em;
-  padding-right: 3em;
+  padding-right: 2rem;
 }
 
 /* Set the style for the login and signup buttons */

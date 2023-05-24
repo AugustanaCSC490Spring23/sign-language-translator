@@ -127,15 +127,28 @@ const FlashcardsCollectionsPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [newCardTitle, setNewCardTitle] = useState("");
   const [newCardDesc, setNewCardDesc] = useState("");
-  
+  const [sortedBy, setSortedBy] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSortChange = (event) => {
+    setSortedBy(event.target.value);
+  };
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
   const handleCancel = () => {
     setShowModal(false);
   };
   const handleTitleChange = (event) =>
     setNewCardTitle(event.target.value);
+
   const handleDescChange = (event) =>
     setNewCardDesc(event.target.value);
+
   const [isAdded, setAdded] = useState(false);
+
   const handleAdd = (event) => {
     setAdded(true);
     setShowModal(false);
@@ -152,6 +165,27 @@ const FlashcardsCollectionsPage = () => {
     setUser(JSON.parse(localStorage.getItem("user")));
   }, [navigate]);
 
+  // Apply sorting based on sortedBy state
+  // useEffect(() => {
+  //   let sortedCollections = [...collections];
+  //   if (sortedBy === "title") {
+  //     sortedCollections.sort((a, b) =>
+  //       a.title.localeCompare(b.title, undefined, {
+  //         sensitivity: "base",
+  //       }),
+  //     );
+  //   } else if (sortedBy === "createdAt") {
+  //     sortedCollections.sort(
+  //       (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
+  //     );
+  //   } else if (sortedBy === "updatedAt") {
+  //     sortedCollections.sort(
+  //       (a, b) => new Date(a.updatedAt) - new Date(b.updatedAt),
+  //     );
+  //   }
+  //   setCollections(sortedCollections);
+  // }, [sortedBy, collections]);
+
   const onDeleteCollection = (deletedSlug) => {
     const updatedCollections = collections.filter(
       (collection) => collection.slug !== deletedSlug,
@@ -163,11 +197,38 @@ const FlashcardsCollectionsPage = () => {
     return <div>Loading...</div>;
   }
   if (user.flashcardsCollections.length === 0) {
-    return <EmptyPage message={`Add a collection!`}/>
+    return <EmptyPage message={`Add a collection!`} />;
   }
+  // Filter collections based on searchTerm state
+  // const filteredCollections = user.flashcardsCollections.filter((collection) =>
+  //   collection.title.toLowerCase().includes(searchTerm.toLowerCase()),
+  // );
   return (
     <Container>
-      <h2 style={{ marginTop: "3rem" }}>{user.name}'s Collections</h2>
+      <h2 style={{ marginTop: "3rem" }}>{user.name}'s collections</h2>
+      <div className="d-flex justify-content-end align-items-center mb-3">
+        <Form.Group controlId="sortSelect" className="mr-3">
+          <Form.Label className="mr-2">Sort By:</Form.Label>
+          <Form.Control
+            as="select"
+            value={sortedBy}
+            onChange={handleSortChange}
+          >
+            <option value="">None</option>
+            <option value="title">Title</option>
+            <option value="createdAt">Created At</option>
+            <option value="updatedAt">Updated At</option>
+          </Form.Control>
+        </Form.Group>
+        <Form.Group controlId="searchInput">
+          <Form.Control
+            type="text"
+            placeholder="Search"
+            value={searchTerm}
+            onChange={handleSearch}
+          />
+        </Form.Group>
+      </div>
       <Row>
         <Col
           md={4}

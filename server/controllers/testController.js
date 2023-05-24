@@ -47,12 +47,6 @@ exports.createTest = asyncCatch(async (req, res, next) => {
     specialPoolObjectIds
   );
 
-  // Exclude the correctAnswer property from each quiz object
-  const quizzesWithoutCorrectAnswers = test.quizzes.map((quiz) => {
-    const { correctAnswer, ...quizWithoutCorrectAnswer } = quiz.toObject();
-    return quizWithoutCorrectAnswer;
-  });
-
   await test.save();
 
   // Add the test to the user's `tests` array
@@ -64,15 +58,43 @@ exports.createTest = asyncCatch(async (req, res, next) => {
   res.status(200).send({
     status: "success",
     data: {
+      testId: test._id,
+    },
+  });
+});
+
+// ** get test by id, this is to get the test for display (no answers available) ** //
+// New function - getTestWithoutAnswers
+exports.getTestWithoutAnswers = asyncCatch(async (req, res, next) => {
+  const { id } = req.params;
+
+  const test = await Test.findOne({
+    _id: id,
+    testTaker: req.user._id,
+  }).populate("quizzes").lean();
+
+  if (!test) {
+    return next(new ErrorResponse("Unauthorized or Test not found", 401));
+  }
+
+  // Exclude the correctAnswer property from each quiz object
+  const quizzesWithoutCorrectAnswers = test.quizzes.map((quiz) => {
+    const { correctAnswer, ...quizWithoutCorrectAnswer } = quiz;
+    return quizWithoutCorrectAnswer;
+  });
+
+  res.status(200).send({
+    status: "success",
+    data: {
       test: {
-        ...test.toObject(),
+        ...test,
         quizzes: quizzesWithoutCorrectAnswers,
       },
     },
   });
 });
 
-// ** get test by id, can only be retrieved after being taken ** //
+// ** get fully detailed test by id, can only be retrieved after being taken ** //
 exports.getTest = asyncCatch(async (req, res, next) => {
   const test = await Test.findOne({
     _id: req.params.id,
