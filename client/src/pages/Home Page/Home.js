@@ -40,6 +40,7 @@ const Home = () => {
             radius="25"
             title="More"
             weight="750"
+            width="100%"
           />
         </Col>
       </Row>
