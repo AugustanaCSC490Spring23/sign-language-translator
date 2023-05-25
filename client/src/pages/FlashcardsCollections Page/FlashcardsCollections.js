@@ -205,7 +205,7 @@ const FlashcardsCollectionsPage = () => {
   // );
   return (
     <Container>
-      <h2 style={{ marginTop: "3rem" }}>{user.name}'s collections</h2>
+      <h2 style={{ marginTop: "3rem" }}>{user.name}'s Collections</h2>
       <div className="d-flex justify-content-end align-items-center mb-3">
         <Form.Group controlId="sortSelect" className="mr-3">
           <Form.Label className="mr-2">Sort By:</Form.Label>

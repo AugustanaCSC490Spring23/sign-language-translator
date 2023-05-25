@@ -1,23 +1,23 @@
-import {Container, ListGroup} from "react-bootstrap";
+import {Container, ListGroup, Row, Col} from "react-bootstrap";
 import Card from 'react-bootstrap/Card';
 
 import styles from "./Quiz.module.css";
 
 const Quiz = () => {
     return (
-        <Container>
-            <h2>Quiz</h2>
             <Card className={styles.card}>
                 <Card.Body>
-                    <Card.Title>Question 1: What is dis ?</Card.Title>
-                    <ListGroup className="list-group-flush">
-                        <ListGroup.Item>Answer 1</ListGroup.Item>
-                        <ListGroup.Item>Answer 2</ListGroup.Item>
-                        <ListGroup.Item>Answer 3</ListGroup.Item>
-                    </ListGroup>
+                    <Row>
+                        <Col xs={4} style={{borderRight: "1px solid rgba(0,0,0,0.2)"}}>
+                            Question
+                        </Col>
+
+                        <Col xs>
+                            Answer
+                        </Col>
+                    </Row>
                 </Card.Body>
-            </Card>
-        </Container>
+            </Card>           
     )
 }
 

@@ -14,7 +14,7 @@ const MyCard = ({quiz}) => {
                     </Card.Text>
 
                     <Card.Text className={styles.qualifyFor}> 
-                        {qualifyFor}
+                        {`${qualifyFor.slice(0, 80)} ...`}
                     </Card.Text>
                     <div className={styles.tagList}>
                         {isCompleted ? 
@@ -37,7 +37,7 @@ const MyCard = ({quiz}) => {
                             </Row>
                         }
                     </div>
-                    <Button variant="primary" href="/">Let's go!</Button>
+                    <Button variant="dark" href="/">Let's go!</Button>
                 </Card.Body>
             </Card>
         </Col>

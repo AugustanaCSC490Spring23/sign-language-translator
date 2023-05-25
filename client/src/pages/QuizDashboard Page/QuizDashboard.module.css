@@ -1,4 +1,14 @@
-.cardContainer {
+.container {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    margin-top: 3rem;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 5px;
+    height: 40vh;
+    width: 40vw;
+    background-color: rgba(255, 142, 142, 0.514) !important;
 }

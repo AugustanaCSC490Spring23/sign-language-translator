@@ -20,7 +20,7 @@ const CardList = ({quizzes}) => {
         <Container>
             <Row>
                 <Col xs lg={1} className={styles.buttonCol}>
-                    {startIndex > 0 && <Button className={styles.button} onClick={handlePrev}>
+                    {startIndex > 0 && <Button variant="outline-dark" className={styles.button} onClick={handlePrev}>
                         Prev
                     </Button>}
                 </Col>
@@ -28,7 +28,7 @@ const CardList = ({quizzes}) => {
                 {visibleQuizzes.map(quiz => <MyCard quiz={quiz}/>)}
 
                 <Col xs lg={1} className={styles.buttonCol}>
-                    {startIndex + 3 < quizzes.length && <Button className={styles.button} onClick={handleNext}>
+                    {startIndex + 3 < quizzes.length && <Button variant="outline-dark" className={styles.button} onClick={handleNext}>
                         Next
                     </Button>}
                 </Col>

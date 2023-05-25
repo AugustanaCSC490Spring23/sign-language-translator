@@ -4,6 +4,21 @@
     align-items: center;
 }
 
+
+
 .button {
-    background-color: bisque;
+    background-color: #4CAF50; /* Replace with your desired solid color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+      
+.button:hover {
+    background-color: #45a049; /* Replace with a slightly different shade for the hover effect */
 }
