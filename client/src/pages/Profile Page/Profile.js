@@ -63,15 +63,7 @@ function Profile() {
             </Card>
           </div>
 
-<<<<<<< HEAD
-        <div className={styles.user_details}>
-          <h3>Viiet Nguyen</h3>
-          <h3>email</h3>
-          <h4>city</h4>
-        </div>
-=======
         </Col>
->>>>>>> main
 
       </Row >
 
