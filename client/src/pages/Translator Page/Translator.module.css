@@ -22,7 +22,27 @@
 }
 .form {
   display: flex;
-  height: 85%;
+  /* height: 55%; */
+  /* border: 5px solid red; */
+}
+
+.translationSec {
+  display: flex;
+  padding: 0 2px;
+  border: 2px solid black;
+  background: white;
+  border-radius: 5px;
+  /* height: inherent; */
+  flex-flow: row wrap;
+  overflow: auto;
+}
+
+.img {
+  margin: 1rem;
+  height: 50%;
+  width: 200px;
+  border: 2px solid black;
+  border-radius: 10px;
 }
 
 .input:not(active) {

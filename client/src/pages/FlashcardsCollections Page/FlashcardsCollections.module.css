@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 .collectionContainer {
+=======
+/* .collectionContainer {
+>>>>>>> main
   width: 100%;
   height: 10rem;
   text-align: center;
@@ -37,4 +41,68 @@
 
 .backCard {
   transform: rotateY(180deg);
+<<<<<<< HEAD
 }
+=======
+} */
+
+
+
+body {
+  background-color: #f5f0e1; /* Light brown background color */
+}
+
+.flashcard-carousel {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff; /* White background color */
+  border: 1px solid #000; /* Black border */
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.flashcard {
+  margin-bottom: 20px;
+}
+
+.flashcard-question {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.flashcard-answer {
+  font-size: 16px;
+  color: #666;
+}
+
+.carousel-controls {
+  margin-top: 20px;
+}
+
+.prev-button,
+.next-button {
+  padding: 10px 20px;
+  background-color: #336699;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.prev-button:hover,
+.next-button:hover {
+  background-color: #1a4266;
+}
+
+.prev-button {
+  margin-right: 10px;
+}
+
+.next-button {
+  
+margin-left: 10px;
+}
+>>>>>>> main

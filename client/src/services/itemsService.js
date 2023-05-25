@@ -34,6 +34,25 @@ const getAllTopics = async () => {
     });
 };
 
+const getSentence = async (prop) => {
+  try {
+    return await axiosInstance
+
+      .post("/api/v1/items/sentence", {
+        sentence: prop.sentence,
+      })
+      .then(function (response) {
+        return response;
+      })
+      .catch(function (error) {
+        errorHandler(error.message);
+      });
+  } catch (err) {
+    console.log(err.message);
+    errorHandler(err.message);
+  }
+};
+
 const getWordByText = async (text) => {
   return await axiosInstance
     .get(`/api/v1/items/text/${text}`)
@@ -45,4 +64,27 @@ const getWordByText = async (text) => {
     });
 };
 
-export { getWordsByFirstLetter, getWordsByTopic, getAllTopics, getWordByText };
+const getNextWordOrPreviousByFirstLetter = async (id) => {
+  try {
+    return await axiosInstance
+      .get(`/api/v1/items/dictionary/nextorprevious/${id}`)
+      .then((response) => {
+        return response;
+      })
+      .catch(function (error) {
+        errorHandler(error.message);
+      });
+  } catch (err) {
+    console.log(err.message);
+    errorHandler(err.message);
+  }
+};
+
+export {
+  getWordsByFirstLetter,
+  getWordsByTopic,
+  getAllTopics,
+  getWordByText,
+  getSentence,
+  getNextWordOrPreviousByFirstLetter,
+};

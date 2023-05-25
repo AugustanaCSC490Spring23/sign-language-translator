@@ -1,7 +1,10 @@
 import axiosInstance from "../utils/axiosInstance";
 import errorHandler from "../utils/errorHandler";
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 const getFlashcardsCollectionById = async (slug) => {
   try {
     const response = await axiosInstance.get(
@@ -13,7 +16,10 @@ const getFlashcardsCollectionById = async (slug) => {
   }
 };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 const getAllFlashcardsCollections = async () => {
   try {
     const response = await axiosInstance.get(`/api/v1/flashcards`);
@@ -23,8 +29,12 @@ const getAllFlashcardsCollections = async () => {
   }
 };
 
+<<<<<<< HEAD
 
 export { getFlashcardsCollectionById, getAllFlashcardsCollections };
 
 
 
+=======
+export { getFlashcardsCollectionById, getAllFlashcardsCollections };
+>>>>>>> main

@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 
-import styles from './WordCard.module.css';
+import styles from "./WordCard.module.css";
 
 const WordCard = ({ word, letter }) => {
   const navigate = useNavigate();

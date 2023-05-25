@@ -12,10 +12,12 @@ const signUp = async (user) => {
         passwordConfirm: user.passwordConfirm,
       })
       .then(function (res) {
-        console.log(res);
         // Store the JWT in local storage
         localStorage.setItem("jwt", res.data.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.data.user));
+        localStorage.setItem(
+          "user",
+          JSON.stringify(res.data.data.user),
+        );
         window.location.assign("/");
       });
   } catch (err) {
@@ -34,9 +36,12 @@ const logIn = async (credentials) => {
       .then(function (res) {
         // Store the JWT in local storage
         localStorage.setItem("jwt", res.data.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.data.user));
+        localStorage.setItem(
+          "user",
+          JSON.stringify(res.data.data.user),
+        );
         window.location.assign("/");
-        notifier.success("Login successful!")
+        notifier.success("Login successful!");
       });
   } catch (err) {
     console.log(err.message);

@@ -1,56 +1,84 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Profile.module.css";
-import { Button } from "react-bootstrap";
+import avatar from "../../assets/Viet-ava.png";
+import { Row, Col, Container, Card, Image, Button } from "react-bootstrap";
+import ImageSlider from "../../Component/Slider";
 
 function Profile() {
-  return (
-    <div className={styles.user_box}>
-      <div className={styles.profile_box1}>
-        <div className={styles.picture_card}>
-          <div className={styles.img_container}>
-            <img src="vietNguyen" alt="viet nguyen" />
-          </div>
-        </div>
+  const navigate = useNavigate();
 
+  const handleSeeMoreClick = () => {
+    navigate("/flashcards");
+  };
+
+  return (
+    <Container fluid className={styles.profileContainer}>
+      <Row style={{ paddingTop: "1.5em" }}>
+        <Col md={{ span: 3 }}>
+          <Image src={avatar} fluid className={styles.profilePicture} />
+          <Col className={styles.profileDetails} md={{ span: 9, offset: 3 }}>
+            <h2 style={{ height: "2.5rem", justifyContent: "start", display: "flex" }}>Viet Nguyen</h2>
+            <p style={{ justifyContent: "start", display: "flex" }}><b>vietnguyen@gmail.com</b></p>
+          </Col>
+        </Col>
+        <Col className={styles.profileDetails} md={{ span: 8, offset: 1 }} style={{ paddingRight: "2em" }}>
+          <h2 style={{ height: "3.5rem", justifyContent: "start", display: "flex" }}>ACHIEVEMENTS!!</h2>
+          <ImageSlider />
+          <hr
+            style={{
+              background: "black",
+              color: "black",
+              height: "3px",
+              border: "none",
+            }}
+          />
+          <h2 style={{ height: "3.5rem", justifyContent: "start", display: "flex" }}>FLASHCARDS</h2>
+
+          <div style={{ display: "flex", justifyContent: "space-between", paddingBottom: "2em" }}>
+            <Card className={styles.profileFlashcard} onClick={handleSeeMoreClick} style={{ flex: 1 }}>
+              <Card.Body>
+                <Card.Title>Card Title</Card.Title>
+              </Card.Body>
+            </Card>
+            <Card className={styles.profileFlashcard} onClick={handleSeeMoreClick} style={{ flex: 1 }}>
+              <Card.Body>
+                <Card.Title>Card Title</Card.Title>
+              </Card.Body>
+            </Card>
+            <Card className={styles.profileFlashcard} onClick={handleSeeMoreClick} style={{ flex: 1 }}>
+              <Card.Body>
+                <Card.Title>Card Title</Card.Title>
+              </Card.Body>
+            </Card>
+            <Card className={styles.profileFlashcard} onClick={handleSeeMoreClick} style={{ flex: 1 }}>
+              <Card.Body>
+                <Card.Title>Card Title</Card.Title>
+              </Card.Body>
+            </Card>
+            <Card className={styles.profileFlashcard} onClick={handleSeeMoreClick} style={{ flex: 1 }}>
+              <Card.Body>
+                <Card.Title>See More</Card.Title>
+              </Card.Body>
+            </Card>
+          </div>
+
+<<<<<<< HEAD
         <div className={styles.user_details}>
           <h3>Viiet Nguyen</h3>
           <h3>email</h3>
           <h4>city</h4>
         </div>
+=======
+        </Col>
+>>>>>>> main
 
-        <div className={styles.edit_button}>
-          <Button variant="outline-dark">edit</Button>
-        </div>
-      </div>
+      </Row >
 
-      <div className={styles.profile_box2}>
-        <div className={styles.level}>
-          <div className={styles.card}>
-            <h3>Level</h3>
-          </div>
-        </div>
+    </Container >
 
-        <div className={styles.completed_courses}>
-          <div className={styles.card}>
-            <h3>Completed Courses</h3>
-          </div>
-        </div>
-
-        <div className={styles.started_lessons}>
-          <div className={styles.card}>
-            <h3>Started Lessons</h3>
-          </div>
-        </div>
-
-        <div className={styles.courses}>
-          <div className={styles.card}>
-            <h3>Courses</h3>
-          </div>
-        </div>
-      </div>
-    </div>
   );
 }
+
 
 export default Profile;

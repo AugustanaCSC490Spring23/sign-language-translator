@@ -1,72 +1,300 @@
-import React from 'react';
-import styles from "./WordDetails.module.css";
+import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import CusButton from "../../Component/CusButton";
-import WordCard from "../../Component/WordCard.js";
-import { useEffect, useState } from "react";
-import { Col, Container, Row, Card } from 'react-bootstrap';
-import { useParams } from "react-router-dom";
-import { getWordByText } from '../../services/itemsService';
+import CusBreadcrumb from "../../Component/CusBreadrumb";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  getWordByText,
+  getNextWordOrPreviousByFirstLetter,
+  getWordsByTopic,
+} from "../../services/itemsService";
+import style from "./WordDetails.module.css";
 
 const WordDetails = () => {
-    const [word, setWord] = useState();
-    const { text } = useParams();
-    useEffect(() => {
-        getWordByText(text).then(function (res) {
-            setWord(res.data.data.item);
-        })
-    }, [text]);
-    if (!word) {
-        return <div>Loading</div>
-    }
-    return (
-        <Container fluid className={styles.wordDetailsContainer}>
-            <Row>
-                <Col className={styles.mainWordDetails} md={{ span: 6, offset: 1 }}>
-                    {text}
-                </Col>
-                <Col>
-                    <Card
-                        style={{
-                            width: "6cm",
-                            height: "6cm",
-                            borderRadius: "10px",
-                            border: "solid 1px #dcdcdc",
-                            overflow: "hidden",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                        }}>
-                        <Card.Img
-                            variant="top"
-                            src={word.meaningPhoto}
-                            style={{
-                                width: "4.25cm",
-                                height: "4.25cm",
-                                borderRadius: "10px",
-                            }}
-                        />
-                    </Card>
-                </Col>
-                <Col className={styles.nextButton} md={{ span: 2 }}>
-                    <CusButton
-                        bgcolor="#3B1404"
-                        color="#F8E5DA"
-                        radius="25"
-                        title="Next word"
-                        weight="750" />
-                </Col>
-            </Row>
-            <Row>
-                <Col className={styles.detailsWordDetails} md={{ span: 4, offset: 1 }}>
-                    When bolding text, its considered a best practice to use the strong tag.
-                    This is because it is a semantic element, whereas b is not.
-                    Non-semantic elements are worse for accessibility and can make content localization and future-proofing difficult.
-                    Additionally, if the text bolding is purely stylistic, its better to use CSS and keep all page styling separate from the content.
-                </Col>
-            </Row>
+  const param = useParams();
+  const navigate = useNavigate();
+  const [wordDetail, setWordDetail] = useState({
+    title: "",
+    url: "",
+    _id: "",
+    topic: "",
+  });
+  const [signPhotos, setSignPhotos] = useState([]);
+  const [item, setItem] = useState({
+    currentItem: "",
+    nextItem: "",
+    previousItem: "",
+  });
 
-        </Container>
-    )
-}
+  const [relatedWords, setRelatedWords] = useState({
+    data: {},
+    render: false,
+  });
+
+  //fetching data and set current word
+  useEffect(() => {
+    const fetchData = async () => {
+      const word = param.text;
+
+      try {
+        const res = await getWordByText(word);
+        const itemData = res.data.data.item;
+
+        setWordDetail({
+          title: itemData.text.toUpperCase(),
+          url: itemData.meaningPhoto,
+          _id: itemData._id,
+          topic: itemData.topic,
+        });
+        setItem((prevItem) => ({
+          ...prevItem,
+          currentItem: itemData,
+        }));
+
+        setSignPhotos(itemData.signPhotos);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      setWordDetail({
+        title: "",
+        url: "",
+        _id: "",
+        topic: "",
+      });
+      setItem({ ...item, currentItem: "" });
+      setSignPhotos([]);
+    };
+  }, [param]);
+
+  //fetching previous and next words
+  useEffect(() => {
+    if (wordDetail._id !== "") {
+      const fetchNextAndPreviousItems = async () => {
+        try {
+          const res = await getNextWordOrPreviousByFirstLetter(
+            wordDetail._id,
+          );
+          const data = res.data.data;
+
+          setItem((prevItem) => ({
+            ...prevItem,
+            nextItem: data.nextItem,
+            previousItem: data.previousItem,
+          }));
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      fetchNextAndPreviousItems();
+    }
+    return () => {
+      setItem({
+        ...item,
+        nextItem: "",
+        previousItem: "",
+      });
+    };
+  }, [wordDetail._id]);
+
+  //fetch data to get the related words by topic
+  useEffect(() => {
+    const fetchTopic = async () => {
+      try {
+        const res = await getWordsByTopic(wordDetail.topic);
+
+        setRelatedWords({
+          data: res.data,
+          render: true,
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchTopic();
+    return () => {
+      setRelatedWords({ data: {}, render: false });
+    };
+  }, [param]);
+
+  //display related items
+  const relatedItems = (length, items) => {
+    let col = [];
+    // console.log("run");
+    for (let i = 0; i < 4; i++) {
+      if (length < 4 && i >= length) {
+        col.push(<Col></Col>);
+        continue;
+      }
+
+      col.push(
+        <Col
+          onClick={(e) => {
+            navigate(
+              `../learning/dictionary/${items[i].firstLetter}/${items[i].text}`,
+            );
+          }}
+        >
+          <Image fluid src={items[i].meaningPhoto} />
+        </Col>,
+      );
+    }
+
+    return col;
+  };
+
+  //not working because navigate will reload the page, which cause the function to run into a loop
+  const navigateRoute = (item) => {
+    navigate(
+      `../learning/dictionary/${item.firstLetter}/${item.text}`,
+    );
+  };
+
+  return (
+    <Container fluid className={`px-5 mb-4 ${style.container}`}>
+      <CusBreadcrumb
+        className={`mb-3 ${style.breadcrumb}`}
+        link={[
+          ["/", "HOME", 0],
+          ["/learning/dictionary", "DICTIONARY", 1],
+          ["", wordDetail.title, 2],
+        ]}
+      />
+
+      <Row className={style.content}>
+        <Row>
+          <Col
+            className={`d-block d-md-none text-center mt-3 ${style.text}`}
+            xs={{ order: 2 }}
+          >
+            {wordDetail.title}
+          </Col>
+
+          <Col
+            xl={{ span: 1, order: 1 }}
+            className={`d-none d-xl-block mb-3  mr-3 ${style.previousButton}`}
+          >
+            {item.previousItem && (
+              <CusButton
+                title="Previous"
+                key="previous"
+                bgcolor="#8b4208"
+                color="white"
+                focus="#3e1408"
+                onClick={(e) => {
+                  navigate(
+                    `../learning/dictionary/${item.previousItem.firstLetter}/${item.previousItem.text}`,
+                  );
+                }}
+              />
+            )}
+          </Col>
+
+          <Col
+            xs={{ order: 3 }}
+            xl={{ span: 4, order: 1 }}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              // border: "1px solid red",
+            }}
+            className={`mt-xs-1 mt-md-2 ${style.instruction}`}
+          >
+            <Row
+              className="d-none d-xl-flex mb-2"
+              // style={{ border: "1px solid black" }}
+            >
+              <Col
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  // border: "1px solid black",
+                }}
+              >
+                <h1 className={style.text}>{wordDetail.title}</h1>
+              </Col>
+
+              <Col className={style.title_image_column}>
+                <Image
+                  fluid
+                  className={style.title_image}
+                  src={wordDetail.url}
+                />
+              </Col>
+            </Row>
+            <Row className="mt-3 mb-sm-4">
+              The sign we use for bus looks like the motion of turning
+              a big steering wheel back and forth, with your fists
+              making the circular steering-wheel motion on either side
+              of your torso. It is like you are driving a bus.
+            </Row>
+          </Col>
+
+          <Col
+            xs={{ order: 1 }}
+            xl={{ span: 5, order: 2 }}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
+          >
+            <Row>
+              {signPhotos.map((value) => {
+                return (
+                  <Col className={style.col_image}>
+                    <Image
+                      roundedCircle
+                      fluid
+                      src={value[1]}
+                      className={style.image}
+                    />
+                  </Col>
+                );
+              })}
+            </Row>
+          </Col>
+          <Col
+            xl={{ span: 1, order: 4 }}
+            className="d-none d-xl-block"
+          >
+            {item.nextItem && (
+              <CusButton
+                title="Next"
+                key="next"
+                bgcolor="#8b4208"
+                color="white"
+                focus="#3e1408"
+                onClick={(e) => {
+                  navigate(
+                    `../learning/dictionary/${item.nextItem.firstLetter}/${item.nextItem.text}`,
+                  );
+                }}
+              />
+            )}
+          </Col>
+        </Row>
+
+        <Row>
+          <Col className={`${style.text} mt-5`}>Related Words</Col>
+          <Row className={style.item}>
+            {relatedWords.render &&
+              relatedItems(
+                relatedWords.data.count,
+                relatedWords.data.data.items,
+              )}
+          </Row>
+        </Row>
+      </Row>
+    </Container>
+  );
+};
 
 export default WordDetails;

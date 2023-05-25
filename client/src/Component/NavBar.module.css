@@ -1,25 +1,25 @@
-.style-navbar {
+.styleNavbar {
   background-color: #f0e7de;
   height: 15vh;
 }
 
-.style-nav {
+.styleNav {
   display: flex;
 }
 
-.style-item {
+.styleItem {
   padding-left: 3em;
   padding-right: 3em;
 }
 
 /* Set the style for the login and signup buttons */
-.style-nav .style-item button {
+.styleNav .styleItem button {
   margin-right: 10px;
   border-radius: 1rem;
 }
 
 /* Change the background color of the buttons on hover */
-.style-nav .style-item button:hover {
+.styleNav .styleItem button:hover {
   background-color: #3b1404;
 }
 
