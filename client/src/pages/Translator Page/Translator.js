@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Container, Form, Row, Col, Image } from "react-bootstrap";
 import CusButton from "../../Component/CusButton";
 import style from "./Translator.module.css";
-import axios from "axios";
+import { getSentence } from "../../services/itemsService";
 
 const Translator = () => {
   const [sentence, setSentence] = useState("");
@@ -12,10 +12,9 @@ const Translator = () => {
   useEffect(() => {
     imgArray.map((item) => {
       if (Array.isArray(item)) {
+        //lists of individual letters not in the database
         item.map((img) => {
           img.signPhotos.map((photo) => {
-            photo.push(id);
-
             setImgList((prev) => {
               return [...prev, photo];
             });
@@ -26,6 +25,8 @@ const Translator = () => {
           });
         });
       } else {
+        // word or phrase in DB
+        // setImgList((prev) => [...prev, ...item.signPhotos]);
         item.signPhotos.map((photo) => {
           setImgList((prev) => {
             return [...prev, photo];
@@ -39,7 +40,6 @@ const Translator = () => {
     });
 
     return () => {
-      console.log("chay");
       setImgList([]);
       setId(0);
     };
@@ -47,12 +47,11 @@ const Translator = () => {
 
   const onTranslate = (e) => {
     e.preventDefault();
-
-    axios({
-      method: "get",
-      url: "/api/v1/items/sentence/" + sentence,
-    }).then(function (response) {
-      console.log(response.data.data.item);
+    if (!sentence) {
+      setImgArray([]);
+      return;
+    }
+    getSentence({ sentence: sentence }).then(function (response) {
       setImgArray(response.data.data.item);
     });
   };
@@ -92,29 +91,13 @@ const Translator = () => {
               />
             </Col>
 
-            <Col
-              style={{
-                padding: "0 2px",
-                border: "2px solid black",
-                background: "white",
-                borderRadius: "5px",
-                height: "inherent",
-                flexFlow: "row wrap",
-                overflow: "auto",
-              }}
-            >
+            <Col className={style.translationSec}>
               {imgList.map((item) => {
                 return (
                   <Image
-                    key={item[2]}
-                    style={{
-                      margin: "1rem",
-                      height: "50%",
-                      width: "30%",
-                      border: "2px solid black",
-                      borderRadius: "10px",
-                    }}
                     src={item[1]}
+                    key={item[2]}
+                    className={style.img}
                   />
                 );
               })}

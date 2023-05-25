@@ -1,25 +1,121 @@
-.wordDetailsContainer {
-    background-color: #ffffff;
-    height: 85vh;
+.container {
+  height: 100%;
+  background: white;
+  display: flex;
+  flex-direction: column;
 }
 
-.mainWordDetails {
-    font-size: 4em;
-    font-weight: bold;
-    color: #41110C;
-    text-align: start;
-    padding-top: 2vh;
+.breadcrumb {
+  font-size: 1.5em;
+  font-family: "Nunito";
 }
 
-.nextButton {
-    padding-top: 4em;
+.text {
+  color: var(--bold-text-color);
+  font-size: 2em;
+  font-weight: 800;
+  letter-spacing: 0.1rem;
+  text-align: left;
+  font-family: "Nunito";
 }
 
-.detailsWordDetails {
-    padding-top: 2vh;
-    text-align: start;
+.instruction {
+  color: var(--text-color);
+  font-size: 1.2em;
+  letter-spacing: 0.1rem;
+  text-align: left;
+  font-family: "Nunito";
+  font-weight: 300;
+  /* align-items: center; */
 }
 
-.mainImageWordDetails {
-    padding-top: 2vh;
+.col_image {
+  height: auto;
+  width: auto;
+  /* height: 200px; */
+  /* border: 1px solid black; */
+}
+
+.image {
+  border: 1px solid black;
+}
+
+.title_image {
+  height: 100px !important;
+  /* height: auto;
+  width: auto; */
+  border: 2px dashed gray;
+  border-radius: 10px;
+  transform: rotate(30deg);
+}
+
+.breadcrumb {
+  margin-top: 4rem;
+  font-family: "Nunito";
+  font-weight: 200;
+  color: var(--bold-text-color);
+}
+
+.breadcrumbItem {
+  font-weight: 600;
+}
+
+.item div {
+  margin-left: 1.5em;
+  /* box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0; */
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+  box-shadow: 0 0.2cm 0.5cm rgba(0, 0, 0, 0.1);
+}
+
+.item div:hover {
+  transform: scale(1.02);
+}
+
+@media screen and (max-width: 991px) {
+  .content {
+    margin: 0px 30px !important;
+  }
+  .breadcrumb {
+    margin-top: 1rem !important;
+    margin: 0px 30px;
+  }
+
+  .instruction {
+    font-size: 1em;
+  }
+  .title_image_column {
+    margin-left: 6rem;
+  }
+
+  .title {
+    font-size: 1em;
+  }
+  .item div:nth-child(3) {
+    display: none;
+  }
+
+  .item div:nth-child(4) {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .content {
+    margin: 0px 100px !important;
+  }
+  .breadcrumb {
+    margin-top: 5rem !important;
+    margin: 0px 100px;
+  }
+
+  .item div:nth-child(4) {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .previousButton {
+    margin-right: 3rem;
+  }
 }

@@ -12,7 +12,7 @@ const imageStyle = {
   width: "9em",
   height: "9em",
   margin: "0.1em",
-  borderRadius: "25%"
+  borderRadius: "25%",
 };
 
 const settings = {
@@ -21,7 +21,7 @@ const settings = {
   speed: 500,
   slidesToShow: 4,
   slidesToScroll: 1,
-  autoplay: false
+  autoplay: false,
 };
 
 function ImageSlider() {
@@ -32,10 +32,10 @@ function ImageSlider() {
       <Slider ref={sliderRef} {...settings}>
         {images.map((image, index) => (
           <div key={index}>
-            <Image src={image} fluid style={imageStyle}  />
+            <Image src={image} fluid style={imageStyle} />
           </div>
         ))}
-      </Slider> 
+      </Slider>
     </div>
   );
 }
