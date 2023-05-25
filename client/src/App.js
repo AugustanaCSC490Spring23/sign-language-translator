@@ -14,8 +14,7 @@ import Words from "./pages/Words Page/Words";
 import WordDetails from "./pages/Word Details Page/WordDetails";
 import Profile from "./pages/Profile Page/Profile";
 import Resources from "./pages/Resources Page/Resources";
-import About from "./pages/About Page/About us";
-import FlashcardsCollections from "./pages/FlashcardsCollections Page/FlashcardsCollections";
+import About from "./pages/About Page/about-us ";
 import Flashcards from "./pages/Flashcards Page/Flashcards";
 
 import {
@@ -78,10 +77,6 @@ function App() {
       path: "/me",
       element: <Profile />,
     },    
-    {
-      path: "/flashcards",
-      element: <FlashcardsCollections />,
-    },
     {
       path: "/flashcards/:slug",
       element: <Flashcards />,
