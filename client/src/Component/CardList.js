@@ -4,7 +4,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import MyCard from "./MyCard";
 import styles from "./CardList.module.css";
 
-const CardList = ({cards}) => {
+const CardList = ({quizzes}) => {
     const [startIndex, setStartIndex] = useState(0);
 
     const handleNext = () => {
@@ -15,22 +15,20 @@ const CardList = ({cards}) => {
         setStartIndex((prevIndex) => prevIndex - 3);
     };
 
-    const visibleCards = cards.slice(startIndex, startIndex + 3);
+    const visibleQuizzes = quizzes.slice(startIndex, startIndex + 3);
     return (
         <Container>
             <Row>
                 <Col xs lg={1} className={styles.buttonCol}>
-                    {startIndex > 0 && <Button className={styles.button}  onClick={handlePrev}>
+                    {startIndex > 0 && <Button className={styles.button} onClick={handlePrev}>
                         Prev
                     </Button>}
                 </Col>
-                
-
-                {visibleCards.map(card => <MyCard card={card}/>)}
-
+                               
+                {visibleQuizzes.map(quiz => <MyCard quiz={quiz}/>)}
 
                 <Col xs lg={1} className={styles.buttonCol}>
-                    {startIndex + 3 < cards.length && <Button className={styles.button} onClick={handleNext}>
+                    {startIndex + 3 < quizzes.length && <Button className={styles.button} onClick={handleNext}>
                         Next
                     </Button>}
                 </Col>

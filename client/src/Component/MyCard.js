@@ -1,17 +1,42 @@
-import {Button, Col, Card} from 'react-bootstrap';
+import {Button, Col, Row, Card} from 'react-bootstrap';
 import styles from "./MyCard.module.css";
 
-const MyCard = ({card}) => {
-    // const {url, title, description, imgUrl} = card;
+const MyCard = ({quiz}) => {
+    const {title,topic,qualifyFor,dateTaken,score,isCompleted} = quiz;
     return (
         <Col xs>
             <Card className={styles.card}>
-                <Card.Img variant="top" src="/" className={styles.img} />
+                {/* <Card.Img variant="top" src="/" className={styles.img} /> */}
                 <Card.Body>
-                    <Card.Title>{card}</Card.Title>
+                    <Card.Title>{title}</Card.Title>
                     <Card.Text>
-                        aaaaaaaaaaaaaaaaaa
+                        {topic}
                     </Card.Text>
+
+                    <Card.Text className={styles.qualifyFor}> 
+                        {qualifyFor}
+                    </Card.Text>
+                    <div className={styles.tagList}>
+                        {isCompleted ? 
+                            <Row>
+                                <Col>
+                                    <Card.Text className={styles.isCompleted}>Completed</Card.Text>
+                                </Col>
+                                <Col>
+                                    <Card.Text className={styles.score}>Score: {score}</Card.Text>
+                                </Col>
+                            </Row>
+                            : 
+                            <Row>
+                                <Col>
+                                    <Card.Text className={styles.isCompleted}>Incompleted</Card.Text>
+                                </Col>
+                                <Col>
+                                    <Card.Text className={styles.score}>Score: N/A</Card.Text>
+                                </Col>
+                            </Row>
+                        }
+                    </div>
                     <Button variant="primary" href="/">Let's go!</Button>
                 </Card.Body>
             </Card>

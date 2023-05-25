@@ -3,9 +3,85 @@ import styles from "./QuizDashboard.module.css";
 import CardList from "../../Component/CardList";
 
 const QuizDashboardPage = () => {
+  const quizzes = [
+    {
+      title: "Dis is quiz 1",
+      topic: "quiz nek",
+      qualifyFor: "dis is der quiz we gonna learn about hello hello hello hello hello hello",
+      dateTaken: "May 25",
+      score: "100%",
+      isCompleted: false
+    },
+    {
+      title: "Dis is quiz 1",
+      topic: "quiz nek",
+      qualifyFor: "dis is der quiz we gonna learn about hello",
+      dateTaken: "May 25",
+      score: "100%",
+      isCompleted: true
+    },
+    {
+      title: "Dis is quiz 1",
+      topic: "quiz nek",
+      qualifyFor: "dis is der quiz we gonna learn about hello",
+      dateTaken: "May 25",
+      score: "100%",
+      isCompleted: false
+    },
+    {
+      title: "Dis is quiz 1",
+      topic: "quiz nek",
+      qualifyFor: "dis is der quiz we gonna learn about hello",
+      dateTaken: "May 25",
+      score: "100%",
+      isCompleted: true
+    },
+    {
+      title: "Dis is quiz 1",
+      topic: "quiz nek",
+      qualifyFor: "dis is der quiz we gonna learn about hello",
+      dateTaken: "May 25",
+      score: "100%",
+      isCompleted: false
+    },
+    {
+      title: "Dis is quiz 1",
+      topic: "quiz nek",
+      qualifyFor: "dis is der quiz we gonna learn about hello",
+      dateTaken: "May 25",
+      score: "100%",
+      isCompleted: true
+    },
+    {
+      title: "Dis is quiz 1",
+      topic: "quiz nek",
+      qualifyFor: "dis is der quiz we gonna learn about hello",
+      dateTaken: "May 25",
+      score: "100%",
+      isCompleted: true
+    },
+    {
+      title: "Dis is quiz 1",
+      topic: "quiz nek",
+      qualifyFor: "dis is der quiz we gonna learn about hello",
+      dateTaken: "May 25",
+      score: "100%",
+      isCompleted: true
+    },
+    {
+      title: "Dis is quiz 1",
+      topic: "quiz nek",
+      qualifyFor: "dis is der quiz we gonna learn about hello",
+      dateTaken: "May 25",
+      score: "100%",
+      isCompleted: true
+    },
+        
+  ]
+    
   return (
     <Container>
-      <CardList cards={[1,2,3,4,5,6,7,8,9,10,11]} />
+      <CardList quizzes={quizzes} />
 
 
     </Container>

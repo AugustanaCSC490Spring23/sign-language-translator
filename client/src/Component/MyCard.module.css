@@ -1,8 +1,31 @@
 .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     border-radius: 5px;
+    height: 40vh;
 }
 
-.img {
+.qualifyFor {
+    min-height: 20%;
+    max-height: 20%;
+    overflow: hidden;
+}
 
+.tagList {
+    margin: 20px;
+}
+
+.isCompleted {
+    background-color: rgba(255, 98, 0, 0.332);
+    color: rgb(71, 71, 71);
+    font-size: 0.8em;
+    padding: 2px;
+    border-radius: 15px;
+}
+
+.score {
+    background-color: rgba(255, 187, 0, 0.547);
+    color: rgb(71, 71, 71);
+    font-size: 0.8em;
+    padding: 2px;
+    border-radius: 15px;
 }
