@@ -1,0 +1,34 @@
+.lessonsContainer {
+  background-color: #f0e7de;
+  height: 85vh;
+}
+
+.lessonsTopPage {
+  background-color: #e8cba2;
+}
+
+.lessonsWelcome {
+  padding-top: 3em;
+  text-align: start;
+}
+
+.lessonsCardLocate {
+  padding: 2em;
+}
+
+.lessonsCard {
+  background-color: #f5f5cf !important;
+}
+
+.lessonRow {
+  margin-bottom: 1em;
+  transition: all 0.2s ease-in-out;
+}
+
+.lessonRow:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+

@@ -1,0 +1,29 @@
+.homeContainer {
+    min-height: 85vh;
+    width: 100vw;
+    background-color: #F0E7DE;
+    height: 85vh;
+}
+
+.styleTitleUpper {
+    font-size: 6em;
+    color: #41110C;
+    text-align: start;
+    padding-top: 2vh;
+}
+
+.styleTitleLower {
+    font-size: 6em;
+    color: #41110C;
+    text-align: start;
+}
+
+.positionSmallContent {
+    align-items: center;
+}
+
+.styleSmallContent {
+    color: #41110C;
+    text-align: start;
+    padding-top: 1em;
+}

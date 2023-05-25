@@ -1,0 +1,13 @@
+.jumbotron {
+  background-color: #f8f9fa;
+  padding: 3rem;
+  margin-bottom: 3rem;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+}
+
+.jumbotron .cardTitle {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}

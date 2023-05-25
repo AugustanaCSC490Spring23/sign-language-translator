@@ -1,0 +1,46 @@
+.profileContainer {
+  background-color: #EDECEB;
+  height: 85vh;
+}
+
+.profilePicture {
+  width: 15em;
+  height: 15em;
+  border-radius: 100%;
+  margin-bottom: 2em;
+}
+
+.profileDetails {
+  align-items: start;
+  justify-content: start;
+}
+
+.achievementsProfile {
+  display: flex;
+  justify-content: center;
+}
+
+.profileFlashcard {
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+  margin-top: 0.31em;
+  margin-bottom: 0.31em;
+  margin-left: 1.56em;
+  margin-right: 1.56em;
+  padding-top: 1.2em;
+  padding-bottom: 1.2em;
+  border-radius: 25%;
+}
+
+.profileFlashcard:hover {
+  transform: scale(1.02);
+}
+
+.profileSeeMore {
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.profileSeeMore:hover {
+  transform: scale(1.02);
+}
