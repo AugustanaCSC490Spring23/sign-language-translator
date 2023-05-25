@@ -2,8 +2,8 @@ import { useParams } from "react-router-dom";
 
 import Jumbotron from "../../Component/Jumbotron.js";
 import WordCard from "../../Component/WordCard.js";
-
 import {
+  getWordByText,
   getWordsByFirstLetter,
   getWordsByTopic,
 } from "../../services/itemsService.js";
@@ -34,7 +34,7 @@ const Words = () => {
       setShowJumbotron(false);
     }
   }, [letter, topic, pathname]);
-
+  const getWord = (e) => {};
   return (
     <>
       {showJumbotron && <Jumbotron />}
