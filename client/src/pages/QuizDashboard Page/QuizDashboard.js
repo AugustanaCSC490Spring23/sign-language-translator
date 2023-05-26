@@ -64,7 +64,7 @@ const QuizDashboardPage = () => {
     const { value } = e.target;
     const topic = value !== "" ? value : null;
     const title =
-      topic !== null ? `Test on: ${topic}` : "General test";
+      topic !== null && topic !== undefined ? `Test on: ${topic}` : "General test";
     setTestQueries((prevQueries) => ({
       ...prevQueries,
       topic,

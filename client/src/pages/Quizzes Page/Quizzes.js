@@ -1,11 +1,22 @@
 import { useParams } from "react-router-dom";
 
-import { Container, Button, Card, Col, Row, Modal, Image } from "react-bootstrap";
+import {
+  Container,
+  Button,
+  Card,
+  Col,
+  Row,
+  Modal,
+  Image,
+} from "react-bootstrap";
 import styles from "./Quizzes.module.css";
 import Quiz from "../../Component/Quiz";
 import { useEffect, useState } from "react";
 import { getTestWithoutAnswers } from "../../services/quizzesService";
-import { gradeTest, getTestResult } from "../../services/quizzesService";
+import {
+  gradeTest,
+  getTestResult,
+} from "../../services/quizzesService";
 
 const QuizzesPage = () => {
   const [userResponses, setUserResponses] = useState([]);
@@ -22,17 +33,19 @@ const QuizzesPage = () => {
   const [score, setScore] = useState(0);
   const handleSubmitTest = () => {
     gradeTest(id, userResponses);
-    getTestResult(id).then(res => setScore(res.data.data.test.score));
+    getTestResult(id).then((res) =>
+      setScore(res.data.data.test.score),
+    );
 
     setShowModal(true);
-  }
+  };
 
   const [showModal, setShowModal] = useState(false);
 
   const handleCloseModal = () => {
     setShowModal(false);
   };
-  if (!quizList) return <div>Loading...</div>
+  if (!quizList) return <div>Loading...</div>;
   return (
     <Container>
       <Row style={{ margin: "1rem 0" }}>
@@ -57,16 +70,26 @@ const QuizzesPage = () => {
         ))}
       </Row>
 
-      <Button variant="secondary" type="submit" onClick={handleSubmitTest} style={{marginBottom: "2rem"}}>Submit</Button>
+      <Button
+        variant="secondary"
+        type="submit"
+        onClick={handleSubmitTest}
+        style={{ marginBottom: "2rem" }}
+      >
+        Submit
+      </Button>
 
       <Modal show={showModal} onHide={handleCloseModal} centered>
         <Modal.Header closeButton>
           <Modal.Title>Congratulations!</Modal.Title>
-          
         </Modal.Header>
         <Modal.Body>
-          <div style={{textAlign: "center"}}>You've achieved a grade of</div>
-          <h1 style={{textAlign: "center", fontSize: "4em"}}>{score}</h1>
+          <div style={{ textAlign: "center" }}>
+            You've achieved a grade of<br />
+            <span style={{ fontSize: "4em" }}>
+              {score}
+            </span>
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" href="/quizzes">

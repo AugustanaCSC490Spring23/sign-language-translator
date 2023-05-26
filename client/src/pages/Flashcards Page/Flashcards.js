@@ -369,7 +369,7 @@ const FlashcardsPage = () => {
 
   return (
     <div>
-      <h2 style={{ marginTop: "3rem", marginBottom: "-3rem" }}>
+      <h2 style={{ marginTop: "3rem" }}>
         {collection.title}
       </h2>
       <Button variant="outline-success" onClick={handleTestClick}>

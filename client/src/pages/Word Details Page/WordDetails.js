@@ -127,7 +127,7 @@ const WordDetails = () => {
     fetchData();
 
     setCollections(
-      JSON.parse(localStorage.getItem("user")).flashcardsCollections,
+      JSON.parse(localStorage.getItem("user"))?.flashcardsCollections,
     );
 
     return () => {
@@ -237,78 +237,82 @@ const WordDetails = () => {
         ]}
       />
 
-      <Modal show={showModal} onHide={handleClose} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Add to Flashcards</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleFormSubmit}>
-            <Container>
-              <Row>
-                <Col>
-                  <Form.Group controlId="flashcardsCollection">
-                    <Form.Label>Choose a Collection</Form.Label>
-                    <Form.Control
-                      as="select"
-                      value={selectedCollection}
-                      onChange={handleCollectionChange}
-                      disabled={createNewCollection}
-                    >
-                      <option value="">
-                        -- Select Collection --
-                      </option>
-                      {collections.map((collection) => (
-                        <option
-                          key={collection.slug}
-                          value={collection.slug}
-                        >
-                          {collection.title}
+      {collections && (
+        <Modal show={showModal} onHide={handleClose} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>Add to Flashcards</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form onSubmit={handleFormSubmit}>
+              <Container>
+                <Row>
+                  <Col>
+                    <Form.Group controlId="flashcardsCollection">
+                      <Form.Label>Choose a Collection</Form.Label>
+                      <Form.Control
+                        as="select"
+                        value={selectedCollection}
+                        onChange={handleCollectionChange}
+                        disabled={createNewCollection}
+                      >
+                        <option value="">
+                          -- Select Collection --
                         </option>
-                      ))}
-                    </Form.Control>
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group controlId="createNewCollection">
-                    <Form.Check
-                      type="checkbox"
-                      label="Create New Collection"
-                      checked={createNewCollection}
-                      onChange={handleToggleCreateNewCollection}
-                    />
-                  </Form.Group>
-                  <Form.Group controlId="newCollectionTitle">
-                    <Form.Label>New Collection Title</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter title"
-                      value={newCollectionTitle}
-                      onChange={handleNewCollectionTitleChange}
-                      disabled={!createNewCollection}
-                    />
-                  </Form.Group>
-                  <Form.Group controlId="newCollectionDescription">
-                    <Form.Label>
-                      New Collection Description
-                    </Form.Label>
-                    <Form.Control
-                      as="textarea"
-                      rows={3}
-                      placeholder="Enter description"
-                      value={newCollectionDescription}
-                      onChange={handleNewCollectionDescriptionChange}
-                      disabled={!createNewCollection}
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-            </Container>
-            <Button variant="primary" type="submit">
-              Add
-            </Button>
-          </Form>
-        </Modal.Body>
-      </Modal>
+                        {collections.map((collection) => (
+                          <option
+                            key={collection.slug}
+                            value={collection.slug}
+                          >
+                            {collection.title}
+                          </option>
+                        ))}
+                      </Form.Control>
+                    </Form.Group>
+                  </Col>
+                  <Col>
+                    <Form.Group controlId="createNewCollection">
+                      <Form.Check
+                        type="checkbox"
+                        label="Create New Collection"
+                        checked={createNewCollection}
+                        onChange={handleToggleCreateNewCollection}
+                      />
+                    </Form.Group>
+                    <Form.Group controlId="newCollectionTitle">
+                      <Form.Label>New Collection Title</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter title"
+                        value={newCollectionTitle}
+                        onChange={handleNewCollectionTitleChange}
+                        disabled={!createNewCollection}
+                      />
+                    </Form.Group>
+                    <Form.Group controlId="newCollectionDescription">
+                      <Form.Label>
+                        New Collection Description
+                      </Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        rows={3}
+                        placeholder="Enter description"
+                        value={newCollectionDescription}
+                        onChange={
+                          handleNewCollectionDescriptionChange
+                        }
+                        disabled={!createNewCollection}
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+              </Container>
+              <Button variant="primary" type="submit">
+                Add
+              </Button>
+            </Form>
+          </Modal.Body>
+        </Modal>
+      )}
 
       <Row className={style.content}>
         <Row>
@@ -383,14 +387,16 @@ const WordDetails = () => {
               xl={{ span: 1, order: 4 }}
               className="d-none d-xl-block"
             ></Col>
-            <CusButton
-              title="Add to Flashcards"
-              key="next"
-              bgcolor="#8b4208"
-              color="white"
-              focus="#3e1408"
-              onClick={handleAddToFlashcards}
-            />
+            {collections && (
+              <CusButton
+                title="Add to Flashcards"
+                key="next"
+                bgcolor="#8b4208"
+                color="white"
+                focus="#3e1408"
+                onClick={handleAddToFlashcards}
+              />
+            )}
           </Col>
 
           <Col
