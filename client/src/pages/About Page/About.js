@@ -4,98 +4,81 @@ import styles from "./About.module.css";
 import vietNguyen from "../../assets/viet-nguyen.jpg";
 import huyNguyen from "../../assets/huy-ngyen.jpg";
 import samuelTklemariam from "../../assets/samuel-teklemariam.jpg";
+import azeeNguyen from "../../assets/azee-nguyen.jpg"
+import { Row, Col, Container, Card, Image, Button } from "react-bootstrap";
 
 function About() {
   return (
-    <div className={styles.about}>
-      <div className={styles.about_box}>
-        <div className={styles.about_inner_box}>
-          <div className={styles.About_info}>
-            <p>
-              <span>Learn more</span>
-            </p>
-            <h1>About us </h1>
-            <p className={styles.About_Text}>
-              Writing effectively is an art. Start by using simple,
-              everyday words people can easily understand. Be clear
-              and direct to the point. Keep your thoughts flowing
-              logically, and aim for brevity unless you're writing in
-              the long form.
-            </p>
-
-            <p className={styles.About_Text2}>
-              Your ideas have a purpose so choose words that
-              accurately express them. Ensure your grammar is flawless
-              as it impacts your credibility. Use the active voice
-              whenever possible as it makes any narrative easier to
-              read.
-            </p>
-            {/* <button id="Browse_Aboutus">BROWSE MORE AboutS</button> */}
-          </div>
+    <Container fluid className={styles.aboutContainer}>
+      <Row style={{ paddingTop: "1.5em" }}>
+        <Col md={{ span: 3, offset: 2 }}>
+          <Card style={{ marginBottom: "2em" }}>
+            <Card.Body>
+              <Card.Text
+                style={{ marginBottom: "0.5em" }}
+                className={styles.aboutText}>
+                learn more
+              </Card.Text>
+              <Card.Title className={styles.aboutTitle}>
+                About Us
+              </Card.Title>
+              <Card.Text className={styles.aboutText}>
+                Welcome to our sign language learning website! Our team is
+                comprised of passionate educators and language experts who are
+                committed to making sign language accessible and engaging
+                for learners of all levels.
+              </Card.Text>
+              <Card.Text className={styles.aboutText}>
+                Whether you are a beginner or looking to improve your skills,
+                we are here to help you achieve your goals and develop a
+                deeper understanding of this beautiful and expressive language.
+                Join us on this journey oflearning and discovery,
+                and let's communicate in a whole new way!
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+      <Row style={{ textAlign: "center" }}>
+        <Col>
+          <h1 style={{ color: "#F0E7DE" }}>Our Team</h1>
+        </Col>
+      </Row>
+      <Row style={{ maxWidth: "95%", marginLeft: "2.5%", marginRight: "2.5%" }}>
+        <div className={styles.membersBox} >
+          <Row>
+            <Col md={{ span: 3 }} className={styles.imageCol}>
+              <div className={styles.imageBack}>
+                <Image src={vietNguyen} className={styles.memberImage} />
+              </div>
+              <p>Viet Nguyen</p>
+              <p>Major: Computer Science</p>
+            </Col>
+            <Col md={{ span: 3 }} className={styles.imageCol}>
+              <div className={styles.imageBack}>
+                <Image src={huyNguyen} className={styles.memberImage} />
+              </div>
+              <p>Huy Nguyen</p>
+              <p>Major: Computer Science</p>
+            </Col>
+            <Col md={{ span: 3 }} className={styles.imageCol}>
+              <div className={styles.imageBack}>
+                <Image src={samuelTklemariam} className={styles.memberImage} />
+              </div>
+              <p>Samuel Teklemariam</p>
+              <p>Major: Computer Science</p>
+            </Col>
+            <Col md={{ span: 3 }} className={styles.imageCol}>
+              <div className={styles.imageBack}>
+                <Image src={azeeNguyen} className={styles.memberImage} />
+              </div>
+              <p>Azee Nguyen</p>
+              <p>Major: Computer Science</p>
+            </Col>
+          </Row>
         </div>
-      </div>
-      <div className={styles.empty}>
-        <h2>Our Team</h2>
-      </div>
-
-      <div className={styles.About_footer}>
-        <div className={styles.footer_box}>
-          <div className={styles.card}>
-            <div class={styles.imgContainer}>
-              <img src={vietNguyen} alt="viet nguyen" />
-            </div>
-            <h3>Viet Nguyen</h3>
-            <p>Major: Computer Science</p>
-            {/* <p> I aspired to be a teacher. Now I see how technology can help me reach my goals. So I need to learn to code first.</p> */}
-
-            <div class={styles.icons}>
-              <a href="#">
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a href="#">
-                <i class="fa-brands fa-linkedin"></i>
-              </a>
-              <a href="#">
-                <i class="fa-brands fa-github"></i>
-              </a>
-              <a href="#">
-                <i class="fa-brands fa-instagram"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div className={styles.footer_box2}>
-          <div className={styles.card}>
-            <div class={styles.imgContainer}>
-              <img src={huyNguyen} alt="huy nguyen" />
-            </div>
-            <h3>Huy Nguyen</h3>
-            <p>Major: Computer Science</p>
-          </div>
-        </div>
-
-        <div className={styles.footer_box3}>
-        <div className={styles.card}>
-            <div class={styles.imgContainer}>
-              <img src={samuelTklemariam} alt="samuel teklemariam" />
-            </div>
-            <h3>Samuel Teklemariam</h3>
-            <p>Major: Computer Science</p>
-          </div>
-        </div>
-
-        <div className={styles.footer_box4}>
-        <div className={styles.card}>
-            <div class={styles.imgContainer}>
-              <img src={huyNguyen} alt="huy nguyen" />
-            </div>
-            <h3>Another Team Member</h3>
-            <p>Major: Computer Science</p>
-          </div>
-        </div>
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
 }
 
