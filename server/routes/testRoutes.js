@@ -5,7 +5,10 @@ const authController = require("../controllers/authController");
 
 const router = express.Router();
 
-router.route("/").post(authController.routeGuard, testController.createTest);
+router
+  .route("/")
+  .post(authController.routeGuard, testController.createTest)
+  .get(authController.routeGuard, testController.getAllTestsWithBasicInfo);
 router
   .route("/delete")
   .delete(authController.exclusiveAccess("admin"), testController.deleteAll);

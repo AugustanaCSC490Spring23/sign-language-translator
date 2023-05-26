@@ -206,29 +206,40 @@ const FlashcardsCollectionsPage = () => {
   return (
     <Container>
       <h2 style={{ marginTop: "3rem" }}>{user.name}'s Collections</h2>
-      <div className="d-flex justify-content-end align-items-center mb-3">
-        <Form.Group controlId="sortSelect" className="mr-3">
-          <Form.Label className="mr-2">Sort By:</Form.Label>
-          <Form.Control
-            as="select"
-            value={sortedBy}
-            onChange={handleSortChange}
-          >
-            <option value="">None</option>
-            <option value="title">Title</option>
-            <option value="createdAt">Created At</option>
-            <option value="updatedAt">Updated At</option>
-          </Form.Control>
-        </Form.Group>
-        <Form.Group controlId="searchInput">
-          <Form.Control
-            type="text"
-            placeholder="Search"
-            value={searchTerm}
-            onChange={handleSearch}
-          />
-        </Form.Group>
-      </div>
+      <Row>
+        <Col>
+          <Form.Group className={styles.sortSearch}>
+            <Row>
+              <Col xs={2}>
+                <Form.Label>Sort By:</Form.Label>
+              </Col>
+              <Col>
+                <Form.Control
+                  as="select"
+                  value={sortedBy}
+                  onChange={handleSortChange}
+                >
+                  <option value="">None</option>
+                  <option value="title">Title</option>
+                  <option value="createdAt">Created At</option>
+                  <option value="updatedAt">Updated At</option>
+                </Form.Control>
+              </Col>
+            </Row>
+          </Form.Group>
+        </Col>
+      
+        <Col>
+          <Form.Group className={styles.sortSearch}>
+            <Form.Control
+              type="text"
+              placeholder="Search"
+              value={searchTerm}
+              onChange={handleSearch}
+            />
+          </Form.Group>
+        </Col>
+      </Row>
       <Row>
         <Col
           md={4}

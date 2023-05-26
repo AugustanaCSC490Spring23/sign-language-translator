@@ -22,6 +22,7 @@ import FlashcardsCollections from "./pages/FlashcardsCollections Page/Flashcards
 import Flashcards from "./pages/Flashcards Page/Flashcards";
 import Quizzes from "./pages/Quizzes Page/Quizzes";
 import QuizDashboard from "./pages/QuizDashboard Page/QuizDashboard";
+import TestResult from "./pages/TestResult Page/TestResult";
 
 import {
   createBrowserRouter,
@@ -99,6 +100,10 @@ function App() {
       path: "/quizzes",
       element: <QuizDashboard />,
     },
+    {
+      path: "/quizzes/result/:id",
+      element: <TestResult />
+    }
   ]);
   return (
     <div className="App">

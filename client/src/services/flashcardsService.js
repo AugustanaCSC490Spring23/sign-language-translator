@@ -28,7 +28,7 @@ const removeFlashcards = async (flashcards, slug) => {
       `/api/v1/flashcards/removeFlashcards/${slug}`,
       { flashcards },
     );
-    notifier.success(`Removed flashcard(s)!`)
+    notifier.success(`Removed flashcard(s)!`);
     return response;
   } catch (error) {
     errorHandler(error.message);
@@ -40,20 +40,34 @@ const deleteCollection = async (slug) => {
     const response = await axiosInstance.delete(
       `/api/v1/flashcards/${slug}`,
     );
-    notifier.success(`Deleted collection!`)
+    notifier.success(`Deleted collection!`);
     return response;
   } catch (error) {
     errorHandler(error.message);
   }
 };
 
-const addCollection = async (title, description) => {
+const addCollection = async (title, description, flashcards) => {
   try {
     const response = await axiosInstance.post(`/api/v1/flashcards`, {
       title,
       description,
+      flashcards
     });
     notifier.success(`Add collection ${title} successfully!`);
+    return response;
+  } catch (error) {
+    errorHandler(error.message);
+  }
+};
+
+const addFlashcards = async (flashcards, slug) => {
+  try {
+    const response = await axiosInstance.patch(
+      `/api/v1/flashcards/addFlashcards/${slug}`,
+      { flashcards },
+    );
+    notifier.success(`Added flashcard(s)!`);
     return response;
   } catch (error) {
     errorHandler(error.message);
@@ -65,5 +79,6 @@ export {
   getAllFlashcardsCollections,
   removeFlashcards,
   deleteCollection,
-  addCollection
+  addCollection,
+  addFlashcards,
 };

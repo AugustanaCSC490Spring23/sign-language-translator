@@ -1,5 +1,24 @@
 .card {
-    margin-top: 1rem;
+    margin-bottom: 1rem;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     border-radius: 5px;
+}
+
+.formCheck {
+    float: left;
+}
+.radioLabel {
+    display: flex;
+    align-items: center;
+}
+
+.radioInput {
+    margin-right: 10px;
+}
+
+.img {
+    display: flex;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
 }

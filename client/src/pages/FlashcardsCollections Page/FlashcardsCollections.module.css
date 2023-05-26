@@ -117,3 +117,7 @@
   transform: "rotate(45deg)";
   transform: scale(1.05);
 }
+
+.sortSearch {
+  margin-bottom: 1rem;
+}

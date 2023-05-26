@@ -1,10 +1,5 @@
 import Button from "react-bootstrap/Button";
 const CusButton = (props) => {
-  const button = (
-    <Button variant="custom" type={props.type}>
-      {props.title}
-    </Button>
-  );
   return (
     <>
       <style type="text/css">
@@ -12,19 +7,20 @@ const CusButton = (props) => {
     .btn-custom {
       background-color: ${props.bgcolor};
       color: ${props.color};
-      width: 100%;
+      width: ${props.width};
       font-weight: 720;
       font-family: "Nunito";
       letter-spacing: 0.1rem;
       border-radius: ${props.radius}px;
-      outline: red
+      outline: red;
+      transition: background-color 0.2s;
+      box-shadow: rgba(99,99,99,.2) 0 2px 8px 0;
     } 
 
     .btn-custom:hover, .btn-custom:focus {
-      font-size: 1.1rem;
       background: ${props.focus};
       color: ${props.color};
-      opacity: 1.1;
+     
     }
 
     .btn-custom:active, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active  {
@@ -37,7 +33,14 @@ const CusButton = (props) => {
     `}
       </style>
 
-      {button}
+      <Button
+        name={props.title}
+        variant="custom"
+        type={props.type}
+        onClick={props.onClick}
+      >
+        {props.title}
+      </Button>
     </>
   );
 };

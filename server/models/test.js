@@ -42,7 +42,7 @@ TestSchema.methods.generateQuizzes = async (
   specialPool
 ) => {
   const query = {
-    category: { $ne: "alphabet" },
+    topic: { $ne: "alphabet" },
   };
 
   // Add the category and difficulty conditions to the query object if they are specified
@@ -100,6 +100,7 @@ TestSchema.methods.generateQuizzes = async (
         { $match: queryWrongChoices },
         { $sample: { size: 3 } },
         { $project: { _id: 1 } },
+        { $match: { _id: { $ne: correctAnswer } } },
       ]),
     ]);
 
@@ -114,6 +115,23 @@ TestSchema.methods.generateQuizzes = async (
       [choices[i], choices[j]] = [choices[j], choices[i]];
     }
 
+    let displayChoices = [];
+    if (quizType === "a") {
+      displayChoices = await Promise.all(
+        choices.map(async (choiceId) => {
+          const choice = await Item.findById(choiceId).exec();
+          return choice ? choice.signPhotos[0][1] : "";
+        })
+      );
+    } else if (quizType === "b") {
+      displayChoices = await Promise.all(
+        choices.map(async (choiceId) => {
+          const choice = await Item.findById(choiceId).exec();
+          return choice ? choice.text : "";
+        })
+      );
+    }
+
     // Create the quiz object with the necessary properties, including the order number
     const quiz = new Quiz({
       quizType,
@@ -122,6 +140,7 @@ TestSchema.methods.generateQuizzes = async (
       correctAnswer,
       keys,
       topic: quizTopic,
+      displayChoices,
     });
 
     await quiz.save();

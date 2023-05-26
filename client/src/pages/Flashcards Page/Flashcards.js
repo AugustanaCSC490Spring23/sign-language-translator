@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   FaArrowLeft,
   FaArrowRight,
@@ -22,6 +22,7 @@ import {
 } from "../../services/flashcardsService";
 import requireAuth from "../../hoc/requireAuth";
 import { updateUser } from "../../services/authService";
+import { createTest } from "../../services/quizzesService";
 
 import styles from "./Flashcards.module.css";
 import FlashcardsTable from "../../Component/FlashcardsTable";
@@ -315,6 +316,8 @@ const FlashcardsPage = () => {
   const [flashcards, setFlashcards] = useState([]);
   const [collection, setCollection] = useState({});
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     getFlashcardsCollectionById(slug)
       .then((response) => {
@@ -346,6 +349,17 @@ const FlashcardsPage = () => {
     updateUser();
   };
 
+  const handleTestClick = () => {
+    const testQueries = {
+      title: `Test on: ${collection.title}`,
+      numQuizzes: 3,
+      specialPool: collection._id
+    };
+    createTest(testQueries).then((res) => {
+      window.location.href = `/quizzes/${res.data.data.testId}`;
+    });
+  };
+
   if (!flashcards.length)
     return (
       <div style={{ marginTop: "50px" }}>
@@ -355,7 +369,12 @@ const FlashcardsPage = () => {
 
   return (
     <div>
-      <h2 style={{ marginTop: "3rem" }}>{collection.title}</h2>
+      <h2 style={{ marginTop: "3rem", marginBottom: "-3rem" }}>
+        {collection.title}
+      </h2>
+      <Button variant="outline-success" onClick={handleTestClick}>
+        Test this collection
+      </Button>
       <FlashcardDisplayer
         flashcards={flashcards}
         shuffleCards={shuffleCards}
@@ -364,7 +383,6 @@ const FlashcardsPage = () => {
       />
 
       <FlashcardsTable flashcards={flashcards}></FlashcardsTable>
-
     </div>
   );
 };

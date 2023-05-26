@@ -15,6 +15,7 @@ const QuizSchema = new Schema({
       ref: "Item",
     },
   ],
+  displayChoices: Array,
   correctAnswer: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Item",

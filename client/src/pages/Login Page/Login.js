@@ -2,9 +2,7 @@ import { Container, Form, Row, Col } from "react-bootstrap";
 import CusButton from "../../Component/CusButton";
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-
 import { logIn } from "../../services/authService";
-
 import style from "./Login.module.css";
 
 const Center = ({ children }) => {
@@ -82,6 +80,7 @@ const Login = () => {
               radius="25"
               title="Login"
               weight="750"
+              width="100%"
               focus="#C3A580"
               type="submit"
             />

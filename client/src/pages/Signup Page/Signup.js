@@ -173,6 +173,7 @@ const Signup = () => {
               radius="25"
               title="Sign Up"
               weight="750"
+              width="40%"
               type="submit"
               focus="#C3A580"
             />
