@@ -62,7 +62,6 @@
 
 .item div {
   margin-left: 1.5em;
-  /* box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0; */
   transition: transform 0.2s ease-in-out;
   cursor: pointer;
   box-shadow: 0 0.2cm 0.5cm rgba(0, 0, 0, 0.1);

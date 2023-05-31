@@ -41,7 +41,6 @@ exports.getAllItems = asyncCatch(async (req, res, next) => {
 });
 
 const processInput = (text) => {
-  console.log('text', text);
   text = text.trim().toLowerCase();
   text = text.replaceAll('\n', ' ');
   text = text.split(' ');
@@ -59,30 +58,41 @@ const processInput = (text) => {
 };
 
 exports.getItemBySentence = asyncCatch(async (req, res, next) => {
-  console.log('text', req);
-  // const elements = arrayConverter(req.params.text);
-
   const elements = processInput(req.body.sentence);
-  console.log('req', elements);
-  const promiseItems = elements.map(async (element) => {
-    const item = await Item.findOne({ text: element });
-    let temp = '';
-    if (!item) {
-      const notFoundElements = [...element];
-      temp = notFoundElements.map(async (value) => {
-        return await Item.findOne({ text: value });
-      });
-      return Promise.all(temp);
-    } else {
-      return item;
-    }
-  });
-  Promise.all(promiseItems).then((values) => {
+  const newElements = elements.join(' ');
+  const temp = [];
+  temp.push(newElements);
+
+  const phrase = await Item.findOne({ text: temp });
+  if (phrase) {
+    const tempList = [];
+    tempList.push(phrase);
     res.status(200).json({
       status: 'success',
-      data: { item: values },
+      data: { item: tempList },
     });
-  });
+  } else {
+    const promiseItems = elements.map(async (element) => {
+      const item = await Item.findOne({ text: element });
+      let temp = '';
+      if (!item) {
+        const notFoundElements = [...element];
+        temp = notFoundElements.map(async (value) => {
+          return await Item.findOne({ text: value });
+        });
+        return Promise.all(temp);
+      } else {
+        return item;
+      }
+    });
+
+    Promise.all(promiseItems).then((values) => {
+      res.status(200).json({
+        status: 'success',
+        data: { item: values },
+      });
+    });
+  }
 });
 
 exports.getItemByText = asyncCatch(async (req, res, next) => {
@@ -190,14 +200,25 @@ exports.getNextOrPreviousItem = asyncCatch(async (req, res, next) => {
 
     let nextItem, previousItem;
 
-    nextItem = await Item.findOne({
-      _id: { $gt: currentItem._id },
-      topic: currentItem.topic,
-    }).sort({ _id: 1 });
-    previousItem = await Item.findOne({
-      _id: { $lt: currentItem._id },
-      topic: currentItem.topic,
-    }).sort({ _id: -1 });
+    if (filter === 'topic') {
+      nextItem = await Item.findOne({
+        _id: { $gt: currentItem._id },
+        topic: currentItem.topic,
+      }).sort({ _id: 1 });
+      previousItem = await Item.findOne({
+        _id: { $lt: currentItem._id },
+        topic: currentItem.topic,
+      }).sort({ _id: -1 });
+    } else if (filter === 'firstLetter') {
+      nextItem = await Item.findOne({
+        _id: { $gt: currentItem._id },
+        firstLetter: currentItem.firstLetter,
+      }).sort({ _id: 1 });
+      previousItem = await Item.findOne({
+        _id: { $lt: currentItem._id },
+        firstLetter: currentItem.firstLetter,
+      }).sort({ _id: -1 });
+    }
 
     res
       .status(200)

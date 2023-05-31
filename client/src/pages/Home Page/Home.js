@@ -27,8 +27,8 @@ const Home = () => {
           className={styles.positionSmallContent}
           md={{ span: 3, offset: 1 }}
         >
-          <h4>Hello!</h4>
-          <p>
+          <h4 style={{ fontSize: "2em" }}>Hello!</h4>
+          <p style={{ fontSize: "1.5em" }}>
             Want to start learning Sign<br></br>
             Laguage for free?
           </p>

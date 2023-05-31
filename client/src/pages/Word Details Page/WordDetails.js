@@ -107,11 +107,14 @@ const WordDetails = () => {
     const fetchTopic = async () => {
       try {
         const res = await getWordsByTopic(wordDetail.topic);
+        console.log("res", res.data.data.items);
+        // const data = res.data.data.items;
 
         setRelatedWords({
-          data: res.data,
+          data: res.data.data,
           render: true,
         });
+        console.log("topic", relatedWords.data);
       } catch (e) {
         console.log(e);
       }
@@ -120,10 +123,11 @@ const WordDetails = () => {
     return () => {
       setRelatedWords({ data: {}, render: false });
     };
-  }, [param]);
+  }, [wordDetail.topic]);
 
   //display related items
   const relatedItems = (length, items) => {
+    // console.log("items", items[0]);
     let col = [];
     // console.log("run");
     for (let i = 0; i < 4; i++) {
@@ -136,14 +140,23 @@ const WordDetails = () => {
         <Col
           onClick={(e) => {
             navigate(
-              `../learning/dictionary/${items[i].firstLetter}/${items[i].text}`,
+              `../learning/dictionary/${items[i].firstLetter}/${items[1].text}`,
             );
           }}
         >
-          <Image fluid src={items[i].meaningPhoto} />
+          {/* <Image fluid src={items[i].meaningPhoto} /> */}
         </Col>,
       );
     }
+    // items.map((value) => {
+    //   console.log(value.meaningPhoto);
+
+    //   col.push(
+    //     <Col>
+    //       <Image fluid src={value.meaingPhoto} />
+    //     </Col>,
+    //   );
+    // });
 
     return col;
   };
@@ -285,10 +298,14 @@ const WordDetails = () => {
         <Row>
           <Col className={`${style.text} mt-5`}>Related Words</Col>
           <Row className={style.item}>
+            {/* {relatedWords.render !== false && run()} */}
+            {/* {relatedWords.data.items.map((values) => {
+              console.log("adsa");
+            })} */}
             {relatedWords.render &&
               relatedItems(
                 relatedWords.data.count,
-                relatedWords.data.data.items,
+                relatedWords.data.items,
               )}
           </Row>
         </Row>

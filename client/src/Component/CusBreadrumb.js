@@ -30,8 +30,13 @@ const CusBreadcrumb = (props) => {
           }
 
           return (
-            <Breadcrumb.Item active={active} key={value[2]}>
-              <Link to={value[0]}>{value[1]}</Link>
+            <Breadcrumb.Item
+              active={active}
+              key={value[2]}
+              href={value[0]}
+            >
+              {value[1]}
+              {/* <Link to={value[0]}>{value[1]}</Link> */}
             </Breadcrumb.Item>
           );
         })}

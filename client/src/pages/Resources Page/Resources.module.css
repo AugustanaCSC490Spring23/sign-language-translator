@@ -1,89 +1,45 @@
-.resources {
-    min-height: 100vh;
-    width: 100vw;
-    padding: 50px;
-    background-color: #f0e7de;
-  }
-  
-  .resources_box {
-    width: 90vw;
-    height: 80vh;
-    background: url(https://media.istockphoto.com/id/1411385549/vector/hands-of-people-with-different-skin-colors-different-nationalities-and-religions-activists.jpg?s=612x612&w=0&k=20&c=VHyNETsP2ZKVwRoJwGtFAO7oOUCgnRBzZFekNAV7Rrg=);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding-left: 150px;
-    padding-right: 50px;
-    padding-top: 90px;
-  }
-  
-  .resources_inner_box {
-    width: 65vw;
-    padding: 50px;
-    background: white;
-  }
-  
-  .resources_info {
-    position: relative;
-    bottom: 50px;
-    padding-top: 50px;
-  }
-  
-  .resources_info h1 {
-    font-size: 5rem;
-    text-align: center;
-  }
-  
-  .resources_text {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    margin-top: 2rem;
-  }
-  
-  .browse_resources {
-    padding: 20px;
-    background: black;
-    border: 5px solid white;
-    color: white;
-    font-size: 1.2rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-    margin-top: 30px;
-    transition: 0.3s ease;
-    border-radius: 100px;
-  }
-  
-  .browse_resources:hover {
-    transform: translateY(-20px);
-  }
-  
-  @media (max-width: 500px) {
-    .resources_box {
-      padding-left: 10px;
-      height: 60vh;
-    }
-    
-    .resources_inner_box {
-      width: 85vw;
-    }
-    
-    .resources_info {
-      bottom: 0;
-      padding: 1rem;
-    }
-    
-    .resources_info h1 {
-      font-size: 2.5rem;
-    }
-    
-    .resources_text {
-      font-size: 1rem;
-      margin-top: 1rem;
-    }
-    
-    .browse_resources {
-      font-size: 1rem;
-      margin-top: 1rem;
-    }
-  }
-  
+.resourcesContainer {
+  background-color: #f0e7de;
+  height: 90vh;
+  object-fit: contain;
+  background-image: url("../../assets/Hand-together.jpg");
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.textContain {
+  background-color: #faf9f2;
+  border: 2vh;
+  border-color: #34170c;
+  max-width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-left: 13%;
+  padding-right: 13%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.browse_resources {
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+  padding-left: 5vh;
+  padding-right: 5vh;
+  background: black;
+  border: 5px solid white;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-top: 4vh;
+  transition: 0.3s ease;
+  border-radius: 100px;
+}
+
+.browse_resources:hover {
+  transform: translateY(-20px);
+  background-color: #34170c;
+  border-color: #34170c;
+}

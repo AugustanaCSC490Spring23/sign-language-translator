@@ -60,7 +60,5 @@
 }
 
 .input:focus {
-  box-shadow: none !important;
   background: #e7d4b6 !important;
-  outline: none !important;
 }

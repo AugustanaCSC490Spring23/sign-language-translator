@@ -1,5 +1,12 @@
 import { useState, useEffect } from "react";
-import { Container, Form, Row, Col, Image } from "react-bootstrap";
+import {
+  Container,
+  Form,
+  Row,
+  Col,
+  Image,
+  Button,
+} from "react-bootstrap";
 import CusButton from "../../Component/CusButton";
 import style from "./Translator.module.css";
 import { getSentence } from "../../services/itemsService";
@@ -68,51 +75,50 @@ const Translator = () => {
         </span>
       </h5>
 
-      <Row
-        style={{ flex: "1", height: "100%" }}
-        className="h-70 mb-3"
-      >
-        <Form onSubmit={onTranslate} style={{ height: "100%" }}>
-          <Row className={`${style.form} mb-4 mx mx-3`}>
-            <Col md={{ span: 6 }} style={{ padding: "0 2px" }}>
-              <Form.Control
-                as="textarea"
-                rows={18}
-                placeholder="Input something..."
-                name="input"
-                className={`${style.input} `}
-                value={sentence}
-                onChange={(e) => {
-                  setSentence((prev) => {
-                    prev = e.target.value;
-                    return prev;
-                  });
-                }}
-              />
+      <Row className="mb-3">
+        <Form onSubmit={onTranslate} style={{ padding: "0px 8rem" }}>
+          <Row className={`${style.form} mb-4`}>
+            <Col
+              lg={{ span: 6 }}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <Col className={style.inputCol}>
+                <Form.Control
+                  placeholder="Input something..."
+                  name="input"
+                  className={`mb-3 ${style.input} `}
+                  value={sentence}
+                  onChange={(e) => {
+                    setSentence((prev) => {
+                      prev = e.target.value;
+                      return prev;
+                    });
+                  }}
+                />
+                <CusButton
+                  width="60%"
+                  id="testing"
+                  bgcolor="#8b4208"
+                  title="TRANSLATE"
+                  color="white"
+                  type="submit"
+                  focus="#3e1408"
+                  weight="750"
+                />
+              </Col>
             </Col>
 
             <Col className={style.translationSec}>
               {imgList.map((item) => {
                 return (
-                  <Image
-                    src={item[1]}
-                    key={item[2]}
-                    className={style.img}
-                  />
+                  <Col className={style.img}>
+                    <Image fluid src={item[1]} key={item[2]} />
+                  </Col>
                 );
               })}
-            </Col>
-          </Row>
-          <Row>
-            <Col md={{ span: 4, offset: 4 }}>
-              <CusButton
-                title="Translate"
-                color="white"
-                bgcolor="#3e1408"
-                type="submit"
-                focus="#3e1408"
-                weight="750"
-              />
             </Col>
           </Row>
         </Form>

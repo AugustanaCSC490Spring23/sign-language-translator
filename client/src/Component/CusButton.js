@@ -13,8 +13,10 @@ const CusButton = (props) => {
       letter-spacing: 0.1rem;
       border-radius: ${props.radius}px;
       outline: red;
-      transition: background-color 0.2s;
+      transition: background-color 0.5s ;
       box-shadow: rgba(99,99,99,.2) 0 2px 8px 0;
+      cursor: pointer;
+      font-size: 1.2em
     } 
 
     .btn-custom:hover, .btn-custom:focus {
@@ -34,6 +36,7 @@ const CusButton = (props) => {
       </style>
 
       <Button
+        id={props.id}
         name={props.title}
         variant="custom"
         type={props.type}

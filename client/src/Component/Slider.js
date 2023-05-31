@@ -6,7 +6,7 @@ import trophy from "../assets/trophy.png";
 import { Button, Image } from "react-bootstrap";
 import { useRef } from "react";
 
-const images = [trophy, trophy, trophy, avatar, avatar];
+const images = [trophy, trophy, trophy, trophy, trophy];
 
 const imageStyle = {
   width: "9em",

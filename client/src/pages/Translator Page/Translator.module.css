@@ -22,8 +22,6 @@
 }
 .form {
   display: flex;
-  /* height: 55%; */
-  /* border: 5px solid red; */
 }
 
 .translationSec {
@@ -32,28 +30,88 @@
   border: 2px solid black;
   background: white;
   border-radius: 5px;
-  /* height: inherent; */
+  height: 600px;
   flex-flow: row wrap;
   overflow: auto;
 }
 
 .img {
   margin: 1rem;
-  height: 50%;
-  width: 200px;
   border: 2px solid black;
   border-radius: 10px;
 }
-
-.input:not(active) {
-  background: white;
-  box-shadow: none;
-  border: 2px solid var(--bold-text-color);
+.inputCol {
+  margin-top: 20%;
+  margin-left: 10%;
+  width: 50%;
 }
 
+.input,
+.input:not(active),
+.input:active,
 .input:focus {
-  box-shadow: 0 0 0 0.2rem #8ebdb1;
-  background: white !important;
-  outline: none !important;
-  border: 2px solid var(--bold-text-color);
+  box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
+}
+
+@media only screen and (min-width: 576px) and (max-width: 991px) {
+  .img {
+    flex: none !important;
+    width: 83.33333333%;
+  }
+
+  .inputCol {
+    display: flex;
+    flex-direction: row;
+    margin: 10%;
+    width: 70%;
+  }
+
+  .input {
+    height: 100%;
+    margin-right: 1rem;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .img {
+    flex: none !important;
+    width: 41.66666667%;
+    height: 50%;
+  }
+
+  .inputCol {
+    width: 70%;
+  }
+
+  .input {
+    height: 20%;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .img {
+    flex: none !important;
+    width: 41.66666667%;
+    height: 50%;
+  }
+
+  .inputCol {
+    width: 70%;
+  }
+
+  .input {
+    height: 20%;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .img {
+    flex: none !important;
+    width: 41.66666667%;
+    height: 50%;
+  }
+
+  .input {
+    height: 20%;
+  }
 }

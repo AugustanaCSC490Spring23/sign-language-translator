@@ -133,7 +133,7 @@ body {
   font-family: "Nunito", Arial, Helvetica, sans-serif !important;
   -webkit-font-smoothing: antialiased !important;
   -moz-osx-font-smoothing: grayscale !important;
-  padding-top: 15vh;
+  padding-top: 10vh;
 }
 
 @font-face {
