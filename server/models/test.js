@@ -42,7 +42,7 @@ TestSchema.methods.generateQuizzes = async (
   specialPool
 ) => {
   const query = {
-    category: { $ne: "alphabet" },
+    topic: { $ne: "alphabet" },
   };
 
   // Add the category and difficulty conditions to the query object if they are specified
@@ -77,46 +77,59 @@ TestSchema.methods.generateQuizzes = async (
     const correctAnswer = items[i]._id;
     const quizTopic = items[i].topic;
     const category = items[i].category;
+    let keys;
 
     // Set the quiz type to "b" and select wrong answers from the same category with category "communication"
     let queryWrongChoices = { _id: { $ne: correctAnswer } };
     if (category === "alphabet" || category === "communication") {
       queryWrongChoices = {
         category: "communication",
-        _id: { $ne: correctAnswer },
       };
       quizType = "b";
+      keys = items[i].signPhotos;
     } else {
       queryWrongChoices = {
         category: "vocabulary",
-        _id: { $ne: correctAnswer },
       };
       quizType = "a";
+      keys = items[i].text;
     }
 
-    const promises = [
+    const [wrongChoices] = await Promise.all([
       Item.aggregate([
         { $match: queryWrongChoices },
         { $sample: { size: 3 } },
         { $project: { _id: 1 } },
+        { $match: { _id: { $ne: correctAnswer } } },
       ]),
+    ]);
+
+    const choices = [
+      correctAnswer,
+      ...wrongChoices.map((choice) => choice._id.toString()),
     ];
-
-    const [wrongChoices] = await Promise.all(promises);
-
-    const allChoices = await Item.find({
-      _id: {
-        $in: [correctAnswer, ...wrongChoices.map((choice) => choice._id)],
-      },
-    })
-      .lean()
-      .exec();
-    let choices = allChoices.map((choice) => choice._id.toString());
 
     // Shuffle the choices array using the Fisher-Yates shuffle algorithm
     for (let i = choices.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [choices[i], choices[j]] = [choices[j], choices[i]];
+    }
+
+    let displayChoices = [];
+    if (quizType === "a") {
+      displayChoices = await Promise.all(
+        choices.map(async (choiceId) => {
+          const choice = await Item.findById(choiceId).exec();
+          return choice ? choice.signPhotos[0][1] : "";
+        })
+      );
+    } else if (quizType === "b") {
+      displayChoices = await Promise.all(
+        choices.map(async (choiceId) => {
+          const choice = await Item.findById(choiceId).exec();
+          return choice ? choice.text : "";
+        })
+      );
     }
 
     // Create the quiz object with the necessary properties, including the order number
@@ -125,7 +138,9 @@ TestSchema.methods.generateQuizzes = async (
       orderNumber: i + 1, // increment the counter for each quiz
       choices,
       correctAnswer,
+      keys,
       topic: quizTopic,
+      displayChoices,
     });
 
     await quiz.save();

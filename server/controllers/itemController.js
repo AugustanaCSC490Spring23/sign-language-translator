@@ -192,6 +192,7 @@ exports.getNextOrPreviousItemByLetter = asyncCatch(async (req, res, next) => {
 exports.getNextOrPreviousItem = asyncCatch(async (req, res, next) => {
   try {
     const { id } = req.params;
+    const { filter } = req.query;
 
     const currentItem = await Item.findById(id);
     if (!currentItem) {

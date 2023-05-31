@@ -13,6 +13,28 @@ const Center = ({ children }) => {
   );
 };
 
+const assignRandomAvatar = () => {
+  // Define an array of avatar picture file names
+  const avatarSet = [
+    "https://res.cloudinary.com/dfb7mq7zb/image/upload/v1683919245/animals%20avatars/cat_avatar_k9jl9k.jpg",
+    "https://res.cloudinary.com/dfb7mq7zb/image/upload/v1683919245/animals%20avatars/cow_avatar_cewswx.jpg",
+    "https://res.cloudinary.com/dfb7mq7zb/image/upload/v1683919244/animals%20avatars/deer_avatar_kaho5i.jpg",
+    "https://res.cloudinary.com/dfb7mq7zb/image/upload/v1683919245/animals%20avatars/fox_avatar_buh3c4.jpg",
+    "https://res.cloudinary.com/dfb7mq7zb/image/upload/v1683919245/animals%20avatars/dog_avatar_qayjhd.jpg",
+    "https://res.cloudinary.com/dfb7mq7zb/image/upload/v1683919245/animals%20avatars/hen_avatar_rk6eua.jpg",
+    "https://res.cloudinary.com/dfb7mq7zb/image/upload/v1683919245/animals%20avatars/monkey_avatar_ej1kff.jpg",
+    "https://res.cloudinary.com/dfb7mq7zb/image/upload/v1683919244/animals%20avatars/panda_avatar_enzwgm.jpg",
+    "https://res.cloudinary.com/dfb7mq7zb/image/upload/v1683919244/animals%20avatars/pig_avatar_cb4rdg.jpg",
+  ];
+
+  // Generate a random index number between 0 and the length of the avatar set
+  const randomIndex = Math.floor(Math.random() * avatarSet.length);
+
+  // Get the file name of the randomly selected avatar picture
+  const randomAvatar = avatarSet[randomIndex];
+  return randomAvatar;
+};
+// sign up user
 const Signup = () => {
   const navigate = useNavigate();
 
@@ -48,11 +70,15 @@ const Signup = () => {
     }
 
     setError(false);
+
+    const avatar = assignRandomAvatar();
+
     const signedUpUser = {
       email: user.email,
       name: user.name,
       password: user.password,
       passwordConfirm: user.passwordConfirm,
+      avatar,
     };
     signUp(signedUpUser);
   };

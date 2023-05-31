@@ -12,6 +12,7 @@ const ItemSchema = new Schema({
     type: String,
     required: [true, "Text must belong to a topic."],
   },
+  instructions: String,
   category: {
     type: String,
     enum: ["vocabulary", "communication", "letter"],

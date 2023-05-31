@@ -1,4 +1,13 @@
-import { Container, Row, Col, Image, Button } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Image,
+  Button,
+  Modal,
+  Form,
+  Dropdown,
+} from "react-bootstrap";
 import CusButton from "../../Component/CusButton";
 import CusBreadcrumb from "../../Component/CusBreadrumb";
 import { useState, useEffect } from "react";
@@ -8,7 +17,12 @@ import {
   getNextWordOrPreviousByFirstLetter,
   getWordsByTopic,
 } from "../../services/itemsService";
+import {
+  addFlashcards,
+  addCollection,
+} from "../../services/flashcardsService";
 import style from "./WordDetails.module.css";
+import { updateUser } from "../../services/authService";
 
 const WordDetails = () => {
   const param = useParams();
@@ -30,6 +44,59 @@ const WordDetails = () => {
     data: {},
     render: false,
   });
+
+  const [collections, setCollections] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
+  const [selectedCollection, setSelectedCollection] = useState("");
+  const [newCollectionTitle, setNewCollectionTitle] = useState("");
+  const [newCollectionDescription, setNewCollectionDescription] =
+    useState("");
+  const [createNewCollection, setCreateNewCollection] =
+    useState(false);
+
+  const handleCollectionChange = (e) => {
+    setSelectedCollection(e.target.value);
+  };
+
+  const handleNewCollectionTitleChange = (e) => {
+    setNewCollectionTitle(e.target.value);
+  };
+
+  const handleNewCollectionDescriptionChange = (e) => {
+    setNewCollectionDescription(e.target.value);
+  };
+
+  const handleAddToFlashcards = () => {
+    setShowModal(true);
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    if (createNewCollection) {
+      // Add to a new collection
+      addCollection(newCollectionTitle, newCollectionDescription, [
+        wordDetail._id,
+      ]);
+    } else {
+      // Add flashcards to an existing collection
+      addFlashcards([wordDetail._id], selectedCollection);
+    }
+
+    updateUser();
+
+    // Close the modal
+    setShowModal(false);
+  };
+
+  const handleClose = () => {
+    setShowModal(false);
+  };
+
+  const handleToggleCreateNewCollection = () => {
+    setCreateNewCollection(!createNewCollection);
+  };
 
   //fetching data and set current word
   useEffect(() => {
@@ -58,6 +125,10 @@ const WordDetails = () => {
     };
 
     fetchData();
+
+    setCollections(
+      JSON.parse(localStorage.getItem("user"))?.flashcardsCollections,
+    );
 
     return () => {
       setWordDetail({
@@ -179,6 +250,83 @@ const WordDetails = () => {
         ]}
       />
 
+      {collections && (
+        <Modal show={showModal} onHide={handleClose} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>Add to Flashcards</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form onSubmit={handleFormSubmit}>
+              <Container>
+                <Row>
+                  <Col>
+                    <Form.Group controlId="flashcardsCollection">
+                      <Form.Label>Choose a Collection</Form.Label>
+                      <Form.Control
+                        as="select"
+                        value={selectedCollection}
+                        onChange={handleCollectionChange}
+                        disabled={createNewCollection}
+                      >
+                        <option value="">
+                          -- Select Collection --
+                        </option>
+                        {collections.map((collection) => (
+                          <option
+                            key={collection.slug}
+                            value={collection.slug}
+                          >
+                            {collection.title}
+                          </option>
+                        ))}
+                      </Form.Control>
+                    </Form.Group>
+                  </Col>
+                  <Col>
+                    <Form.Group controlId="createNewCollection">
+                      <Form.Check
+                        type="checkbox"
+                        label="Create New Collection"
+                        checked={createNewCollection}
+                        onChange={handleToggleCreateNewCollection}
+                      />
+                    </Form.Group>
+                    <Form.Group controlId="newCollectionTitle">
+                      <Form.Label>New Collection Title</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter title"
+                        value={newCollectionTitle}
+                        onChange={handleNewCollectionTitleChange}
+                        disabled={!createNewCollection}
+                      />
+                    </Form.Group>
+                    <Form.Group controlId="newCollectionDescription">
+                      <Form.Label>
+                        New Collection Description
+                      </Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        rows={3}
+                        placeholder="Enter description"
+                        value={newCollectionDescription}
+                        onChange={
+                          handleNewCollectionDescriptionChange
+                        }
+                        disabled={!createNewCollection}
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+              </Container>
+              <Button variant="primary" type="submit">
+                Add
+              </Button>
+            </Form>
+          </Modal.Body>
+        </Modal>
+      )}
+
       <Row className={style.content}>
         <Row>
           <Col
@@ -248,6 +396,20 @@ const WordDetails = () => {
               making the circular steering-wheel motion on either side
               of your torso. It is like you are driving a bus.
             </Row>
+            <Col
+              xl={{ span: 1, order: 4 }}
+              className="d-none d-xl-block"
+            ></Col>
+            {collections && (
+              <CusButton
+                title="Add to Flashcards"
+                key="next"
+                bgcolor="#8b4208"
+                color="white"
+                focus="#3e1408"
+                onClick={handleAddToFlashcards}
+              />
+            )}
           </Col>
 
           <Col

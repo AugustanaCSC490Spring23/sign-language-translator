@@ -15,6 +15,7 @@ const QuizSchema = new Schema({
       ref: "Item",
     },
   ],
+  displayChoices: Array,
   correctAnswer: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Item",
@@ -23,6 +24,7 @@ const QuizSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Item",
   },
+  keys: Array,
   isCorrect: Boolean,
   topic: String,
 });

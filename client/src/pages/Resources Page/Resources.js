@@ -17,10 +17,9 @@ function Resources() {
           language for both children and parents. Highly
           recommended!!!
         </p>
-        <button className={styles.browse_resources}>More</button>
+        <Button className={styles.browse_resources}>More</Button>
       </div>
-      <div className={styles.empty}></div>
-    </div>
+    </Container>
   );
 }
 

@@ -1,0 +1,70 @@
+.flashcardDisplayer {
+  position: relative;
+  width: 50vw;
+  height: 50vh;
+  margin: 0 auto;
+  perspective: 1000px;
+  user-select: none;
+}
+
+.flashcardDisplayer:hover {
+  cursor: pointer;
+}
+
+.flashcard {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.2s;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.front,
+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.front {
+  background-color: transparent;
+  font-size: 24px;
+  transform: rotateY(0deg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.back {
+  background-color: transparent;
+  transform: rotateY(-180deg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.image {
+  max-width: 93%;
+  max-height: 80%;
+  border-radius: 10px;
+  transition: transform 0.5s;
+  bottom: 10rem;
+}
+
+.removeButton {
+  cursor: "pointer";
+  transition: "transform 0.3s";
+}
+
+.removeButton:hover {
+  transform: "rotate(45deg)";
+  transform: scale(1.05);
+}
+
+.arrowButton:hover {
+  transform: scale(1.05);
+}

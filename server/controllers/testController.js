@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const Test = require("../models/test");
 const Quiz = require("../models/quiz");
 const Item = require("../models/item");
+const User = require("../models/user");
 const FlashcardsCollection = require("../models/flashcardsCollection");
 
 const asyncCatch = require("../utils/asyncCatch");
@@ -17,7 +18,8 @@ exports.createTest = asyncCatch(async (req, res, next) => {
     specialPool,
     title,
     qualifyFor,
-  } = req.body;
+  } = req.body.testQuery;
+  console.log(req.body)
   const test = new Test({
     difficulty,
     numQuizzes,
@@ -47,12 +49,6 @@ exports.createTest = asyncCatch(async (req, res, next) => {
     specialPoolObjectIds
   );
 
-  // Exclude the correctAnswer property from each quiz object
-  const quizzesWithoutCorrectAnswers = test.quizzes.map((quiz) => {
-    const { correctAnswer, ...quizWithoutCorrectAnswer } = quiz.toObject();
-    return quizWithoutCorrectAnswer;
-  });
-
   await test.save();
 
   // Add the test to the user's `tests` array
@@ -64,19 +60,70 @@ exports.createTest = asyncCatch(async (req, res, next) => {
   res.status(200).send({
     status: "success",
     data: {
+      testId: test._id,
+    },
+  });
+});
+
+// get all tests with info: title, topic, qualifyFor, dateTaken, score
+exports.getAllTestsWithBasicInfo = asyncCatch(async (req, res, next) => {
+  const user = await User.findById(req.user._id)
+    .populate("tests")
+    .lean()
+    .exec();
+  const tests = user.tests.map((test) => {
+    const { title, topic, qualifyFor, dateTaken, score, _id } = test;
+    let isCompleted = score !== null;
+    return { title, topic, qualifyFor, dateTaken, score, isCompleted, _id };
+  });
+
+  // Sort the tests by the latest dateTaken
+  tests.sort((a, b) => new Date(b.dateTaken) - new Date(a.dateTaken));
+
+  res.status(200).json({
+    success: true,
+    data: { tests },
+  });
+});
+
+// ** get test by id, this is to get the test for display (no answers available) ** //
+// New function - getTestWithoutAnswers
+exports.getTestWithoutAnswers = asyncCatch(async (req, res, next) => {
+  const { id } = req.params;
+
+  const test = await Test.findOne({
+    _id: id,
+    testTaker: req.user._id,
+  })
+    .populate("quizzes")
+    .lean();
+
+  if (!test) {
+    return next(new ErrorResponse("Unauthorized or Test not found", 401));
+  }
+
+  // Exclude the correctAnswer property from each quiz object
+  const quizzesWithoutCorrectAnswers = test.quizzes.map((quiz) => {
+    const { correctAnswer, ...quizWithoutCorrectAnswer } = quiz;
+    return quizWithoutCorrectAnswer;
+  });
+
+  res.status(200).send({
+    status: "success",
+    data: {
       test: {
-        ...test.toObject(),
+        ...test,
         quizzes: quizzesWithoutCorrectAnswers,
       },
     },
   });
 });
 
-// ** get test by id, can only be retrieved after being taken ** //
+// ** get fully detailed test by id, can only be retrieved after being taken ** //
 exports.getTest = asyncCatch(async (req, res, next) => {
   const test = await Test.findOne({
     _id: req.params.id,
-    score: { $exists: true },
+    // score: { $exists: true },
   })
     .lean()
     .exec();

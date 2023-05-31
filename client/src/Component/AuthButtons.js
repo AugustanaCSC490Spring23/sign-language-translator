@@ -44,7 +44,7 @@ function AuthButtons() {
           <Dropdown.Menu>
             <Dropdown.Item href="/me">My Profile</Dropdown.Item>
             <Dropdown.Item href="/flashcards">Flashcards</Dropdown.Item>
-            <Dropdown.Item href="/quiz">Quiz</Dropdown.Item>
+            <Dropdown.Item href="/quizzes">Quiz</Dropdown.Item>
             <Dropdown.Divider />
             <Dropdown.Item onClick={handleSignout}>Signout</Dropdown.Item>
           </Dropdown.Menu>
@@ -74,7 +74,7 @@ function AuthButtons() {
 
       <Modal show={showModal} onHide={handleModalClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Confirm Signout</Modal.Title>
+          <Modal.Title>Leaving so soon?</Modal.Title>
         </Modal.Header>
         <Modal.Body>Are you sure you want to sign out?</Modal.Body>
         <Modal.Footer>
